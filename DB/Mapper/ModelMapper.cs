@@ -9,7 +9,7 @@ using AutoMapper;
 
 namespace DB.Mapper
 {
-    static class ModelMapper
+    public static class ModelMapper
     {
         public static IMapper Mapper { get; } = new MapperConfiguration(cfg =>
         {
