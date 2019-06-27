@@ -2,6 +2,7 @@
 using DB.Model.Implementation;
 using DB.Model.Interfaces;
 using DB.Services.Implementation;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace DBServer.Controllers
         }
 
         // PUT: api/Building/5
-        public void Put([FromBody]BuildingModel value)
+        public void Post([FromBody]BuildingModel value)
         {
             new BuildingService().AddOrUpdate(value);
         }
