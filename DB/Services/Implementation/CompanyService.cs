@@ -9,99 +9,72 @@ using System.Threading.Tasks;
 
 namespace DB.Services.Implementation
 {
-    class CompanyService : ICompanyService
+    public class CompanyService : ICompanyService
     {
-        private CompanyModel FirmaToCompany(Firmy x)
+        public void AddOrUpdate(ICompanyModel model)
         {
-            return new CompanyModel()
-            {
-                id_firmy = x.id_firmy,
-                NIP = x.NIP,
-                nazwa_firmy = x.nazwa_firmy,
-                nr_telefonu = x.nr_telefonu
-            };
-        }
-
-        private Firmy CompanyToFirma(CompanyModel x)
-        {
-            return new Firmy()
-            {
-                id_firmy = x.id_firmy,
-                NIP = x.NIP,
-                nazwa_firmy = x.nazwa_firmy,
-                nr_telefonu = x.nr_telefonu
-            };
-        }
-
-        public void AddOrUpdate(IDBModel model)
-        {
-            var cModel = (CompanyModel)model;
             try
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var company = ctx.Firmy.Find(cModel.id_firmy);
+                    var newObject = ctx.Firmy.Find(model.id_firmy);
 
-                    if (company == null)
+                    if (newObject == null)
                     {
-                        company = CompanyToFirma(cModel);
-                        ctx.Firmy.Add(company);
+                        newObject = Mapper.ModelMapper.Mapper.Map<Firmy>(model);
+                        ctx.Firmy.Add(newObject);
                     }
                     else
                     {
-                        company.NIP = cModel.NIP;
-                        company.nr_telefonu = cModel.nr_telefonu;
-                        company.nazwa_firmy = cModel.nazwa_firmy;
+                        newObject.nazwa_firmy = newObject.nazwa_firmy;
+                        newObject.NIP = newObject.NIP;
+                        newObject.nr_telefonu = newObject.nr_telefonu;
                     }
-
                     ctx.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                new Logger(ex.Message);
+                Logger.Log(ex.Message);
             }
         }
 
-        public List<IDBModel> GetAll()
+        public List<ICompanyModel> GetAll()
         {
-            var queryResult = new List<IDBModel>();
+            List<ICompanyModel> result = new List<ICompanyModel>();
             try
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var companies = ctx.Firmy.AsQueryable();
-
-                    foreach (var company in companies)
+                    foreach (var obiekt in ctx.Firmy.ToList())
                     {
-                        queryResult.Add(FirmaToCompany(company));
+                        result.Add(Mapper.ModelMapper.Mapper.Map<ICompanyModel>(obiekt));
                     }
+                    return result;
                 }
             }
             catch (Exception ex)
             {
-                new Logger(ex.Message);
-            }
-            return queryResult;
-        }
-
-        public IDBModel GetSingle(int id)
-        {
-            CompanyModel company;
-            try
-            {
-                using (var ctx = new DBProjectEntities())
-                {
-                    var firma = ctx.Firmy.Find(id);
-                    company = FirmaToCompany(firma);
-                }
-            }
-            catch (Exception ex)
-            {
-                new Logger(ex.Message);
+                Logger.Log(ex.Message);
                 return null;
             }
-            return company;
+        }
+
+        public ICompanyModel GetSingle(int id)
+        {
+            try
+            {
+                using (var ctx = new DBProjectEntities())
+                {
+                    var queryResult = ctx.Firmy.Where(x => x.id_firmy == id).FirstOrDefault();
+                    return Mapper.ModelMapper.Mapper.Map<ICompanyModel>(queryResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+                return null;
+            }
         }
 
         public bool Remove(int id)
@@ -110,45 +83,28 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var result = ctx.Firmy.Find(id);
-                    if (result != null)
+                    var queryResult = ctx.Firmy.Where(x => x.id_firmy == id).FirstOrDefault();
+                    if (queryResult is null)
                     {
-                        ctx.Firmy.Remove(result);
+                        return false;
                     }
-
-                    ctx.SaveChanges();
+                    else
+                    {
+                        ctx.Firmy.Remove(queryResult);
+                        return true;
+                    }
                 }
-                return true;
             }
             catch (Exception ex)
             {
-                new Logger(ex.Message);
+                Logger.Log(ex.Message);
                 return false;
             }
         }
 
-        public bool Remove(IDBModel model)
+        public bool Remove(ICompanyModel model)
         {
-            var cModel = (CompanyModel)model;
-            try
-            {
-                using (var ctx = new DBProjectEntities())
-                {
-                    var result = ctx.Firmy.Find(cModel.id_firmy);
-                    if (result != null)
-                    {
-                        ctx.Firmy.Remove(result);
-                    }
-
-                    ctx.SaveChanges();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                new Logger(ex.Message);
-                return false;
-            }
+            return Remove(model.id_firmy);
         }
     }
 }

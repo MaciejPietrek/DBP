@@ -100,6 +100,7 @@
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Logger.cs" />
+    <Compile Include="Mapper\ModelMapper.cs" />
     <Compile Include="Mieszkania.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>

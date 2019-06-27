@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DB.Model.Interfaces
 {
-    interface IFaultModel : IDBModel
+    public interface IFaultModel : IDBModel
     {
         int id_usterki { get; set; }
         int? id_mieszkania { get; set; }

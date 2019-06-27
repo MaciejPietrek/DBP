@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
-using DB.Model.Implementation;
 using DBClient.DataReceivers;
 
 namespace DBClient
@@ -14,18 +13,23 @@ namespace DBClient
     {
         static void Main(string[] args)
         {
-            while (Console.ReadKey().Key != ConsoleKey.Escape)
+            var som = new DB.Services.Implementation.FaultService();
+            var son = som.GetAll();
+
+            foreach (var building in son)
             {
-                foreach (var obj in CompanyDataReceiver.GetCompanyList())
-                {
-                    Console.WriteLine($"a : {obj.id_firmy,-10} b : {obj.nazwa_firmy,-10} c : {obj.NIP,-10} d : {obj.nr_telefonu,-10}");
-                }
-                Console.WriteLine(CompanyDataReceiver.RemoveCompany(2));
-                foreach (var obj in CompanyDataReceiver.GetCompanyList())
-                {
-                    Console.WriteLine($"a : {obj.id_firmy,-10} b : {obj.nazwa_firmy,-10} c : {obj.NIP,-10} d : {obj.nr_telefonu,-10}");
-                }
+                Console.WriteLine($"1: {building.id_mieszkania} 2: {building.id_usterki}");
             }
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            var b = som.GetSingle(2);
+
+            Console.WriteLine($"1: {b.id_mieszkania} 2: {b.id_usterki}");
+
+            var aa = new DB.Services.Implementation.SupervisingService();
+
             Console.ReadKey();
         }
     }

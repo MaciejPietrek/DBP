@@ -166,15 +166,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\CompanyController.cs" />
-    <Compile Include="Controllers\FaultsController.cs" />
-    <Compile Include="Controllers\PaymentBillsController.cs" />
-    <Compile Include="Controllers\PaymentController.cs" />
-    <Compile Include="Controllers\RentalsController.cs" />
-    <Compile Include="Controllers\RepairBillController.cs" />
-    <Compile Include="Controllers\RepairsController.cs" />
-    <Compile Include="Controllers\ResidencesController.cs" />
-    <Compile Include="Controllers\ResidentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

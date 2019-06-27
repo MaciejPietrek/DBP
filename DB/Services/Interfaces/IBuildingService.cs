@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DB.Services.Interfaces
 {
-    interface IBuildingService : IDBService<IBuildingModel>
+    public interface IBuildingService : IDBService<IBuildingModel>
     {
 
     }

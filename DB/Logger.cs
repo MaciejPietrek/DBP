@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DB
 {
-    class Logger
+    static class Logger
     {
-        public Logger(string logText)
+        static public void Log(string logText)
         {
             var directory = Directory.GetCurrentDirectory();
             using (var writer = new StreamWriter(directory + "\\log.txt"))

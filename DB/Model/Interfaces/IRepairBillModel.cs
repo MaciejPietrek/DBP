@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DB.Model.Interfaces
 {
-    interface IRepairBillModel : IDBModel
+    public interface IRepairBillModel : IDBModel
     {
         int id_faktury { get; set; }
         int? id_naprawy { get; set; }

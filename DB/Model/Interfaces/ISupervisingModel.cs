@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DB.Model.Interfaces
 {
-    interface ISupervisingModel : IDBModel
+    public interface ISupervisingModel : IDBModel
     {
         DateTime? data_rozpoczecia { get; set; }
         DateTime? data_zakonczenia { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DB.Model.Interfaces
 {
-    interface IRentalModel : IDBModel
+    public interface IRentalModel : IDBModel
     {
         int id_wynajmu { get; set; }
         int? id_mieszkania { get; set; }

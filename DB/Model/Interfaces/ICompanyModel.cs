@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DB.Model.Interfaces
 {
-    interface ICompanyModel : IDBModel
+    public interface ICompanyModel : IDBModel
     {
         int id_firmy { get; set; }
         string NIP { get; set; }

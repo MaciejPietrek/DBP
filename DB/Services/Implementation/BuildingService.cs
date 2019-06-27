@@ -9,96 +9,70 @@ using DB.Model.Implementation;
 
 namespace DB.Services.Implementation
 {
-    class BuildingService : IBuildingService
-    { 
-        private BuildingModel BudynkiToBuilding(Budynki x)
+    public class BuildingService : IBuildingService
+    {
+        public void AddOrUpdate(IBuildingModel model)
         {
-            return new BuildingModel()
-            {
-                id_budynku = x.id_budynku,
-                adres_budynku = x.adres_budynku
-            };
-        }
-
-        private Budynki BuildingToBudynki(BuildingModel x)
-        {
-            return new Budynki()
-            {
-                id_budynku = x.id_budynku,
-                adres_budynku = x.adres_budynku
-            };
-        }
-
-        public void AddOrUpdate(IDBModel model)
-        {
-            var cModel = (CompanyModel)model;
             try
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var company = ctx.Firmy.Find(cModel.id_firmy);
+                    var newObject = ctx.Budynki.Find(model.id_budynku);
 
-                    if (company == null)
+                    if (newObject == null)
                     {
-                        company = CompanyToFirma(cModel);
-                        ctx.Firmy.Add(company);
+                        newObject = Mapper.ModelMapper.Mapper.Map<Budynki>(model);
+                        ctx.Budynki.Add(newObject);
                     }
                     else
                     {
-                        company.NIP = cModel.NIP;
-                        company.nr_telefonu = cModel.nr_telefonu;
-                        company.nazwa_firmy = cModel.nazwa_firmy;
+                        newObject.adres_budynku = model.adres_budynku;
                     }
-
                     ctx.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                new Logger(ex.Message);
+                Logger.Log(ex.Message);
             }
         }
 
-        public List<IDBModel> GetAll()
+        public List<IBuildingModel> GetAll()
         {
-            var queryResult = new List<IDBModel>();
+            List<IBuildingModel> result = new List<IBuildingModel>();
             try
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var companies = ctx.Firmy.AsQueryable();
-
-                    foreach (var company in companies)
+                    foreach(var obiekt in ctx.Budynki.ToList())
                     {
-                        queryResult.Add(FirmaToCompany(company));
+                        result.Add(Mapper.ModelMapper.Mapper.Map<IBuildingModel>(obiekt));
                     }
+                    return result;
                 }
             }
             catch (Exception ex)
             {
-                new Logger(ex.Message);
-            }
-            return queryResult;
-        }
-
-        public IDBModel GetSingle(int id)
-        {
-            CompanyModel company;
-            try
-            {
-                using (var ctx = new DBProjectEntities())
-                {
-                    var firma = ctx.Firmy.Find(id);
-                    company = FirmaToCompany(firma);
-                }
-            }
-            catch (Exception ex)
-            {
-                new Logger(ex.Message);
+                Logger.Log(ex.Message);
                 return null;
             }
-            
-            return company;
+        }
+
+        public IBuildingModel GetSingle(int id)
+        {
+            try
+            {
+                using (var ctx = new DBProjectEntities())
+                {
+                    var queryResult = ctx.Budynki.Where(x => x.id_budynku == id).FirstOrDefault();
+                    return Mapper.ModelMapper.Mapper.Map<IBuildingModel>(queryResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+                return null;
+            }
         }
 
         public bool Remove(int id)
@@ -107,45 +81,28 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var result = ctx.Firmy.Find(id);
-                    if (result != null)
+                    var queryResult = ctx.Budynki.Where(x => x.id_budynku == id).FirstOrDefault();
+                    if(queryResult is null)
                     {
-                        ctx.Firmy.Remove(result);
+                        return false;
                     }
-
-                    ctx.SaveChanges();
+                    else
+                    {
+                        ctx.Budynki.Remove(queryResult);
+                        return true;
+                    }
                 }
-                return true;
             }
             catch (Exception ex)
             {
-                new Logger(ex.Message);
+                Logger.Log(ex.Message);
                 return false;
             }
         }
 
-        public bool Remove(IDBModel model)
+        public bool Remove(IBuildingModel model)
         {
-            var cModel = (CompanyModel)model;
-            try
-            {
-                using (var ctx = new DBProjectEntities())
-                {
-                    var result = ctx.Firmy.Find(cModel.id_firmy);
-                    if (result != null)
-                    {
-                        ctx.Firmy.Remove(result);
-                    }
-
-                    ctx.SaveChanges();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                new Logger(ex.Message);
-                return false;
-            }
+            return Remove(model.id_budynku);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DB.Model.Interfaces
 {
-    interface ISupervisorModel : IDBModel
+    public interface ISupervisorModel : IDBModel
     {
         int id_dozorcy { get; set; }
         string nr_telefonu { get; set; }
