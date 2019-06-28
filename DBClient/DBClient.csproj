@@ -59,9 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataReceivers\BuildingDataReceiver.cs" />
+    <Compile Include="DataReceivers\DataReceivers.cs" />
     <Compile Include="DataReceivers\Connector.cs" />
-    <Compile Include="DataReceivers\IdataReceiver.cs" />
+    <Compile Include="DataReceivers\DataReceiver.cs" />
+    <Compile Include="DataReceivers\IDataReceiver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

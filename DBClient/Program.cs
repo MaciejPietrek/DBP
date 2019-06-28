@@ -14,16 +14,6 @@ namespace DBClient
     {
         static void Main(string[] args)
         {
-            Console.ReadKey();
-
-            BuildingDataReceiver som = new BuildingDataReceiver();
-
-            var a = new BuildingModel()
-            {
-                adres_budynku = "Siemianowicka 100",
-                id_budynku = 10001
-            };
-            Console.ReadKey();
 
         }
     }
