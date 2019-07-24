@@ -17,7 +17,7 @@ namespace DBClient.DataReceivers
         }
     }
 
-    class BuildingDataReceiver : DataReceiver<CompanyModel>
+    class BuildingDataReceiver : DataReceiver<BuildingModel>
     {
         public BuildingDataReceiver()
             : base("http://localhost:51950/api/Building")
@@ -26,7 +26,7 @@ namespace DBClient.DataReceivers
         }
     }
 
-    class FaultDataReceiver : DataReceiver<CompanyModel>
+    class FaultDataReceiver : DataReceiver<FaultModel>
     {
         public FaultDataReceiver()
             : base("http://localhost:51950/api/Fault")
@@ -35,7 +35,7 @@ namespace DBClient.DataReceivers
         }
     }
 
-    class FlatDataReceiver : DataReceiver<CompanyModel>
+    class FlatDataReceiver : DataReceiver<FlatModel>
     {
         public FlatDataReceiver()
             : base("http://localhost:51950/api/Flat")
@@ -44,7 +44,7 @@ namespace DBClient.DataReceivers
         }
     }
 
-    class RentalBillDataReceiver : DataReceiver<CompanyModel>
+    class RentalBillDataReceiver : DataReceiver<RentalBillModel>
     {
         public RentalBillDataReceiver()
             : base("http://localhost:51950/api/RentalBill")
@@ -53,16 +53,16 @@ namespace DBClient.DataReceivers
         }
     }
 
-    class RentalDataReceiver : DataReceiver<CompanyModel>
+    class RentalDataReceiver : DataReceiver<RentalModel>
     {
         public RentalDataReceiver()
-            : base("http://localhost:51950/api/RentalData")
+            : base("http://localhost:51950/api/Rental")
         {
 
         }
     }
 
-    class RepairBilDataReceiver : DataReceiver<CompanyModel>
+    class RepairBilDataReceiver : DataReceiver<RepairBillModel>
     {
         public RepairBilDataReceiver()
             : base("http://localhost:51950/api/RepairBill")
@@ -71,16 +71,16 @@ namespace DBClient.DataReceivers
         }
     }
 
-    class RepairDataReceiver : DataReceiver<CompanyModel>
+    class RepairDataReceiver : DataReceiver<RepairModel>
     {
         public RepairDataReceiver()
-            : base("http://localhost:51950/api/Repai")
+            : base("http://localhost:51950/api/Repair")
         {
 
         }
     }
 
-    class SupervisingDataReceiver : DataReceiver<CompanyModel>
+    class SupervisingDataReceiver : DataReceiver<SupervisingModel>
     {
         public SupervisingDataReceiver()
             : base("http://localhost:51950/api/Supervising")
@@ -89,7 +89,7 @@ namespace DBClient.DataReceivers
         }
     }
 
-    class SupervisorDataReceiver : DataReceiver<CompanyModel>
+    class SupervisorDataReceiver : DataReceiver<SupervisorModel>
     {
         public SupervisorDataReceiver()
             : base("http://localhost:51950/api/Supervisor")
@@ -98,7 +98,7 @@ namespace DBClient.DataReceivers
         }
     }
 
-    class TenantDataReceiver : DataReceiver<CompanyModel>
+    class TenantDataReceiver : DataReceiver<TenantModel>
     {
         public TenantDataReceiver()
             : base("http://localhost:51950/api/Tenant")
