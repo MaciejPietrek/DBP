@@ -17,7 +17,7 @@ namespace DBClient.DataReceivers
         {
             using (HttpClient client = new HttpClient())
             {
-                using (HttpResponseMessage responseMessage = await client.GetAsync(url))
+                using (HttpResponseMessage responseMessage = await client.GetAsync(url).ConfigureAwait(false))
                 {
                     using (HttpContent content = responseMessage.Content)
                     {

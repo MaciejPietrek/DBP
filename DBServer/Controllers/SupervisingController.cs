@@ -11,14 +11,13 @@ using System.Web.Http;
 
 namespace DBServer.Controllers
 {
-    public class SupervisingController : ApiController
+    public class SupervisingController : DBServerApiController
     {
         // GET: api/Supervising
         public IEnumerable<SupervisingModel> Get()
         {
-
             var i = ModelMapper.Mapper.Map<List<ISupervisingModel>, List<SupervisingModel>>(new SupervisingService().GetAll());
-            return i;
+            Logger.Add(i).Flush(); return i;
         }
 
         // GET: api/Supervising/5

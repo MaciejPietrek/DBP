@@ -12,14 +12,13 @@ using System.Web.Http;
 
 namespace DBServer.Controllers
 {
-    public class BuildingController : ApiController
+    public class BuildingController : DBServerApiController
     {
         // GET: api/Building
         public IEnumerable<BuildingModel> Get()
         {
-
             var i = ModelMapper.Mapper.Map<List<IBuildingModel>, List<BuildingModel>>(new BuildingService().GetAll());
-            return i;
+            Logger.Add(i).Flush(); return i;
         }
 
         // GET: api/Building/5
