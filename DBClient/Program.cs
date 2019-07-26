@@ -7,6 +7,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using DBClient.DataReceivers;
 using DB.Model.Implementation;
+using System.Runtime.Serialization;
 
 namespace DBClient
 {
@@ -14,7 +15,8 @@ namespace DBClient
     {
         static void Main(string[] args)
         {
-
+            var form = new MainForm();
+            form.ShowDialog();
         }
     }
 }

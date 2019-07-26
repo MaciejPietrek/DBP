@@ -11,14 +11,13 @@ using System.Web.Http;
 
 namespace DBServer.Controllers
 {
-    public class CompanyController : ApiController
+    public class CompanyController : DBServerApiController
     {
         // GET: api/Company
         public IEnumerable<CompanyModel> Get()
         {
-
             var i = ModelMapper.Mapper.Map<List<ICompanyModel>, List<CompanyModel>>(new CompanyService().GetAll());
-            return i;
+            Logger.Add(i).Flush(); return i;
         }
 
         // GET: api/Company/5

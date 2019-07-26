@@ -11,14 +11,14 @@ using System.Web.Http;
 
 namespace DBServer.Controllers
 {
-    public class FaultController : ApiController
+    public class FaultController : DBServerApiController
     {
         // GET: api/Fault
         public IEnumerable<FaultModel> Get()
         {
 
             var i = ModelMapper.Mapper.Map<List<IFaultModel>, List<FaultModel>>(new FaultService().GetAll());
-            return i;
+            Logger.Add(i).Flush(); return i;
         }
 
         // GET: api/Fault/5

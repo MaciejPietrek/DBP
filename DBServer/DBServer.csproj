@@ -171,6 +171,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\DBServerApiController.cs" />
     <Compile Include="Controllers\FaultController.cs" />
     <Compile Include="Controllers\FlatController.cs" />
     <Compile Include="Controllers\RentalBillController.cs" />
@@ -273,6 +274,10 @@
     <ProjectReference Include="..\DB\DB.csproj">
       <Project>{7872af3b-926c-4cbe-b8d8-89666b15b7b7}</Project>
       <Name>DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\FileLogger.csproj">
+      <Project>{C516447C-CF4A-4883-8618-4DB8F8C73BB9}</Project>
+      <Name>FileLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

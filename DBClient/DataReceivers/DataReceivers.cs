@@ -11,7 +11,7 @@ namespace DBClient.DataReceivers
     class CompanyDataReceiver : DataReceiver<CompanyModel>
     {
         public CompanyDataReceiver()
-            : base("http://localhost:51950/api/Company")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Company")
         {
 
         }
@@ -20,16 +20,16 @@ namespace DBClient.DataReceivers
     class BuildingDataReceiver : DataReceiver<BuildingModel>
     {
         public BuildingDataReceiver()
-            : base("http://localhost:51950/api/Building")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Building")
         {
-
+            
         }
     }
 
     class FaultDataReceiver : DataReceiver<FaultModel>
     {
         public FaultDataReceiver()
-            : base("http://localhost:51950/api/Fault")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Fault")
         {
 
         }
@@ -38,7 +38,7 @@ namespace DBClient.DataReceivers
     class FlatDataReceiver : DataReceiver<FlatModel>
     {
         public FlatDataReceiver()
-            : base("http://localhost:51950/api/Flat")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Flat")
         {
 
         }
@@ -47,7 +47,7 @@ namespace DBClient.DataReceivers
     class RentalBillDataReceiver : DataReceiver<RentalBillModel>
     {
         public RentalBillDataReceiver()
-            : base("http://localhost:51950/api/RentalBill")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/RentalBill")
         {
 
         }
@@ -56,7 +56,7 @@ namespace DBClient.DataReceivers
     class RentalDataReceiver : DataReceiver<RentalModel>
     {
         public RentalDataReceiver()
-            : base("http://localhost:51950/api/Rental")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Rental")
         {
 
         }
@@ -65,7 +65,7 @@ namespace DBClient.DataReceivers
     class RepairBilDataReceiver : DataReceiver<RepairBillModel>
     {
         public RepairBilDataReceiver()
-            : base("http://localhost:51950/api/RepairBill")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/RepairBill")
         {
 
         }
@@ -74,7 +74,7 @@ namespace DBClient.DataReceivers
     class RepairDataReceiver : DataReceiver<RepairModel>
     {
         public RepairDataReceiver()
-            : base("http://localhost:51950/api/Repair")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Repair")
         {
 
         }
@@ -83,7 +83,7 @@ namespace DBClient.DataReceivers
     class SupervisingDataReceiver : DataReceiver<SupervisingModel>
     {
         public SupervisingDataReceiver()
-            : base("http://localhost:51950/api/Supervising")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Supervising")
         {
 
         }
@@ -92,7 +92,7 @@ namespace DBClient.DataReceivers
     class SupervisorDataReceiver : DataReceiver<SupervisorModel>
     {
         public SupervisorDataReceiver()
-            : base("http://localhost:51950/api/Supervisor")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Supervisor")
         {
 
         }
@@ -101,7 +101,7 @@ namespace DBClient.DataReceivers
     class TenantDataReceiver : DataReceiver<TenantModel>
     {
         public TenantDataReceiver()
-            : base("http://localhost:51950/api/Tenant")
+            : base(Properties.Settings.Default.ServerIPAdress + "api/Tenant")
         {
 
         }
