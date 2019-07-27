@@ -10,9 +10,9 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBClient.DataReceivers
+namespace DBClient.DataRecievers
 {
-    class BuildingDataReceiver : IDataReceiver<BuildingModel>
+    class BuildingDataReceiver : IDataReciever<BuildingModel>
     {
         static private readonly string url = "http://localhost:51950/api/Building";
 

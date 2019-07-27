@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBClient.DataReceivers
+namespace DBClient.DataRecievers
 {
-    interface IDataReceiver<T> where T : IDBModel
+    public interface IDataReciever<T> where T : IDBModel
     {
         List<T> GetList();
 

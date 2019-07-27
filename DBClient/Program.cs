@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
-using DBClient.DataReceivers;
+using DBClient.DataRecievers;
 using DB.Model.Implementation;
 
 namespace DBClient

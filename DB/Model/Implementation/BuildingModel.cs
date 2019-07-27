@@ -11,9 +11,11 @@ namespace DB.Model.Implementation
     public class BuildingModel : IBuildingModel
     {
         [Display(Name = "Identyfikator Budynku")]
+		[System.ComponentModel.DisplayName("ID")]
         public int id_budynku { get; set; }
 
         [Display(Name = "Adres Budynku")]
-        public string adres_budynku { get; set; }
+		[System.ComponentModel.DisplayName("Adres")]
+		public string adres_budynku { get; set; }
     }
 }
