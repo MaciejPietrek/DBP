@@ -17,16 +17,16 @@ namespace DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Budynki()
         {
-            this.Dozorowania = new HashSet<Dozorowania>();
             this.Mieszkania = new HashSet<Mieszkania>();
+            this.Dozorowania = new HashSet<Dozorowania>();
         }
     
         public int id_budynku { get; set; }
         public string adres_budynku { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dozorowania> Dozorowania { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mieszkania> Mieszkania { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Dozorowania> Dozorowania { get; set; }
     }
 }

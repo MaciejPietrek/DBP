@@ -8,11 +8,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBServer", "DBServer\DBServ
 		{7872AF3B-926C-4CBE-B8D8-89666B15B7B7} = {7872AF3B-926C-4CBE-B8D8-89666B15B7B7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektKarola", "DB\ProjektKarola.csproj", "{7872AF3B-926C-4CBE-B8D8-89666B15B7B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{7872AF3B-926C-4CBE-B8D8-89666B15B7B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBClient", "DBClient\DBClient.csproj", "{9A2EFB91-C02E-425B-9485-9E0F287D6B45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend1", "Frontend1\Frontend1.csproj", "{52B8BE50-4F93-4270-8A77-A7C9C55AAA16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend1\Frontend.csproj", "{52B8BE50-4F93-4270-8A77-A7C9C55AAA16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataServer", "DataServer2\DataServer.csproj", "{E90C1159-0994-42BC-8F92-FA9F8E14DA17}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7872AF3B-926C-4CBE-B8D8-89666B15B7B7} = {7872AF3B-926C-4CBE-B8D8-89666B15B7B7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +41,10 @@ Global
 		{52B8BE50-4F93-4270-8A77-A7C9C55AAA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52B8BE50-4F93-4270-8A77-A7C9C55AAA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52B8BE50-4F93-4270-8A77-A7C9C55AAA16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E90C1159-0994-42BC-8F92-FA9F8E14DA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E90C1159-0994-42BC-8F92-FA9F8E14DA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E90C1159-0994-42BC-8F92-FA9F8E14DA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E90C1159-0994-42BC-8F92-FA9F8E14DA17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

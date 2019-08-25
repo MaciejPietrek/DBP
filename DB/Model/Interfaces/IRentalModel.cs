@@ -8,7 +8,6 @@ namespace DB.Model.Interfaces
 {
     public interface IRentalModel : IDBModel
     {
-        int id_wynajmu { get; set; }
         int? id_mieszkania { get; set; }
         DateTime? data_rozpoczecia { get; set; }
         DateTime? data_zakonczenia { get; set; }

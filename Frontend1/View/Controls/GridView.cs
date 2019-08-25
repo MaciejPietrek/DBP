@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Frontend1.View.Controls
+namespace Frontend.View.Controls
 {
-	class GridView : DataGridView
+	public class GridView : DataGridView
 	{
 		public GridView()
 		{

@@ -1,4 +1,5 @@
-﻿using DB.Model.Interfaces;
+﻿using DB.Model.Attributes;
+using DB.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,22 +11,31 @@ namespace DB.Model.Implementation
 {
     public class RentalModel : IRentalModel
     {
-        [Display(Name = "Identyfikator Wynajmu")]
-        public int id_wynajmu { get; set; }
+		[PrimaryKey()]
+		[System.ComponentModel.DisplayName("ID")]
+		[Display(Name = "Identyfikator Wynajmu")]
+        public int Id { get; set; }
 
-        [Display(Name = "Identyfikator Mieszkania")]
+		[ForeignKey(typeof(FlatModel))]
+		[System.ComponentModel.DisplayName("ID mieszkania")]
+		[Display(Name = "Identyfikator Mieszkania")]
         public int? id_mieszkania { get; set; }
 
-        [Display(Name = "Data Rozpoczęcia")]
+		[System.ComponentModel.DisplayName("Data zakończenia najmu")]
+		[Display(Name = "Data Rozpoczęcia")]
         public DateTime? data_rozpoczecia { get; set; }
 
-        [Display(Name = "Data Zakończenia")]
+		[System.ComponentModel.DisplayName("Data rozpoczęcia najmu")]
+		[Display(Name = "Data Zakończenia")]
         public DateTime? data_zakonczenia { get; set; }
 
-        [Display(Name = "Identyfikator Najemcy")]
+		[ForeignKey(typeof(TenantModel))]
+		[System.ComponentModel.DisplayName("ID najemcy")]
+		[Display(Name = "Identyfikator Najemcy")]
         public int? id_najemcy { get; set; }
 
-        [Display(Name = "Cena Miesieczna Mieszkania")]
+		[System.ComponentModel.DisplayName("Miesiączny czynsz")]
+		[Display(Name = "Cena Miesieczna Mieszkania")]
         public float? cena_miesieczna { get; set; }
     }
 }

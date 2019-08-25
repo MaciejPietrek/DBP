@@ -1,4 +1,5 @@
-﻿using DB.Model.Interfaces;
+﻿using DB.Model.Attributes;
+using DB.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,19 +11,25 @@ namespace DB.Model.Implementation
 {
     public class SupervisorModel : ISupervisorModel
     {
-        [Display(Name = "Identyfikator Dozorcy")]
-        public int id_dozorcy { get; set; }
+		[PrimaryKey()]
+		[System.ComponentModel.DisplayName("ID")]
+		[Display(Name = "Identyfikator Dozorcy")]
+        public int Id { get; set; }
 
-        [Display(Name = "Numer Telefonu")]
+		[System.ComponentModel.DisplayName("Numer telefonu")]
+		[Display(Name = "Numer Telefonu")]
         public string nr_telefonu { get; set; }
 
-        [Display(Name = "Imie")]
+		[System.ComponentModel.DisplayName("Imię")]
+		[Display(Name = "Imie")]
         public string Imie { get; set; }
 
-        [Display(Name = "Nazwisko")]
+		[System.ComponentModel.DisplayName("Nazwisko")]
+		[Display(Name = "Nazwisko")]
         public string Nazwisko { get; set; }
 
-        [Display(Name = "Pesel")]
+		[System.ComponentModel.DisplayName("PESEL")]
+		[Display(Name = "Pesel")]
         public string PESEL { get; set; }
     }
 }

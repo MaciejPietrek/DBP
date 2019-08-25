@@ -17,7 +17,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var newObject = ctx.Budynki.Find(model.id_budynku);
+                    var newObject = ctx.Budynki.Find(model.Id);
 
                     if (newObject == null)
                     {
@@ -102,7 +102,7 @@ namespace DB.Services.Implementation
 
         public bool Remove(IBuildingModel model)
         {
-            return Remove(model.id_budynku);
+            return Remove(model.Id);
         }
     }
 }

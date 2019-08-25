@@ -8,6 +8,6 @@ namespace DB.Model.Interfaces
 {
     public interface IDBModel
     {
-
+		int Id { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DB.Model.Interfaces;
+﻿using DB.Model.Attributes;
+using DB.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,19 +11,26 @@ namespace DB.Model.Implementation
 {
     public class FlatModel : IFlatModel
     {
-        [Display(Name = "Identyfikator Mieszkania")]
-        public int id_mieszkania { get; set; }
+		[PrimaryKey()]
+		[System.ComponentModel.DisplayName("ID")]
+		[Display(Name = "Identyfikator Mieszkania")]
+        public int Id { get; set; }
 
-        [Display(Name = "Identyfikator Budynku")]
+		[ForeignKey(typeof(BuildingModel))]
+		[System.ComponentModel.DisplayName("ID budynku")]
+		[Display(Name = "Identyfikator Budynku")]
         public int? id_budynku { get; set; }
 
-        [Display(Name = "Numer Mieszkania")]
+		[System.ComponentModel.DisplayName("Numer mieszkania")]
+		[Display(Name = "Numer Mieszkania")]
         public int numer { get; set; }
 
-        [Display(Name = "Metraż Mieszkania")]
+		[System.ComponentModel.DisplayName("Powierzchnia")]
+		[Display(Name = "Metraż Mieszkania")]
         public float? metraz { get; set; }
 
-        [Display(Name = "Opis Mieszkania")]
+		[System.ComponentModel.DisplayName("Opis")]
+		[Display(Name = "Opis Mieszkania")]
         public string opis { get; set; }
     }
 }

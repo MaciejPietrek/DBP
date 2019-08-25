@@ -8,7 +8,6 @@ namespace DB.Model.Interfaces
 {
     public interface IRepairBillModel : IDBModel
     {
-        int id_faktury { get; set; }
         int? id_naprawy { get; set; }
         float cena { get; set; }
         int numer_faktury { get; set; }

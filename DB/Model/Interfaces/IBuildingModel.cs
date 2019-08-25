@@ -9,7 +9,6 @@ namespace DB.Model.Interfaces
 {
     public interface IBuildingModel : IDBModel
     {
-        int id_budynku { get; set; }
         string adres_budynku { get; set; }
     }
 }

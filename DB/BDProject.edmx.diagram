@@ -7,7 +7,6 @@
       <Diagram DiagramId="a7ab1f16202d449dad06b971b839a233" Name="Diagram1">
         <EntityTypeShape EntityType="DBProjectModel.Budynki" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBProjectModel.Dozorcy" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBProjectModel.Dozorowania" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DBProjectModel.FakturyNapraw" Width="1.5" PointX="9.75" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DBProjectModel.FakturyWynajem" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBProjectModel.Firmy" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
@@ -19,12 +18,7 @@
         <EntityTypeShape EntityType="DBProjectModel.StanyUsterek" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBProjectModel.Usterki" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DBProjectModel.Wynajmy" Width="1.5" PointX="8.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBProjectModel.BudynkiMieszkaniaUsterki" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBProjectModel.FaultsDataView" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBProjectModel.RentalDataView" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="DBProjectModel.FK__Dozorowan__id_bu__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="DBProjectModel.FK__Mieszkani__id_bu__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="DBProjectModel.FK__Dozorowan__id_do__534D60F1" ManuallyRouted="false" />
         <AssociationConnector Association="DBProjectModel.FK__FakturyNa__id_na__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="DBProjectModel.FK__FakturyWy__id_wy__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="DBProjectModel.FK__Naprawy__id_firm__46E78A0C" ManuallyRouted="false" />
@@ -35,6 +29,10 @@
         <AssociationConnector Association="DBProjectModel.FK__Naprawy__stan__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="DBProjectModel.FK__Platnosci__id_wy__619B8048" ManuallyRouted="false" />
         <AssociationConnector Association="DBProjectModel.FK__Usterki__stan__412EB0B6" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBProjectModel.sysdiagrams" Width="1.875" PointX="5" PointY="0.75" />
+        <EntityTypeShape EntityType="DBProjectModel.Dozorowania" Width="1.5" PointX="3" PointY="4.75" />
+        <AssociationConnector Association="DBProjectModel.FK__Dozorowan__id_bu__3F466844" />
+        <AssociationConnector Association="DBProjectModel.FK__Dozorowan__id_do__3E52440B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

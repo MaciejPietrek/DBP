@@ -27,7 +27,6 @@ namespace DB
     
         public virtual DbSet<Budynki> Budynki { get; set; }
         public virtual DbSet<Dozorcy> Dozorcy { get; set; }
-        public virtual DbSet<Dozorowania> Dozorowania { get; set; }
         public virtual DbSet<FakturyNapraw> FakturyNapraw { get; set; }
         public virtual DbSet<FakturyWynajem> FakturyWynajem { get; set; }
         public virtual DbSet<Firmy> Firmy { get; set; }
@@ -39,8 +38,7 @@ namespace DB
         public virtual DbSet<StanyUsterek> StanyUsterek { get; set; }
         public virtual DbSet<Usterki> Usterki { get; set; }
         public virtual DbSet<Wynajmy> Wynajmy { get; set; }
-        public virtual DbSet<BudynkiMieszkaniaUsterki> BudynkiMieszkaniaUsterki { get; set; }
-        public virtual DbSet<FaultsDataView> FaultsDataView { get; set; }
-        public virtual DbSet<RentalDataView> RentalDataView { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Dozorowania> Dozorowania { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Budynki">
           <Key>
             <PropertyRef Name="id_budynku" />
@@ -24,13 +24,13 @@
         </EntityType>
         <EntityType Name="Dozorowania">
           <Key>
-            <PropertyRef Name="id_dozorcy" />
-            <PropertyRef Name="id_budynku" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="data_rozpoczecia" Type="datetime" />
           <Property Name="data_zakonczenia" Type="datetime" />
-          <Property Name="id_dozorcy" Type="int" Nullable="false" />
-          <Property Name="id_budynku" Type="int" Nullable="false" />
+          <Property Name="id_dozorcy" Type="int" />
+          <Property Name="id_budynku" Type="int" />
         </EntityType>
         <EntityType Name="FakturyNapraw">
           <Key>
@@ -75,7 +75,7 @@
           <Key>
             <PropertyRef Name="id_najemcy" />
           </Key>
-          <Property Name="id_najemcy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_najemcy" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nr_telefonu" Type="varchar" MaxLength="12" />
           <Property Name="imie" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="nazwisko" Type="varchar" MaxLength="20" Nullable="false" />
@@ -116,6 +116,16 @@
           </Key>
           <Property Name="stan" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Usterki">
           <Key>
             <PropertyRef Name="id_usterki" />
@@ -136,63 +146,8 @@
           <Property Name="id_najemcy" Type="int" />
           <Property Name="cena_miesieczna" Type="real" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBProject.dbo.BudynkiMieszkaniaUsterki' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="BudynkiMieszkaniaUsterki">
-          <Key>
-            <PropertyRef Name="adres_budynku" />
-            <PropertyRef Name="numer" />
-          </Key>
-          <Property Name="opis" Type="varchar" MaxLength="500" />
-          <Property Name="stan" Type="varchar" MaxLength="30" />
-          <Property Name="adres_budynku" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="numer" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBProject.dbo.FaultsDataView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="FaultsDataView">
-          <Key>
-            <PropertyRef Name="adres_budynku" />
-            <PropertyRef Name="numer" />
-            <PropertyRef Name="id_usterki" />
-            <PropertyRef Name="id_mieszkania" />
-            <PropertyRef Name="id_budynku" />
-          </Key>
-          <Property Name="opis" Type="varchar" MaxLength="500" />
-          <Property Name="stan" Type="varchar" MaxLength="30" />
-          <Property Name="adres_budynku" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="numer" Type="int" Nullable="false" />
-          <Property Name="id_usterki" Type="int" Nullable="false" />
-          <Property Name="id_mieszkania" Type="int" Nullable="false" />
-          <Property Name="id_budynku" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="RentalDataView">
-          <Key>
-            <PropertyRef Name="imie" />
-            <PropertyRef Name="nazwisko" />
-            <PropertyRef Name="numer" />
-            <PropertyRef Name="adres_budynku" />
-            <PropertyRef Name="id_najemcy" />
-            <PropertyRef Name="id_budynku" />
-            <PropertyRef Name="id_mieszkania" />
-            <PropertyRef Name="id_wynajmu" />
-          </Key>
-          <Property Name="imie" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="nazwisko" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="numer" Type="int" Nullable="false" />
-          <Property Name="adres_budynku" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="data_rozpoczecia" Type="datetime" />
-          <Property Name="data_zakonczenia" Type="datetime" />
-          <Property Name="id_najemcy" Type="int" Nullable="false" />
-          <Property Name="id_budynku" Type="int" Nullable="false" />
-          <Property Name="id_mieszkania" Type="int" Nullable="false" />
-          <Property Name="id_wynajmu" Type="int" Nullable="false" />
-          <Property Name="cena_miesieczna" Type="real" />
-        </EntityType>
-        <Association Name="FK__Dozorowan__id_bu__5441852A">
-          <End Role="Budynki" Type="Self.Budynki" Multiplicity="1" />
+        <Association Name="FK__Dozorowan__id_bu__3F466844">
+          <End Role="Budynki" Type="Self.Budynki" Multiplicity="0..1" />
           <End Role="Dozorowania" Type="Self.Dozorowania" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Budynki">
@@ -203,8 +158,8 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Dozorowan__id_do__534D60F1">
-          <End Role="Dozorcy" Type="Self.Dozorcy" Multiplicity="1" />
+        <Association Name="FK__Dozorowan__id_do__3E52440B">
+          <End Role="Dozorcy" Type="Self.Dozorcy" Multiplicity="0..1" />
           <End Role="Dozorowania" Type="Self.Dozorowania" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dozorcy">
@@ -215,7 +170,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FakturyNa__id_na__4BAC3F29">
+        <Association Name="FK__FakturyNa__id_na__24927208">
           <End Role="Naprawy" Type="Self.Naprawy" Multiplicity="0..1" />
           <End Role="FakturyNapraw" Type="Self.FakturyNapraw" Multiplicity="*" />
           <ReferentialConstraint>
@@ -227,7 +182,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FakturyWy__id_wy__5DCAEF64">
+        <Association Name="FK__FakturyWy__id_wy__35BCFE0A">
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="0..1" />
           <End Role="FakturyWynajem" Type="Self.FakturyWynajem" Multiplicity="*" />
           <ReferentialConstraint>
@@ -239,7 +194,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Mieszkani__id_bu__3D5E1FD2">
+        <Association Name="FK__Mieszkani__id_bu__164452B1">
           <End Role="Budynki" Type="Self.Budynki" Multiplicity="0..1" />
           <End Role="Mieszkania" Type="Self.Mieszkania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -251,7 +206,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Naprawy__id_firm__46E78A0C">
+        <Association Name="FK__Naprawy__id_firm__1FCDBCEB">
           <End Role="Firmy" Type="Self.Firmy" Multiplicity="0..1" />
           <End Role="Naprawy" Type="Self.Naprawy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -263,7 +218,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Naprawy__id_uste__45F365D3">
+        <Association Name="FK__Naprawy__id_uste__1ED998B2">
           <End Role="Usterki" Type="Self.Usterki" Multiplicity="0..1" />
           <End Role="Naprawy" Type="Self.Naprawy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -275,7 +230,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Naprawy__stan__47DBAE45">
+        <Association Name="FK__Naprawy__stan__20C1E124">
           <End Role="StanyNapraw" Type="Self.StanyNapraw" Multiplicity="0..1" />
           <End Role="Naprawy" Type="Self.Naprawy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -287,7 +242,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Platnosci__id_wy__619B8048">
+        <Association Name="FK__Platnosci__id_wy__398D8EEE">
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="0..1" />
           <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
           <ReferentialConstraint>
@@ -299,7 +254,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usterki__id_mies__403A8C7D">
+        <Association Name="FK__Usterki__id_mies__1920BF5C">
           <End Role="Mieszkania" Type="Self.Mieszkania" Multiplicity="0..1" />
           <End Role="Usterki" Type="Self.Usterki" Multiplicity="*" />
           <ReferentialConstraint>
@@ -311,7 +266,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usterki__stan__412EB0B6">
+        <Association Name="FK__Usterki__stan__1A14E395">
           <End Role="StanyUsterek" Type="Self.StanyUsterek" Multiplicity="0..1" />
           <End Role="Usterki" Type="Self.Usterki" Multiplicity="*" />
           <ReferentialConstraint>
@@ -323,7 +278,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wynajmy__id_mies__59FA5E80">
+        <Association Name="FK__Wynajmy__id_mies__31EC6D26">
           <End Role="Mieszkania" Type="Self.Mieszkania" Multiplicity="0..1" />
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -335,7 +290,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wynajmy__id_naje__5AEE82B9">
+        <Association Name="FK__Wynajmy__id_naje__32E0915F">
           <End Role="Najemcy" Type="Self.Najemcy" Multiplicity="0..1" />
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -360,97 +315,63 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
           <EntitySet Name="Platnosci" EntityType="Self.Platnosci" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StanyNapraw" EntityType="Self.StanyNapraw" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StanyUsterek" EntityType="Self.StanyUsterek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usterki" EntityType="Self.Usterki" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wynajmy" EntityType="Self.Wynajmy" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BudynkiMieszkaniaUsterki" EntityType="Self.BudynkiMieszkaniaUsterki" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [BudynkiMieszkaniaUsterki].[opis] AS [opis], 
-    [BudynkiMieszkaniaUsterki].[stan] AS [stan], 
-    [BudynkiMieszkaniaUsterki].[adres_budynku] AS [adres_budynku], 
-    [BudynkiMieszkaniaUsterki].[numer] AS [numer]
-    FROM [dbo].[BudynkiMieszkaniaUsterki] AS [BudynkiMieszkaniaUsterki]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="FaultsDataView" EntityType="Self.FaultsDataView" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FaultsDataView].[opis] AS [opis], 
-    [FaultsDataView].[stan] AS [stan], 
-    [FaultsDataView].[adres_budynku] AS [adres_budynku], 
-    [FaultsDataView].[numer] AS [numer], 
-    [FaultsDataView].[id_usterki] AS [id_usterki], 
-    [FaultsDataView].[id_mieszkania] AS [id_mieszkania], 
-    [FaultsDataView].[id_budynku] AS [id_budynku]
-    FROM [dbo].[FaultsDataView] AS [FaultsDataView]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="RentalDataView" EntityType="Self.RentalDataView" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [RentalDataView].[imie] AS [imie], 
-    [RentalDataView].[nazwisko] AS [nazwisko], 
-    [RentalDataView].[numer] AS [numer], 
-    [RentalDataView].[adres_budynku] AS [adres_budynku], 
-    [RentalDataView].[data_rozpoczecia] AS [data_rozpoczecia], 
-    [RentalDataView].[data_zakonczenia] AS [data_zakonczenia], 
-    [RentalDataView].[id_najemcy] AS [id_najemcy], 
-    [RentalDataView].[id_budynku] AS [id_budynku], 
-    [RentalDataView].[id_mieszkania] AS [id_mieszkania], 
-    [RentalDataView].[id_wynajmu] AS [id_wynajmu], 
-    [RentalDataView].[cena_miesieczna] AS [cena_miesieczna]
-    FROM [dbo].[RentalDataView] AS [RentalDataView]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__Dozorowan__id_bu__5441852A" Association="Self.FK__Dozorowan__id_bu__5441852A">
+          <AssociationSet Name="FK__Dozorowan__id_bu__3F466844" Association="Self.FK__Dozorowan__id_bu__3F466844">
             <End Role="Budynki" EntitySet="Budynki" />
             <End Role="Dozorowania" EntitySet="Dozorowania" />
           </AssociationSet>
-          <AssociationSet Name="FK__Dozorowan__id_do__534D60F1" Association="Self.FK__Dozorowan__id_do__534D60F1">
+          <AssociationSet Name="FK__Dozorowan__id_do__3E52440B" Association="Self.FK__Dozorowan__id_do__3E52440B">
             <End Role="Dozorcy" EntitySet="Dozorcy" />
             <End Role="Dozorowania" EntitySet="Dozorowania" />
           </AssociationSet>
-          <AssociationSet Name="FK__FakturyNa__id_na__4BAC3F29" Association="Self.FK__FakturyNa__id_na__4BAC3F29">
+          <AssociationSet Name="FK__FakturyNa__id_na__24927208" Association="Self.FK__FakturyNa__id_na__24927208">
             <End Role="Naprawy" EntitySet="Naprawy" />
             <End Role="FakturyNapraw" EntitySet="FakturyNapraw" />
           </AssociationSet>
-          <AssociationSet Name="FK__FakturyWy__id_wy__5DCAEF64" Association="Self.FK__FakturyWy__id_wy__5DCAEF64">
+          <AssociationSet Name="FK__FakturyWy__id_wy__35BCFE0A" Association="Self.FK__FakturyWy__id_wy__35BCFE0A">
             <End Role="Wynajmy" EntitySet="Wynajmy" />
             <End Role="FakturyWynajem" EntitySet="FakturyWynajem" />
           </AssociationSet>
-          <AssociationSet Name="FK__Mieszkani__id_bu__3D5E1FD2" Association="Self.FK__Mieszkani__id_bu__3D5E1FD2">
+          <AssociationSet Name="FK__Mieszkani__id_bu__164452B1" Association="Self.FK__Mieszkani__id_bu__164452B1">
             <End Role="Budynki" EntitySet="Budynki" />
             <End Role="Mieszkania" EntitySet="Mieszkania" />
           </AssociationSet>
-          <AssociationSet Name="FK__Naprawy__id_firm__46E78A0C" Association="Self.FK__Naprawy__id_firm__46E78A0C">
+          <AssociationSet Name="FK__Naprawy__id_firm__1FCDBCEB" Association="Self.FK__Naprawy__id_firm__1FCDBCEB">
             <End Role="Firmy" EntitySet="Firmy" />
             <End Role="Naprawy" EntitySet="Naprawy" />
           </AssociationSet>
-          <AssociationSet Name="FK__Naprawy__id_uste__45F365D3" Association="Self.FK__Naprawy__id_uste__45F365D3">
+          <AssociationSet Name="FK__Naprawy__id_uste__1ED998B2" Association="Self.FK__Naprawy__id_uste__1ED998B2">
             <End Role="Usterki" EntitySet="Usterki" />
             <End Role="Naprawy" EntitySet="Naprawy" />
           </AssociationSet>
-          <AssociationSet Name="FK__Naprawy__stan__47DBAE45" Association="Self.FK__Naprawy__stan__47DBAE45">
+          <AssociationSet Name="FK__Naprawy__stan__20C1E124" Association="Self.FK__Naprawy__stan__20C1E124">
             <End Role="StanyNapraw" EntitySet="StanyNapraw" />
             <End Role="Naprawy" EntitySet="Naprawy" />
           </AssociationSet>
-          <AssociationSet Name="FK__Platnosci__id_wy__619B8048" Association="Self.FK__Platnosci__id_wy__619B8048">
+          <AssociationSet Name="FK__Platnosci__id_wy__398D8EEE" Association="Self.FK__Platnosci__id_wy__398D8EEE">
             <End Role="Wynajmy" EntitySet="Wynajmy" />
             <End Role="Platnosci" EntitySet="Platnosci" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usterki__id_mies__403A8C7D" Association="Self.FK__Usterki__id_mies__403A8C7D">
+          <AssociationSet Name="FK__Usterki__id_mies__1920BF5C" Association="Self.FK__Usterki__id_mies__1920BF5C">
             <End Role="Mieszkania" EntitySet="Mieszkania" />
             <End Role="Usterki" EntitySet="Usterki" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usterki__stan__412EB0B6" Association="Self.FK__Usterki__stan__412EB0B6">
+          <AssociationSet Name="FK__Usterki__stan__1A14E395" Association="Self.FK__Usterki__stan__1A14E395">
             <End Role="StanyUsterek" EntitySet="StanyUsterek" />
             <End Role="Usterki" EntitySet="Usterki" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wynajmy__id_mies__59FA5E80" Association="Self.FK__Wynajmy__id_mies__59FA5E80">
+          <AssociationSet Name="FK__Wynajmy__id_mies__31EC6D26" Association="Self.FK__Wynajmy__id_mies__31EC6D26">
             <End Role="Mieszkania" EntitySet="Mieszkania" />
             <End Role="Wynajmy" EntitySet="Wynajmy" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wynajmy__id_naje__5AEE82B9" Association="Self.FK__Wynajmy__id_naje__5AEE82B9">
+          <AssociationSet Name="FK__Wynajmy__id_naje__32E0915F" Association="Self.FK__Wynajmy__id_naje__32E0915F">
             <End Role="Najemcy" EntitySet="Najemcy" />
             <End Role="Wynajmy" EntitySet="Wynajmy" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -460,8 +381,8 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
           </Key>
           <Property Name="id_budynku" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="adres_budynku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Dozorowania" Relationship="Self.FK__Dozorowan__id_bu__5441852A" FromRole="Budynki" ToRole="Dozorowania" />
           <NavigationProperty Name="Mieszkania" Relationship="Self.FK__Mieszkani__id_bu__3D5E1FD2" FromRole="Budynki" ToRole="Mieszkania" />
+          <NavigationProperty Name="Dozorowania" Relationship="DBProjectModel.FK__Dozorowan__id_bu__3F466844" FromRole="Budynki" ToRole="Dozorowania" />
         </EntityType>
         <EntityType Name="Dozorcy">
           <Key>
@@ -472,19 +393,7 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
           <Property Name="Imie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Nazwisko" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Dozorowania" Relationship="Self.FK__Dozorowan__id_do__534D60F1" FromRole="Dozorcy" ToRole="Dozorowania" />
-        </EntityType>
-        <EntityType Name="Dozorowania">
-          <Key>
-            <PropertyRef Name="id_dozorcy" />
-            <PropertyRef Name="id_budynku" />
-          </Key>
-          <Property Name="data_rozpoczecia" Type="DateTime" Precision="3" />
-          <Property Name="data_zakonczenia" Type="DateTime" Precision="3" />
-          <Property Name="id_dozorcy" Type="Int32" Nullable="false" />
-          <Property Name="id_budynku" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Budynki" Relationship="Self.FK__Dozorowan__id_bu__5441852A" FromRole="Dozorowania" ToRole="Budynki" />
-          <NavigationProperty Name="Dozorcy" Relationship="Self.FK__Dozorowan__id_do__534D60F1" FromRole="Dozorowania" ToRole="Dozorcy" />
+          <NavigationProperty Name="Dozorowania" Relationship="DBProjectModel.FK__Dozorowan__id_do__3E52440B" FromRole="Dozorcy" ToRole="Dozorowania" />
         </EntityType>
         <EntityType Name="FakturyNapraw">
           <Key>
@@ -611,67 +520,6 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
           <NavigationProperty Name="Najemcy" Relationship="Self.FK__Wynajmy__id_naje__5AEE82B9" FromRole="Wynajmy" ToRole="Najemcy" />
           <NavigationProperty Name="Platnosci" Relationship="Self.FK__Platnosci__id_wy__619B8048" FromRole="Wynajmy" ToRole="Platnosci" />
         </EntityType>
-        <EntityType Name="BudynkiMieszkaniaUsterki">
-          <Key>
-            <PropertyRef Name="adres_budynku" />
-            <PropertyRef Name="numer" />
-          </Key>
-          <Property Name="opis" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="stan" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="adres_budynku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="numer" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FaultsDataView">
-          <Key>
-            <PropertyRef Name="adres_budynku" />
-            <PropertyRef Name="numer" />
-            <PropertyRef Name="id_usterki" />
-            <PropertyRef Name="id_mieszkania" />
-            <PropertyRef Name="id_budynku" />
-          </Key>
-          <Property Name="opis" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="stan" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="adres_budynku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="numer" Type="Int32" Nullable="false" />
-          <Property Name="id_usterki" Type="Int32" Nullable="false" />
-          <Property Name="id_mieszkania" Type="Int32" Nullable="false" />
-          <Property Name="id_budynku" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RentalDataView">
-          <Key>
-            <PropertyRef Name="imie" />
-            <PropertyRef Name="nazwisko" />
-            <PropertyRef Name="numer" />
-            <PropertyRef Name="adres_budynku" />
-            <PropertyRef Name="id_najemcy" />
-            <PropertyRef Name="id_budynku" />
-            <PropertyRef Name="id_mieszkania" />
-            <PropertyRef Name="id_wynajmu" />
-          </Key>
-          <Property Name="imie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nazwisko" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="numer" Type="Int32" Nullable="false" />
-          <Property Name="adres_budynku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="data_rozpoczecia" Type="DateTime" Precision="3" />
-          <Property Name="data_zakonczenia" Type="DateTime" Precision="3" />
-          <Property Name="id_najemcy" Type="Int32" Nullable="false" />
-          <Property Name="id_budynku" Type="Int32" Nullable="false" />
-          <Property Name="id_mieszkania" Type="Int32" Nullable="false" />
-          <Property Name="id_wynajmu" Type="Int32" Nullable="false" />
-          <Property Name="cena_miesieczna" Type="Single" />
-        </EntityType>
-        <Association Name="FK__Dozorowan__id_bu__5441852A">
-          <End Role="Budynki" Type="Self.Budynki" Multiplicity="1" />
-          <End Role="Dozorowania" Type="Self.Dozorowania" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Budynki">
-              <PropertyRef Name="id_budynku" />
-            </Principal>
-            <Dependent Role="Dozorowania">
-              <PropertyRef Name="id_budynku" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Mieszkani__id_bu__3D5E1FD2">
           <End Role="Budynki" Type="Self.Budynki" Multiplicity="0..1" />
           <End Role="Mieszkania" Type="Self.Mieszkania" Multiplicity="*" />
@@ -681,18 +529,6 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             </Principal>
             <Dependent Role="Mieszkania">
               <PropertyRef Name="id_budynku" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Dozorowan__id_do__534D60F1">
-          <End Role="Dozorcy" Type="Self.Dozorcy" Multiplicity="1" />
-          <End Role="Dozorowania" Type="Self.Dozorowania" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dozorcy">
-              <PropertyRef Name="id_dozorcy" />
-            </Principal>
-            <Dependent Role="Dozorowania">
-              <PropertyRef Name="id_dozorcy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -819,7 +655,6 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
         <EntityContainer Name="DBProjectEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Budynki" EntityType="Self.Budynki" />
           <EntitySet Name="Dozorcy" EntityType="Self.Dozorcy" />
-          <EntitySet Name="Dozorowania" EntityType="Self.Dozorowania" />
           <EntitySet Name="FakturyNapraw" EntityType="Self.FakturyNapraw" />
           <EntitySet Name="FakturyWynajem" EntityType="Self.FakturyWynajem" />
           <EntitySet Name="Firmy" EntityType="Self.Firmy" />
@@ -831,20 +666,9 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
           <EntitySet Name="StanyUsterek" EntityType="Self.StanyUsterek" />
           <EntitySet Name="Usterki" EntityType="Self.Usterki" />
           <EntitySet Name="Wynajmy" EntityType="Self.Wynajmy" />
-          <EntitySet Name="BudynkiMieszkaniaUsterki" EntityType="Self.BudynkiMieszkaniaUsterki" />
-          <EntitySet Name="FaultsDataView" EntityType="Self.FaultsDataView" />
-          <EntitySet Name="RentalDataView" EntityType="Self.RentalDataView" />
-          <AssociationSet Name="FK__Dozorowan__id_bu__5441852A" Association="Self.FK__Dozorowan__id_bu__5441852A">
-            <End Role="Budynki" EntitySet="Budynki" />
-            <End Role="Dozorowania" EntitySet="Dozorowania" />
-          </AssociationSet>
           <AssociationSet Name="FK__Mieszkani__id_bu__3D5E1FD2" Association="Self.FK__Mieszkani__id_bu__3D5E1FD2">
             <End Role="Budynki" EntitySet="Budynki" />
             <End Role="Mieszkania" EntitySet="Mieszkania" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Dozorowan__id_do__534D60F1" Association="Self.FK__Dozorowan__id_do__534D60F1">
-            <End Role="Dozorcy" EntitySet="Dozorcy" />
-            <End Role="Dozorowania" EntitySet="Dozorowania" />
           </AssociationSet>
           <AssociationSet Name="FK__FakturyNa__id_na__4BAC3F29" Association="Self.FK__FakturyNa__id_na__4BAC3F29">
             <End Role="Naprawy" EntitySet="Naprawy" />
@@ -886,7 +710,63 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
             <End Role="StanyUsterek" EntitySet="StanyUsterek" />
             <End Role="Usterki" EntitySet="Usterki" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="DBProjectModel.sysdiagrams" />
+          <EntitySet Name="Dozorowania" EntityType="DBProjectModel.Dozorowania" />
+          <AssociationSet Name="FK__Dozorowan__id_bu__3F466844" Association="DBProjectModel.FK__Dozorowan__id_bu__3F466844">
+            <End Role="Budynki" EntitySet="Budynki" />
+            <End Role="Dozorowania" EntitySet="Dozorowania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dozorowan__id_do__3E52440B" Association="DBProjectModel.FK__Dozorowan__id_do__3E52440B">
+            <End Role="Dozorcy" EntitySet="Dozorcy" />
+            <End Role="Dozorowania" EntitySet="Dozorowania" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Dozorowania">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="data_rozpoczecia" Type="DateTime" Precision="3" />
+          <Property Name="data_zakonczenia" Type="DateTime" Precision="3" />
+          <Property Name="id_dozorcy" Type="Int32" />
+          <Property Name="id_budynku" Type="Int32" />
+          <NavigationProperty Name="Budynki" Relationship="DBProjectModel.FK__Dozorowan__id_bu__3F466844" FromRole="Dozorowania" ToRole="Budynki" />
+          <NavigationProperty Name="Dozorcy" Relationship="DBProjectModel.FK__Dozorowan__id_do__3E52440B" FromRole="Dozorowania" ToRole="Dozorcy" />
+        </EntityType>
+        <Association Name="FK__Dozorowan__id_bu__3F466844">
+          <End Type="DBProjectModel.Budynki" Role="Budynki" Multiplicity="0..1" />
+          <End Type="DBProjectModel.Dozorowania" Role="Dozorowania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Budynki">
+              <PropertyRef Name="id_budynku" />
+            </Principal>
+            <Dependent Role="Dozorowania">
+              <PropertyRef Name="id_budynku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dozorowan__id_do__3E52440B">
+          <End Type="DBProjectModel.Dozorcy" Role="Dozorcy" Multiplicity="0..1" />
+          <End Type="DBProjectModel.Dozorowania" Role="Dozorowania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dozorcy">
+              <PropertyRef Name="id_dozorcy" />
+            </Principal>
+            <Dependent Role="Dozorowania">
+              <PropertyRef Name="id_dozorcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -909,16 +789,6 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
                 <ScalarProperty Name="Imie" ColumnName="Imie" />
                 <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
                 <ScalarProperty Name="PESEL" ColumnName="PESEL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Dozorowania">
-            <EntityTypeMapping TypeName="DBProjectModel.Dozorowania">
-              <MappingFragment StoreEntitySet="Dozorowania">
-                <ScalarProperty Name="data_rozpoczecia" ColumnName="data_rozpoczecia" />
-                <ScalarProperty Name="data_zakonczenia" ColumnName="data_zakonczenia" />
-                <ScalarProperty Name="id_dozorcy" ColumnName="id_dozorcy" />
-                <ScalarProperty Name="id_budynku" ColumnName="id_budynku" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1037,47 +907,29 @@ warning 6002: The table/view 'DBProject.dbo.RentalDataView' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BudynkiMieszkaniaUsterki">
-            <EntityTypeMapping TypeName="DBProjectModel.BudynkiMieszkaniaUsterki">
-              <MappingFragment StoreEntitySet="BudynkiMieszkaniaUsterki">
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="stan" ColumnName="stan" />
-                <ScalarProperty Name="adres_budynku" ColumnName="adres_budynku" />
-                <ScalarProperty Name="numer" ColumnName="numer" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBProjectModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FaultsDataView">
-            <EntityTypeMapping TypeName="DBProjectModel.FaultsDataView">
-              <MappingFragment StoreEntitySet="FaultsDataView">
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="stan" ColumnName="stan" />
-                <ScalarProperty Name="adres_budynku" ColumnName="adres_budynku" />
-                <ScalarProperty Name="numer" ColumnName="numer" />
-                <ScalarProperty Name="id_usterki" ColumnName="id_usterki" />
-                <ScalarProperty Name="id_mieszkania" ColumnName="id_mieszkania" />
+          <EntitySetMapping Name="Dozorowania">
+            <EntityTypeMapping TypeName="DBProjectModel.Dozorowania">
+              <MappingFragment StoreEntitySet="Dozorowania">
                 <ScalarProperty Name="id_budynku" ColumnName="id_budynku" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RentalDataView">
-            <EntityTypeMapping TypeName="DBProjectModel.RentalDataView">
-              <MappingFragment StoreEntitySet="RentalDataView">
-                <ScalarProperty Name="imie" ColumnName="imie" />
-                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
-                <ScalarProperty Name="numer" ColumnName="numer" />
-                <ScalarProperty Name="adres_budynku" ColumnName="adres_budynku" />
-                <ScalarProperty Name="data_rozpoczecia" ColumnName="data_rozpoczecia" />
+                <ScalarProperty Name="id_dozorcy" ColumnName="id_dozorcy" />
                 <ScalarProperty Name="data_zakonczenia" ColumnName="data_zakonczenia" />
-                <ScalarProperty Name="id_najemcy" ColumnName="id_najemcy" />
-                <ScalarProperty Name="id_budynku" ColumnName="id_budynku" />
-                <ScalarProperty Name="id_mieszkania" ColumnName="id_mieszkania" />
-                <ScalarProperty Name="id_wynajmu" ColumnName="id_wynajmu" />
-                <ScalarProperty Name="cena_miesieczna" ColumnName="cena_miesieczna" />
+                <ScalarProperty Name="data_rozpoczecia" ColumnName="data_rozpoczecia" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

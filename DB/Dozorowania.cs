@@ -14,10 +14,11 @@ namespace DB
     
     public partial class Dozorowania
     {
+        public int id { get; set; }
         public Nullable<System.DateTime> data_rozpoczecia { get; set; }
         public Nullable<System.DateTime> data_zakonczenia { get; set; }
-        public int id_dozorcy { get; set; }
-        public int id_budynku { get; set; }
+        public Nullable<int> id_dozorcy { get; set; }
+        public Nullable<int> id_budynku { get; set; }
     
         public virtual Budynki Budynki { get; set; }
         public virtual Dozorcy Dozorcy { get; set; }

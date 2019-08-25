@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Frontend.Controllers;
+using Frontend.View.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Frontend1
+namespace Frontend
 {
 	static class Program
 	{
@@ -16,7 +18,8 @@ namespace Frontend1
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+			AppController appController = new AppController();
+			appController.StartApp();
 		}
 	}
 }
