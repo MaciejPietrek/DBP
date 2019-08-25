@@ -11,14 +11,14 @@ using System.Web.Http;
 
 namespace DBServer.Controllers
 {
-    public class FlatController : ApiController
+    public class FlatController : DBServerApiController
     {
         // GET: api/Flat
         public IEnumerable<FlatModel> Get()
         {
 
             var i = ModelMapper.Mapper.Map<List<IFlatModel>, List<FlatModel>>(new FlatService().GetAll());
-            return i;
+            Logger.Add(i).Flush(); return i;
         }
 
         // GET: api/Flat/5

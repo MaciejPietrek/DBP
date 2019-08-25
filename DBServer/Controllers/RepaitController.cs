@@ -11,14 +11,14 @@ using System.Web.Http;
 
 namespace DBServer.Controllers
 {
-    public class RepairController : ApiController
+    public class RepairController : DBServerApiController
     {
         // GET: api/Repair
         public IEnumerable<RepairModel> Get()
         {
 
             var i = ModelMapper.Mapper.Map<List<IRepairModel>, List<RepairModel>>(new RepairService().GetAll());
-            return i;
+            Logger.Add(i).Flush(); return i;
         }
 
         // GET: api/Repair/5

@@ -11,14 +11,14 @@ using System.Web.Http;
 
 namespace DBServer.Controllers
 {
-    public class RentalController : ApiController
+    public class RentalController : DBServerApiController
     {
         // GET: api/Rental
         public IEnumerable<RentalModel> Get()
         {
 
             var i = ModelMapper.Mapper.Map<List<IRentalModel>, List<RentalModel>>(new RentalService().GetAll());
-            return i;
+            Logger.Add(i).Flush(); return i;
         }
 
         // GET: api/Rental/5

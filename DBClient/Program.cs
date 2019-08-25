@@ -7,6 +7,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using DBClient.DataRecievers;
 using DB.Model.Implementation;
+using System.Runtime.Serialization;
 
 namespace DBClient
 {
@@ -14,17 +15,8 @@ namespace DBClient
     {
         static void Main(string[] args)
         {
-            Console.ReadKey();
-
-            BuildingDataReceiver som = new BuildingDataReceiver();
-
-            var a = new BuildingModel()
-            {
-                adres_budynku = "Siemianowicka 100",
-                id_budynku = 10001
-            };
-            Console.ReadKey();
-
+            var form = new MainForm();
+            form.ShowDialog();
         }
     }
 }
