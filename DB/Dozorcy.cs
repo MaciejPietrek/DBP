@@ -20,7 +20,7 @@ namespace DB
             this.Dozorowania = new HashSet<Dozorowania>();
         }
     
-        public int id_dozorcy { get; set; }
+        public int id { get; set; }
         public string nr_telefonu { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }

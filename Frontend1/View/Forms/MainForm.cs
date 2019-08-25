@@ -88,6 +88,12 @@ namespace Frontend
 			return null;
 		}
 
+		new public void Refresh()
+		{
+			TabContents tabContents = GetCurrentlySelectedTab().Controls[0] as TabContents;
+			tabContents.DataGrid.Refresh();
+		}
+
 		#endregion
 	}
 }

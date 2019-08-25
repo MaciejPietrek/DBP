@@ -31,14 +31,18 @@ namespace DataServer.Controllers
             new TenantService().AddOrUpdate(value);
         }
 
-        // DELETE: api/Tenant/5
-        public void Delete(int id)
-        {
-            new TenantService().Remove(id);
-        }
+		// DELETE: api/Tenant/5
+		public IHttpActionResult Delete(int id)
+		{
+			bool result = new TenantService().Remove(id);
+			if (result)
+				return Ok();
+			else
+				return Conflict();
+		}
 
-        // DELETE: api/Tenant/5
-        public void Delete([FromBody]TenantModel value)
+		// DELETE: api/Tenant/5
+		public void Delete([FromBody]TenantModel value)
         {
             new TenantService().Remove(value);
         }

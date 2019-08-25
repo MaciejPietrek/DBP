@@ -31,14 +31,18 @@ namespace DataServer.Controllers
             new RentalService().AddOrUpdate(value);
         }
 
-        // DELETE: api/Rental/5
-        public void Delete(int id)
-        {
-            new RentalService().Remove(id);
-        }
+		// DELETE: api/Rental/5
+		public IHttpActionResult Delete(int id)
+		{
+			bool result = new RentalService().Remove(id);
+			if (result)
+				return Ok();
+			else
+				return Conflict();
+		}
 
-        // DELETE: api/Rental/5
-        public void Delete([FromBody]RentalModel value)
+		// DELETE: api/Rental/5
+		public void Delete([FromBody]RentalModel value)
         {
             new RentalService().Remove(value);
         }

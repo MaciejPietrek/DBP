@@ -33,9 +33,13 @@ namespace DataServer.Controllers
         }
 
         // DELETE: api/Building/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            new BuildingService().Remove(id);
+			bool result = new BuildingService().Remove(id);
+			if (result)
+				return Ok();
+			else
+				return Conflict();
         }
 
         // DELETE: api/Building/5

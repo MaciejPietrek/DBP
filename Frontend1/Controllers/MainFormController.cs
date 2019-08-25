@@ -85,8 +85,14 @@ namespace Frontend.Controllers
 			string buttonText = "Dodaj";
 			EventHandler action = AddEntity<T>;
 			newActionSet.Add(buttonText, action);
+			buttonText = "Edytuj";
+			action = UpdateEntity<T>;
+			newActionSet.Add(buttonText, action);
+			buttonText = "Usuń";
+			action = DeleteEntity<T>;
+			newActionSet.Add(buttonText, action);
 			buttonText = "Zamknij zakładkę";
-			action = CloseTab;
+			action = CloseTabHandler;
 			newActionSet.Add(buttonText, action);
 			return newActionSet;
 		}
@@ -135,7 +141,7 @@ namespace Frontend.Controllers
 			}
 		}
 
-		private void CloseTab(object sender, EventArgs eventArgs)
+		private void CloseTabHandler(object sender, EventArgs eventArgs)
 		{
 			_mainForm.CloseTab(_mainForm.GetCurrentlySelectedTab());
 		}
@@ -149,7 +155,9 @@ namespace Frontend.Controllers
 				string errorMessage = _dataSourceManager.Add(newEntity);
 				if(errorMessage == null)
 				{
-					_mainForm.Refresh();
+					TabContents tabContents = _mainForm.GetCurrentlySelectedTab().Controls[0] as TabContents;
+					tabContents.DataGrid.DataSource = null;
+					tabContents.DataGrid.DataSource = _dataSourceManager.Get<T>();
 				}
 				else
 				{
@@ -166,11 +174,7 @@ namespace Frontend.Controllers
 			if (modifiedEntity != null)
 			{
 				string errorMessage = _dataSourceManager.Update(modifiedEntity, entity);
-				if (errorMessage == null)
-				{
-					_mainForm.Refresh();
-				}
-				else
+				if (errorMessage != null)
 				{
 					MessageBox.Show(errorMessage);
 				}
@@ -186,7 +190,9 @@ namespace Frontend.Controllers
 				string errorMessage = _dataSourceManager.Delete(entity);
 				if (errorMessage == null)
 				{
-					_mainForm.Refresh();
+					TabContents tabContents = _mainForm.GetCurrentlySelectedTab().Controls[0] as TabContents;
+					tabContents.DataGrid.DataSource = null;
+					tabContents.DataGrid.DataSource = _dataSourceManager.Get<T>();
 				}
 				else
 				{

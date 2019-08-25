@@ -11,11 +11,15 @@ namespace DB
     {
         static public void Log(string logText)
         {
-            var directory = Directory.GetCurrentDirectory();
-            using (var writer = new StreamWriter(directory + "\\log.txt"))
-            {
-                writer.WriteLine(logText);
-            }
+			/*if(System.Configuration.ConfigurationSettings.AppSettings.GetValues("logOn")[0] == "true")
+			{
+				var directory = Directory.GetCurrentDirectory();
+				using (var writer = new StreamWriter(directory + "\\log.txt"))
+				{
+					writer.WriteLine(logText);
+				}
+			}*/
+            
         }
     }
 }

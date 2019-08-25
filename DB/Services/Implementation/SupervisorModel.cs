@@ -16,7 +16,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var newObject = ctx.Dozorcy.Find(model.id_dozorcy);
+                    var newObject = ctx.Dozorcy.Find(model.Id);
 
                     if (newObject == null)
                     {
@@ -66,7 +66,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Dozorcy.Where(x => x.id_dozorcy == id).FirstOrDefault();
+                    var queryResult = ctx.Dozorcy.Where(x => x.id == id).FirstOrDefault();
                     return Mapper.ModelMapper.Mapper.Map<ISupervisorModel>(queryResult);
                 }
             }
@@ -83,7 +83,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Dozorcy.Where(x => x.id_dozorcy == id).FirstOrDefault();
+                    var queryResult = ctx.Dozorcy.Where(x => x.id == id).FirstOrDefault();
                     if (queryResult is null)
                     {
                         return false;
@@ -91,6 +91,7 @@ namespace DB.Services.Implementation
                     else
                     {
                         ctx.Dozorcy.Remove(queryResult);
+						ctx.SaveChanges();
                         return true;
                     }
                 }
@@ -104,7 +105,7 @@ namespace DB.Services.Implementation
 
         public bool Remove(ISupervisorModel model)
         {
-            return Remove(model.id_dozorcy);
+            return Remove(model.Id);
         }
     }
 }

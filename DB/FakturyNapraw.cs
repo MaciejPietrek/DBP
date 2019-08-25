@@ -14,7 +14,7 @@ namespace DB
     
     public partial class FakturyNapraw
     {
-        public int id_faktury { get; set; }
+        public int id { get; set; }
         public Nullable<int> id_naprawy { get; set; }
         public float cena { get; set; }
         public int numer_faktury { get; set; }

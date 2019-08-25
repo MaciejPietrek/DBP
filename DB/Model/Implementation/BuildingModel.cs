@@ -11,7 +11,7 @@ namespace DB.Model.Implementation
 {
     public class BuildingModel : IBuildingModel
     {
-		//[PrimaryKey()]
+		[PrimaryKey()]
         [Display(Name = "Identyfikator Budynku")]
 		[System.ComponentModel.DisplayName("ID")]
         public int Id { get; set; }

@@ -20,7 +20,7 @@ namespace DB
             this.Naprawy = new HashSet<Naprawy>();
         }
     
-        public int id_firmy { get; set; }
+        public int id { get; set; }
         public string NIP { get; set; }
         public string nr_telefonu { get; set; }
         public string nazwa_firmy { get; set; }

@@ -21,7 +21,7 @@ namespace DB
             this.Wynajmy = new HashSet<Wynajmy>();
         }
     
-        public int id_mieszkania { get; set; }
+        public int id { get; set; }
         public Nullable<int> id_budynku { get; set; }
         public int numer { get; set; }
         public Nullable<float> metraz { get; set; }

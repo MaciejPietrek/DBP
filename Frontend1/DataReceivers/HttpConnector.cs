@@ -73,6 +73,9 @@ namespace Frontend.DataRecievers
 						{
 							return Task.Run(async () => { return await content.ReadAsStringAsync(); }).Result;
 						}
+					}else if(responseMessage.StatusCode == HttpStatusCode.Conflict)
+					{
+						_lastErrorMessage = "Nie można usunąć rekordu do którego istnieje odwołanie w innej tabeli";
 					}
 					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
 					{
@@ -98,7 +101,7 @@ namespace Frontend.DataRecievers
 			{
 				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PostAsJsonAsync(url, postContent); }).Result)
 				{
-					if (responseMessage.StatusCode == HttpStatusCode.OK)
+					if (responseMessage.StatusCode == HttpStatusCode.NoContent)
 					{
 						using (HttpContent content = responseMessage.Content)
 						{

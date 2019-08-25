@@ -31,14 +31,18 @@ namespace DataServer.Controllers
             new FaultService().AddOrUpdate(value);
         }
 
-        // DELETE: api/Fault/5
-        public void Delete(int id)
-        {
-            new FaultService().Remove(id);
-        }
+		// DELETE: api/Fault/5
+		public IHttpActionResult Delete(int id)
+		{
+			bool result = new FaultService().Remove(id);
+			if (result)
+				return Ok();
+			else
+				return Conflict();
+		}
 
-        // DELETE: api/Fault/5
-        public void Delete([FromBody]FaultModel value)
+		// DELETE: api/Fault/5
+		public void Delete([FromBody]FaultModel value)
         {
             new FaultService().Remove(value);
         }

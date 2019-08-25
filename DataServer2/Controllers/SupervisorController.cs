@@ -31,14 +31,18 @@ namespace DataServer.Controllers
             new SupervisorService().AddOrUpdate(value);
         }
 
-        // DELETE: api/Supervisor/5
-        public void Delete(int id)
-        {
-            new SupervisorService().Remove(id);
-        }
+		// DELETE: api/Supervisor/5
+		public IHttpActionResult Delete(int id)
+		{
+			bool result = new SupervisorService().Remove(id);
+			if (result)
+				return Ok();
+			else
+				return Conflict();
+		}
 
-        // DELETE: api/Supervisor/5
-        public void Delete([FromBody]SupervisorModel value)
+		// DELETE: api/Supervisor/5
+		public void Delete([FromBody]SupervisorModel value)
         {
             new SupervisorService().Remove(value);
         }

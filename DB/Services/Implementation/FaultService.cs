@@ -16,7 +16,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var newObject = ctx.Usterki.Find(model.id_usterki);
+                    var newObject = ctx.Usterki.Find(model.Id);
 
                     if (newObject == null)
                     {
@@ -65,7 +65,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Usterki.Where(x => x.id_usterki == id).FirstOrDefault();
+                    var queryResult = ctx.Usterki.Where(x => x.id == id).FirstOrDefault();
                     return Mapper.ModelMapper.Mapper.Map<IFaultModel>(queryResult);
                 }
             }
@@ -82,7 +82,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Usterki.Where(x => x.id_usterki == id).FirstOrDefault();
+                    var queryResult = ctx.Usterki.Where(x => x.id == id).FirstOrDefault();
                     if (queryResult is null)
                     {
                         return false;
@@ -90,7 +90,8 @@ namespace DB.Services.Implementation
                     else
                     {
                         ctx.Usterki.Remove(queryResult);
-                        return true;
+						ctx.SaveChanges();
+						return true;
                     }
                 }
             }
@@ -103,7 +104,7 @@ namespace DB.Services.Implementation
 
         public bool Remove(IFaultModel model)
         {
-            return Remove(model.id_usterki);
+            return Remove(model.Id);
         }
     }
 }

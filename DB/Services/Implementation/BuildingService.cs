@@ -64,7 +64,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Budynki.Where(x => x.id_budynku == id).FirstOrDefault();
+                    var queryResult = ctx.Budynki.Where(x => x.id == id).FirstOrDefault();
                     return Mapper.ModelMapper.Mapper.Map<IBuildingModel>(queryResult);
                 }
             }
@@ -81,7 +81,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Budynki.Where(x => x.id_budynku == id).FirstOrDefault();
+                    var queryResult = ctx.Budynki.Where(x => x.id == id).FirstOrDefault();
                     if(queryResult is null)
                     {
                         return false;
@@ -89,7 +89,8 @@ namespace DB.Services.Implementation
                     else
                     {
                         ctx.Budynki.Remove(queryResult);
-                        return true;
+						ctx.SaveChanges();
+						return true;
                     }
                 }
             }

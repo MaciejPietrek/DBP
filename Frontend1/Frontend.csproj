@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AddEditFormController.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\EntityChoiceFormController.cs" />
     <Compile Include="Controllers\MainFormController.cs" />
     <Compile Include="DataReceivers\HttpConnector.cs" />
     <Compile Include="DataReceivers\DataReciever.cs" />
@@ -70,6 +71,12 @@
     </Compile>
     <Compile Include="View\Forms\AddEditForm.Designer.cs">
       <DependentUpon>AddEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\EntityChoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Forms\EntityChoiceForm.Designer.cs">
+      <DependentUpon>EntityChoiceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Forms\LoginForm.cs">
       <SubType>Form</SubType>
@@ -121,6 +128,9 @@
     </Compile>
     <EmbeddedResource Include="View\Forms\AddEditForm.resx">
       <DependentUpon>AddEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Forms\EntityChoiceForm.resx">
+      <DependentUpon>EntityChoiceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

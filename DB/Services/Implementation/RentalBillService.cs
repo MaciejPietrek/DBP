@@ -16,7 +16,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var newObject = ctx.FakturyWynajem.Find(model.id_faktury);
+                    var newObject = ctx.FakturyWynajem.Find(model.Id);
 
                     if (newObject == null)
                     {
@@ -66,7 +66,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.FakturyWynajem.Where(x => x.id_faktury == id).FirstOrDefault();
+                    var queryResult = ctx.FakturyWynajem.Where(x => x.id == id).FirstOrDefault();
                     return Mapper.ModelMapper.Mapper.Map<IRentalBillModel>(queryResult);
                 }
             }
@@ -83,7 +83,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.FakturyWynajem.Where(x => x.id_faktury == id).FirstOrDefault();
+                    var queryResult = ctx.FakturyWynajem.Where(x => x.id == id).FirstOrDefault();
                     if (queryResult is null)
                     {
                         return false;
@@ -91,7 +91,8 @@ namespace DB.Services.Implementation
                     else
                     {
                         ctx.FakturyWynajem.Remove(queryResult);
-                        return true;
+						ctx.SaveChanges();
+						return true;
                     }
                 }
             }
@@ -104,7 +105,7 @@ namespace DB.Services.Implementation
 
         public bool Remove(IRentalBillModel model)
         {
-            return Remove(model.id_faktury);
+            return Remove(model.Id);
         }
     }
 }

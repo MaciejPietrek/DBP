@@ -20,7 +20,7 @@ namespace DB
             this.FakturyNapraw = new HashSet<FakturyNapraw>();
         }
     
-        public int id_naprawy { get; set; }
+        public int id { get; set; }
         public Nullable<int> id_usterki { get; set; }
         public Nullable<int> id_firmy { get; set; }
         public string nr_telefonu { get; set; }

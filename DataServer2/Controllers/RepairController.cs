@@ -31,14 +31,18 @@ namespace DataServer.Controllers
             new RepairService().AddOrUpdate(value);
         }
 
-        // DELETE: api/Repair/5
-        public void Delete(int id)
-        {
-            new RepairService().Remove(id);
-        }
+		// DELETE: api/Repair/5
+		public IHttpActionResult Delete(int id)
+		{
+			bool result = new RepairService().Remove(id);
+			if (result)
+				return Ok();
+			else
+				return Conflict();
+		}
 
-        // DELETE: api/Repair/5
-        public void Delete([FromBody]RepairModel value)
+		// DELETE: api/Repair/5
+		public void Delete([FromBody]RepairModel value)
         {
             new RepairService().Remove(value);
         }
