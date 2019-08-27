@@ -1,4 +1,5 @@
-﻿using DB.Model.Interfaces;
+﻿using DB.Model.Attributes;
+using DB.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,16 +11,26 @@ namespace DB.Model.Implementation
 {
     public class SupervisingModel : ISupervisingModel
     {
-        [Display(Name = "Data Rozpoczęcia")]
+		[PrimaryKey()]
+		[System.ComponentModel.DisplayName("ID")]
+		public int Id { get; set; }
+
+		[System.ComponentModel.DisplayName("Data Rozpoczęcia")]
+		[Display(Name = "Data Rozpoczęcia")]
         public DateTime? data_rozpoczecia { get; set; }
 
-        [Display(Name = "Data Zakończenia")]
+		[System.ComponentModel.DisplayName("Data Zakończenia")]
+		[Display(Name = "Data Zakończenia")]
         public DateTime? data_zakonczenia { get; set; }
 
-        [Display(Name = "Identyfikator Dozorcy")]
+		[ForeignKey(typeof(SupervisorModel))]
+		[System.ComponentModel.DisplayName("Identyfikator Dozorcy")]
+		[Display(Name = "Identyfikator Dozorcy")]
         public int id_dozorcy { get; set; }
 
-        [Display(Name = "Identyfikator Budynku")]
+		[ForeignKey(typeof(BuildingModel))]
+		[System.ComponentModel.DisplayName("Identyfikator Budynku")]
+		[Display(Name = "Identyfikator Budynku")]
         public int id_budynku { get; set; }
     }
 }

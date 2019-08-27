@@ -21,7 +21,7 @@ namespace DB
             this.Platnosci = new HashSet<Platnosci>();
         }
     
-        public int id_wynajmu { get; set; }
+        public int id { get; set; }
         public Nullable<int> id_mieszkania { get; set; }
         public Nullable<System.DateTime> data_rozpoczecia { get; set; }
         public Nullable<System.DateTime> data_zakonczenia { get; set; }

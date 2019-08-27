@@ -8,10 +8,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DB</RootNamespace>
     <AssemblyName>DB</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -77,9 +78,6 @@
     <Compile Include="Budynki.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="BudynkiMieszkaniaUsterki.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
-    </Compile>
     <Compile Include="Common\Enums\AvailableRoles.cs" />
     <Compile Include="Dozorcy.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
@@ -93,9 +91,6 @@
     <Compile Include="FakturyWynajem.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="FaultsDataView.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
-    </Compile>
     <Compile Include="Firmy.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
@@ -104,6 +99,8 @@
     <Compile Include="Mieszkania.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Attributes\ForeignKeyAttribute.cs" />
+    <Compile Include="Model\Attributes\PrimaryKeyAttribute.cs" />
     <Compile Include="Model\Implementation\BuildingModel.cs" />
     <Compile Include="Model\Implementation\CompanyModel.cs" />
     <Compile Include="Model\Implementation\FaultModel.cs" />
@@ -136,9 +133,6 @@
     <Compile Include="Platnosci.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="RentalDataView.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
-    </Compile>
     <Compile Include="Services\Implementation\BuildingService.cs" />
     <Compile Include="Services\Implementation\CompanyService.cs" />
     <Compile Include="Services\Implementation\FaultService.cs" />
@@ -166,6 +160,9 @@
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
     <Compile Include="StanyUsterek.cs">
+      <DependentUpon>BDProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Usterki.cs">

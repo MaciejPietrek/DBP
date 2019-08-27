@@ -1,4 +1,5 @@
-﻿using DB.Model.Interfaces;
+﻿using DB.Model.Attributes;
+using DB.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,10 +11,13 @@ namespace DB.Model.Implementation
 {
     public class BuildingModel : IBuildingModel
     {
+		[PrimaryKey()]
         [Display(Name = "Identyfikator Budynku")]
-        public int id_budynku { get; set; }
+		[System.ComponentModel.DisplayName("ID")]
+        public int Id { get; set; }
 
         [Display(Name = "Adres Budynku")]
-        public string adres_budynku { get; set; }
+		[System.ComponentModel.DisplayName("Adres")]
+		public string adres_budynku { get; set; }
     }
 }

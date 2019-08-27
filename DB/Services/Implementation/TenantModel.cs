@@ -16,7 +16,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var newObject = ctx.Najemcy.Find(model.id_najemcy);
+                    var newObject = ctx.Najemcy.Find(model.Id);
 
                     if (newObject == null)
                     {
@@ -66,7 +66,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Najemcy.Where(x => x.id_najemcy == id).FirstOrDefault();
+                    var queryResult = ctx.Najemcy.Where(x => x.id == id).FirstOrDefault();
                     return Mapper.ModelMapper.Mapper.Map<ITenantModel>(queryResult);
                 }
             }
@@ -83,7 +83,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Najemcy.Where(x => x.id_najemcy == id).FirstOrDefault();
+                    var queryResult = ctx.Najemcy.Where(x => x.id == id).FirstOrDefault();
                     if (queryResult is null)
                     {
                         return false;
@@ -91,7 +91,8 @@ namespace DB.Services.Implementation
                     else
                     {
                         ctx.Najemcy.Remove(queryResult);
-                        return true;
+						ctx.SaveChanges();
+						return true;
                     }
                 }
             }
@@ -104,7 +105,7 @@ namespace DB.Services.Implementation
 
         public bool Remove(ITenantModel model)
         {
-            return Remove(model.id_najemcy);
+            return Remove(model.Id);
         }
     }
 }

@@ -19,8 +19,8 @@ namespace DBClient
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var som = new DataReceivers.CompanyDataReceiver();
-            dataGridView1.DataSource = som.GetList();
+            //var som = new DataReceivers.CompanyDataReceiver();
+            //dataGridView1.DataSource = som.GetList();
         }
     }
 }

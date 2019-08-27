@@ -14,7 +14,7 @@ namespace DB
     
     public partial class FakturyWynajem
     {
-        public int id_faktury { get; set; }
+        public int id { get; set; }
         public Nullable<int> id_wynajem { get; set; }
         public float cena { get; set; }
         public int numer_faktury { get; set; }

@@ -16,7 +16,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var newObject = ctx.Naprawy.Find(model.id_naprawy);
+                    var newObject = ctx.Naprawy.Find(model.Id);
 
                     if (newObject == null)
                     {
@@ -69,7 +69,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Naprawy.Where(x => x.id_naprawy == id).FirstOrDefault();
+                    var queryResult = ctx.Naprawy.Where(x => x.id == id).FirstOrDefault();
                     return Mapper.ModelMapper.Mapper.Map<IRepairModel>(queryResult);
                 }
             }
@@ -86,7 +86,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Naprawy.Where(x => x.id_naprawy == id).FirstOrDefault();
+                    var queryResult = ctx.Naprawy.Where(x => x.id == id).FirstOrDefault();
                     if (queryResult is null)
                     {
                         return false;
@@ -94,7 +94,8 @@ namespace DB.Services.Implementation
                     else
                     {
                         ctx.Naprawy.Remove(queryResult);
-                        return true;
+						ctx.SaveChanges();
+						return true;
                     }
                 }
             }
@@ -107,7 +108,7 @@ namespace DB.Services.Implementation
 
         public bool Remove(IRepairModel model)
         {
-            return Remove(model.id_naprawy);
+            return Remove(model.Id);
         }
     }
 }

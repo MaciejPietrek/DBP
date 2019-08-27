@@ -1,4 +1,5 @@
-﻿using DB.Model.Interfaces;
+﻿using DB.Model.Attributes;
+using DB.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,16 +11,21 @@ namespace DB.Model.Implementation
 {
     public class CompanyModel : ICompanyModel
     {
-        [Display(Name = "Identyfikator Firmy")]
-        public int id_firmy { get; set; }
+		[PrimaryKey()]
+		[Display(Name = "Identyfikator Firmy")]
+		[System.ComponentModel.DisplayName("ID")]
+		public int Id { get; set; }
 
         [Display(Name = "NIP")]
-        public string NIP { get; set; }
+		[System.ComponentModel.DisplayName("NIP")]
+		public string NIP { get; set; }
 
-        [Display(Name = "Numer Telefonu")]
+		[System.ComponentModel.DisplayName("Numer telefornu")]
+		[Display(Name = "Numer Telefonu")]
         public string nr_telefonu { get; set; }
 
-        [Display(Name = "Nazwa Firmy")]
+		[System.ComponentModel.DisplayName("Nazwa firmy")]
+		[Display(Name = "Nazwa Firmy")]
         public string nazwa_firmy { get; set; }
     }
 }

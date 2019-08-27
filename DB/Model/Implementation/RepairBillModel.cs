@@ -1,4 +1,5 @@
-﻿using DB.Model.Interfaces;
+﻿using DB.Model.Attributes;
+using DB.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,19 +11,26 @@ namespace DB.Model.Implementation
 {
     public class RepairBillModel : IRepairBillModel
     {
-        [Display(Name = "Identyfikator Faktury")]
-        public int id_faktury { get; set; }
+		[PrimaryKey()]
+		[System.ComponentModel.DisplayName("ID")]
+		[Display(Name = "Identyfikator Faktury")]
+        public int Id { get; set; }
 
-        [Display(Name = "Identyfikator Naprawy")]
+		[ForeignKey(typeof(RepairModel))]
+		[System.ComponentModel.DisplayName("Identyfikator Naprawy")]
+		[Display(Name = "Identyfikator Naprawy")]
         public int? id_naprawy { get; set; }
 
-        [Display(Name = "Kwota")]
+		[System.ComponentModel.DisplayName("Kwota do zapłaty")]
+		[Display(Name = "Kwota")]
         public float cena { get; set; }
-        
-        [Display(Name = "Numer Faktury")]
+
+		[System.ComponentModel.DisplayName("Numer faktury")]
+		[Display(Name = "Numer Faktury")]
         public int numer_faktury { get; set; }
 
-        [Display(Name = "Data Płatności")]
+		[System.ComponentModel.DisplayName("Data płatności")]
+		[Display(Name = "Data Płatności")]
         public DateTime? data_platnosci { get; set; }
     }
 }

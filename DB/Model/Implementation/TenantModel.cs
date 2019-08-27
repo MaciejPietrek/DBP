@@ -1,4 +1,5 @@
-﻿using DB.Model.Interfaces;
+﻿using DB.Model.Attributes;
+using DB.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,19 +11,25 @@ namespace DB.Model.Implementation
 {
     public class TenantModel : ITenantModel
     {
-        [Display(Name = "Identyfikator Najemcy")]
-        public int id_najemcy { get; set; }
+		[PrimaryKey()]
+		[System.ComponentModel.DisplayName("ID")]
+		[Display(Name = "Identyfikator Najemcy")]
+        public int Id { get; set; }
 
-        [Display(Name = "Numer Telefonu")]
+		[System.ComponentModel.DisplayName("Numer Telefonu")]
+		[Display(Name = "Numer Telefonu")]
         public string nr_telefonu { get; set; }
 
-        [Display(Name = "Imie")]
+		[System.ComponentModel.DisplayName("Imię")]
+		[Display(Name = "Imie")]
         public string imie { get; set; }
 
-        [Display(Name = "Nazwisko")]
+		[System.ComponentModel.DisplayName("Nazwisko")]
+		[Display(Name = "Nazwisko")]
         public string nazwisko { get; set; }
 
-        [Display(Name = "PESEL")]
+		[System.ComponentModel.DisplayName("PESEL")]
+		[Display(Name = "PESEL")]
         public string PESEL { get; set; }
     }
 }

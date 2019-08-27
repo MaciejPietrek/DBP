@@ -8,7 +8,6 @@ namespace DB.Model.Interfaces
 {
     public interface IRepairModel : IDBModel
     {
-        int id_naprawy { get; set; }
         int? id_usterki { get; set; }
         int? id_firmy { get; set; }
         string nr_telefonu { get; set; }

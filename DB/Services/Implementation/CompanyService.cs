@@ -17,7 +17,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var newObject = ctx.Firmy.Find(model.id_firmy);
+                    var newObject = ctx.Firmy.Find(model.Id);
 
                     if (newObject == null)
                     {
@@ -66,7 +66,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Firmy.Where(x => x.id_firmy == id).FirstOrDefault();
+                    var queryResult = ctx.Firmy.Where(x => x.id == id).FirstOrDefault();
                     return Mapper.ModelMapper.Mapper.Map<ICompanyModel>(queryResult);
                 }
             }
@@ -83,7 +83,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var queryResult = ctx.Firmy.Where(x => x.id_firmy == id).FirstOrDefault();
+                    var queryResult = ctx.Firmy.Where(x => x.id == id).FirstOrDefault();
                     if (queryResult is null)
                     {
                         return false;
@@ -91,6 +91,7 @@ namespace DB.Services.Implementation
                     else
                     {
                         ctx.Firmy.Remove(queryResult);
+						ctx.SaveChanges();
                         return true;
                     }
                 }
@@ -104,7 +105,7 @@ namespace DB.Services.Implementation
 
         public bool Remove(ICompanyModel model)
         {
-            return Remove(model.id_firmy);
+            return Remove(model.Id);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace DB.Model.Interfaces
 {
     public interface ITenantModel : IDBModel
     {
-        int id_najemcy { get; set; }
         string nr_telefonu { get; set; }
         string imie { get; set; }
         string nazwisko { get; set; }

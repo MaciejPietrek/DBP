@@ -20,7 +20,7 @@ namespace DB
             this.Wynajmy = new HashSet<Wynajmy>();
         }
     
-        public int id_najemcy { get; set; }
+        public int id { get; set; }
         public string nr_telefonu { get; set; }
         public string imie { get; set; }
         public string nazwisko { get; set; }

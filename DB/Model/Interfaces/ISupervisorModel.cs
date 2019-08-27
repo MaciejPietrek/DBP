@@ -8,7 +8,6 @@ namespace DB.Model.Interfaces
 {
     public interface ISupervisorModel : IDBModel
     {
-        int id_dozorcy { get; set; }
         string nr_telefonu { get; set; }
         string Imie { get; set; }
         string Nazwisko { get; set; }

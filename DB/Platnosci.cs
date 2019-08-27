@@ -14,7 +14,7 @@ namespace DB
     
     public partial class Platnosci
     {
-        public int id_platnosci { get; set; }
+        public int id { get; set; }
         public Nullable<int> id_wynajmu { get; set; }
         public Nullable<System.DateTime> data_platnosci { get; set; }
         public float cena { get; set; }

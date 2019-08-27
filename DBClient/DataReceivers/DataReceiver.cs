@@ -1,4 +1,4 @@
-﻿using DB.Model.Interfaces;
+﻿using DBClient.DataRecievers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DBClient.DataReceivers
-{
+{/*
     class DataReceiver<T> where T : IDBModel
     {
         private readonly string url;
@@ -42,7 +42,7 @@ namespace DBClient.DataReceivers
 
         public void Update(T model)
         {
-            Connector.Upd(url, model);
+            Connector.Upd(url, model).Wait();
         }
-    }
+    }*/
 }

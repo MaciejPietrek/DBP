@@ -81,8 +81,35 @@ namespace DB.Services.Implementation
             }
         }
 
-        [Obsolete("Remove(int id) deprecated, please use Remove(int id_dozorcy, int id_budynku) or Remove(ISupervisingModel model) instead.")]
-        public bool Remove(int id) => false;
+		[Obsolete("Remove(int id) deprecated, please use Remove(int id_dozorcy, int id_budynku) or Remove(ISupervisingModel model) instead.")]
+		public bool Remove(int id)
+		{
+			try
+			{
+				using (var ctx = new DBProjectEntities())
+				{
+					var queryResult = ctx.
+						Dozorowania.
+						Where(x => x.id == id).
+						FirstOrDefault();
+					if (queryResult is null)
+					{
+						return false;
+					}
+					else
+					{
+						ctx.Dozorowania.Remove(queryResult);
+						ctx.SaveChanges();
+						return true;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Log(ex.Message);
+				return false;
+			}
+		}
 
         public bool Remove(int id_dozorcy, int id_budynku)
         {
@@ -101,7 +128,8 @@ namespace DB.Services.Implementation
                     else
                     {
                         ctx.Dozorowania.Remove(queryResult);
-                        return true;
+						ctx.SaveChanges();
+						return true;
                     }
                 }
             }
