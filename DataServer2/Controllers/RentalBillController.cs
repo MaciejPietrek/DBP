@@ -34,7 +34,7 @@ namespace DataServer.Controllers
         // DELETE: api/RentalBill/5
         public IHttpActionResult Delete(int id)
         {
-			bool result = new CompanyService().Remove(id);
+			bool result = new RentalBillService().Remove(id);
 			if (result)
 				return Ok();
 			else

@@ -211,9 +211,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CurrentRepairController.cs" />
     <Compile Include="Controllers\FaultController.cs" />
     <Compile Include="Controllers\FlatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncomeController.cs" />
+    <Compile Include="Controllers\LatePaymentController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\RentalBillController.cs" />
     <Compile Include="Controllers\RentalController.cs" />
     <Compile Include="Controllers\RepairBillController.cs" />

@@ -90,6 +90,26 @@ namespace DB.Mapper
             cfg.CreateMap<TenantModel, ITenantModel>();
             cfg.CreateMap<ITenantModel, Najemcy>();
             cfg.CreateMap<Najemcy, ITenantModel>();
+            //Payment-----------------------
+            cfg.CreateMap<Platnosci, PaymentModel>();
+            cfg.CreateMap<PaymentModel, Platnosci>();
+            cfg.CreateMap<IPaymentModel, PaymentModel>();
+            cfg.CreateMap<PaymentModel, IPaymentModel>();
+            cfg.CreateMap<IPaymentModel, Platnosci>();
+            cfg.CreateMap<Platnosci, IPaymentModel>();
+            //Repair------------------------
+            cfg.CreateMap<Naprawy, CurrentRepairModel>();
+            cfg.CreateMap<CurrentRepairModel, Naprawy>();
+            cfg.CreateMap<ICurrentRepairModel, CurrentRepairModel>();
+            cfg.CreateMap<CurrentRepairModel, ICurrentRepairModel>();
+            cfg.CreateMap<ICurrentRepairModel, Naprawy>();
+            cfg.CreateMap<Naprawy, ICurrentRepairModel>();
+            //LatePayment
+            cfg.CreateMap<ILatePaymentModel, LatePaymentModel>();
+            cfg.CreateMap<LatePaymentModel, ILatePaymentModel>();
+            //Income
+            cfg.CreateMap<IIncomeModel, IncomeModel>();
+            cfg.CreateMap<IncomeModel, IIncomeModel>();
         }).CreateMapper();
     }
 }

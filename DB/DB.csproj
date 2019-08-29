@@ -103,8 +103,12 @@
     <Compile Include="Model\Attributes\PrimaryKeyAttribute.cs" />
     <Compile Include="Model\Implementation\BuildingModel.cs" />
     <Compile Include="Model\Implementation\CompanyModel.cs" />
+    <Compile Include="Model\Implementation\CurrentRepairModel.cs" />
     <Compile Include="Model\Implementation\FaultModel.cs" />
     <Compile Include="Model\Implementation\FlatModel.cs" />
+    <Compile Include="Model\Implementation\IncomeModel.cs" />
+    <Compile Include="Model\Implementation\LatePaymentModel.cs" />
+    <Compile Include="Model\Implementation\PaymentModel.cs" />
     <Compile Include="Model\Implementation\RentalBillModel.cs" />
     <Compile Include="Model\Implementation\RentalModel.cs" />
     <Compile Include="Model\Implementation\RepairBillModel.cs" />
@@ -112,11 +116,16 @@
     <Compile Include="Model\Implementation\SupervisingModel.cs" />
     <Compile Include="Model\Implementation\SupervisorModel.cs" />
     <Compile Include="Model\Implementation\TenantModel.cs" />
+    <Compile Include="Model\IncomeChecker.cs" />
     <Compile Include="Model\Interfaces\ICompanyModel.cs" />
     <Compile Include="Model\Interfaces\IBuildingModel.cs" />
+    <Compile Include="Model\Interfaces\ICurrentRepairModel.cs" />
     <Compile Include="Model\Interfaces\IDBModel.cs" />
     <Compile Include="Model\Interfaces\IFaultModel.cs" />
     <Compile Include="Model\Interfaces\IFlatModel.cs" />
+    <Compile Include="Model\Interfaces\IIncomeModel.cs" />
+    <Compile Include="Model\Interfaces\ILatePaymentModel.cs" />
+    <Compile Include="Model\Interfaces\IPaymentModel.cs" />
     <Compile Include="Model\Interfaces\IRentalModel.cs" />
     <Compile Include="Model\Interfaces\IRentalBillModel.cs" />
     <Compile Include="Model\Interfaces\IRepairBillModel.cs" />
@@ -124,6 +133,7 @@
     <Compile Include="Model\Interfaces\ISupervisingModel.cs" />
     <Compile Include="Model\Interfaces\ISupervisorModel.cs" />
     <Compile Include="Model\Interfaces\ITenantModel.cs" />
+    <Compile Include="Model\LatePaymentChecker.cs" />
     <Compile Include="Najemcy.cs">
       <DependentUpon>BDProject.tt</DependentUpon>
     </Compile>
@@ -135,8 +145,12 @@
     </Compile>
     <Compile Include="Services\Implementation\BuildingService.cs" />
     <Compile Include="Services\Implementation\CompanyService.cs" />
+    <Compile Include="Services\Implementation\CurrentRepairService.cs" />
     <Compile Include="Services\Implementation\FaultService.cs" />
     <Compile Include="Services\Implementation\FlatService.cs" />
+    <Compile Include="Services\Implementation\IncomeService.cs" />
+    <Compile Include="Services\Implementation\LatePaymentService.cs" />
+    <Compile Include="Services\Implementation\PaymentService.cs" />
     <Compile Include="Services\Implementation\RentalBillService.cs" />
     <Compile Include="Services\Implementation\RentalService.cs" />
     <Compile Include="Services\Implementation\RepairBillService.cs" />
@@ -146,9 +160,13 @@
     <Compile Include="Services\Implementation\TenantModel.cs" />
     <Compile Include="Services\Interfaces\IBuildingService.cs" />
     <Compile Include="Services\Interfaces\ICompanyService.cs" />
+    <Compile Include="Services\Interfaces\ICurrentRepairService.cs" />
     <Compile Include="Services\Interfaces\IDBService.cs" />
     <Compile Include="Services\Interfaces\IFaultService.cs" />
     <Compile Include="Services\Interfaces\IFlatService.cs" />
+    <Compile Include="Services\Interfaces\IIncomeService.cs" />
+    <Compile Include="Services\Interfaces\ILatePaymentService.cs" />
+    <Compile Include="Services\Interfaces\IPaymentService.cs" />
     <Compile Include="Services\Interfaces\IRentalBillService.cs" />
     <Compile Include="Services\Interfaces\IRentalService.cs" />
     <Compile Include="Services\Interfaces\IRepairBillService.cs" />
