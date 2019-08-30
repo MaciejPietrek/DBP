@@ -76,7 +76,11 @@ namespace Frontend.Controllers
 			buttonData.Add("Dozorcy", OpenTabHandler<SupervisorModel>);
 			buttonData.Add("Najemcy", OpenTabHandler<TenantModel>);
 			buttonData.Add("Dozorowania", OpenTabHandler<SupervisingModel>);
-			_mainForm.CreateTabOpeningButtonSet(buttonData);
+            buttonData.Add("Platnosci", OpenTabHandler<PaymentModel>);
+            buttonData.Add("Bieżące naprawy", OpenTabHandler<CurrentRepairModel>);
+            buttonData.Add("Zaległe płatności", OpenTabHandler<LatePaymentModel>);
+            buttonData.Add("Zyski", OpenTabHandler<IncomeModel>);
+            _mainForm.CreateTabOpeningButtonSet(buttonData);
 		}
 
 		private Dictionary<string, EventHandler> GenerateActionsFor<T>() where T : class, IDBModel, new()
