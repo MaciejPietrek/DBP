@@ -99,7 +99,7 @@ namespace Frontend.DataRecievers
         {
 			try
 			{
-				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PostAsJsonAsync(url, postContent); }).Result)
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PutAsJsonAsync(url, postContent); }).Result)
 				{
 					if (responseMessage.StatusCode == HttpStatusCode.NoContent)
 					{

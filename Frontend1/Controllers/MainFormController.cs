@@ -178,6 +178,12 @@ namespace Frontend.Controllers
 				{
 					MessageBox.Show(errorMessage);
 				}
+				else
+				{
+					TabContents tabContents = _mainForm.GetCurrentlySelectedTab().Controls[0] as TabContents;
+					tabContents.DataGrid.DataSource = null;
+					tabContents.DataGrid.DataSource = _dataSourceManager.Get<T>();
+				}
 			}
 		}
 

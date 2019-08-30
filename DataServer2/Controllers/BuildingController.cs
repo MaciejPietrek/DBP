@@ -27,7 +27,7 @@ namespace DataServer.Controllers
         }
 
         // PUT: api/Building/5
-        public void Post([FromBody]BuildingModel value)
+        public void Put([FromBody]BuildingModel value)
         {
             new BuildingService().AddOrUpdate(value);
         }
