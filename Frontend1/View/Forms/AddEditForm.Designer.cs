@@ -109,6 +109,7 @@
 			this.Controls.Add(this.tableLayoutPanelExternal);
 			this.Name = "AddEditForm";
 			this.Text = "AddEditForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
 			this.tableLayoutPanelExternal.ResumeLayout(false);
 			this.flowLayoutPanel.ResumeLayout(false);
 			this.ResumeLayout(false);

@@ -13,7 +13,6 @@ namespace Frontend.Managers
 	{
 		static DataSourceManager _instance = new DataSourceManager();
 
-		//HttpConnector _httpConnector = HttpConnector.GetInstance();
 		Dictionary<Type, object> _dataHolder = new Dictionary<Type, object>(); 
 
 		private DataSourceManager() { }
@@ -56,15 +55,13 @@ namespace Frontend.Managers
 				{
 					if (data.Key.Equals(typeof(T)))
 					{
-						(data.Value as List<T>).Add(newEntity);
+						(data.Value as List<T>).Clear();
+						(data.Value as List<T>).AddRange(dataReciever.GetList());
+						break;
 					}
 				}
-				return null;
 			}
-			else
-			{
-				return dataReciever.LastErrorMessage;
-			}
+			return dataReciever.LastErrorMessage;
 		}
 
 		public string Update<T>(T modifiedEntity, T oldEntity) where T : IDBModel
@@ -78,14 +75,11 @@ namespace Frontend.Managers
 					{
 						var entityList = data.Value as List<T>;
 						entityList[entityList.IndexOf(oldEntity)] = modifiedEntity;
+						break;
 					}
 				}
-				return null;
 			}
-			else
-			{
-				return dataReciever.LastErrorMessage;
-			}
+			return dataReciever.LastErrorMessage;
 		}
 
 		public string Delete<T>(T entity) where T : IDBModel
@@ -98,14 +92,11 @@ namespace Frontend.Managers
 					if (data.Key.Equals(typeof(T)))
 					{
 						(data.Value as List<T>).Remove(entity);
+						break;
 					}
 				}
-				return null;
 			}
-			else
-			{
-				return dataReciever.LastErrorMessage;
-			}
+			return dataReciever.LastErrorMessage;
 		}
 	}
 }

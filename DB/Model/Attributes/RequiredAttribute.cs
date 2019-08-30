@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Frontend.ViewModel
+namespace DB.Model.Attributes
 {
-	public interface IViewModel
+	public class RequiredAttribute : Attribute
 	{
 	}
 }

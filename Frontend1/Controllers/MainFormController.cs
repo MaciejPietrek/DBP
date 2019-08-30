@@ -1,8 +1,8 @@
-﻿using DB.Model.Implementation;
+﻿using DB.Model.Attributes;
+using DB.Model.Implementation;
 using DB.Model.Interfaces;
 using Frontend.Managers;
 using Frontend.View.Controls;
-using Frontend.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,7 +44,6 @@ namespace Frontend.Controllers
 		public void Start()
 		{
 			_mainForm.ShowDialog();
-			Cleanup();
 		}
 
 		private Dictionary<string, EventHandler> GetActionsFor<T>() where T : class, IDBModel, new()
@@ -86,24 +85,30 @@ namespace Frontend.Controllers
 		private Dictionary<string, EventHandler> GenerateActionsFor<T>() where T : class, IDBModel, new()
 		{
 			Dictionary<string, EventHandler> newActionSet = new Dictionary<string, EventHandler>();
-			string buttonText = "Dodaj";
-			EventHandler action = AddEntity<T>;
-			newActionSet.Add(buttonText, action);
-			buttonText = "Edytuj";
-			action = UpdateEntity<T>;
-			newActionSet.Add(buttonText, action);
-			buttonText = "Usuń";
-			action = DeleteEntity<T>;
-			newActionSet.Add(buttonText, action);
+			string buttonText;
+			EventHandler action;
+			if (typeof(T).GetCustomAttributes(typeof(ReadonlyAttribute), false).FirstOrDefault() == null)
+			{
+				buttonText = "Dodaj";
+				action = AddEntity<T>;
+				newActionSet.Add(buttonText, action);
+				buttonText = "Edytuj";
+				action = UpdateEntity<T>;
+				newActionSet.Add(buttonText, action);
+				buttonText = "Usuń";
+				action = DeleteEntity<T>;
+				newActionSet.Add(buttonText, action);
+			}
 			buttonText = "Zamknij zakładkę";
 			action = CloseTabHandler;
 			newActionSet.Add(buttonText, action);
 			return newActionSet;
 		}
 
-		private void Cleanup()
+		private void RefreshDataGrids<T>() where T : class, IDBModel, new()
 		{
-
+			TabPage tab = _mainForm.GetCurrentlySelectedTab() as TabPage;
+			_mainForm.RefreshPages(_dataSourceManager.Get<T>(), tab.Text);
 		}
 
 		#endregion Methods
@@ -157,16 +162,11 @@ namespace Frontend.Controllers
 			if (newEntity != null)
 			{
 				string errorMessage = _dataSourceManager.Add(newEntity);
-				if(errorMessage == null)
-				{
-					TabContents tabContents = _mainForm.GetCurrentlySelectedTab().Controls[0] as TabContents;
-					tabContents.DataGrid.DataSource = null;
-					tabContents.DataGrid.DataSource = _dataSourceManager.Get<T>();
-				}
-				else
+				if(errorMessage != null)
 				{
 					MessageBox.Show(errorMessage);
 				}
+				RefreshDataGrids<T>();
 			}
 		}
 
@@ -182,12 +182,7 @@ namespace Frontend.Controllers
 				{
 					MessageBox.Show(errorMessage);
 				}
-				else
-				{
-					TabContents tabContents = _mainForm.GetCurrentlySelectedTab().Controls[0] as TabContents;
-					tabContents.DataGrid.DataSource = null;
-					tabContents.DataGrid.DataSource = _dataSourceManager.Get<T>();
-				}
+				RefreshDataGrids<T>();
 			}
 		}
 
@@ -198,16 +193,11 @@ namespace Frontend.Controllers
 			if (MessageBox.Show("Usunąć zaznaczoną pozycję?", "Potwierdzeniu usunięcia", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				string errorMessage = _dataSourceManager.Delete(entity);
-				if (errorMessage == null)
-				{
-					TabContents tabContents = _mainForm.GetCurrentlySelectedTab().Controls[0] as TabContents;
-					tabContents.DataGrid.DataSource = null;
-					tabContents.DataGrid.DataSource = _dataSourceManager.Get<T>();
-				}
-				else
+				if (errorMessage != null)
 				{
 					MessageBox.Show(errorMessage);
 				}
+				RefreshDataGrids<T>();
 			}
 		}
 

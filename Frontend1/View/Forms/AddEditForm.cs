@@ -17,6 +17,7 @@ namespace Frontend.View.Forms
 		object _dataSource = null;
 		List<Control> _valueControls = new List<Control>();
 		List<Type> _foreignTypes = new List<Type>();
+		bool _cancelClose = false;
 
 		public EventHandler ChooseEntityEvent;
 
@@ -37,7 +38,7 @@ namespace Frontend.View.Forms
 		{
 			get
 			{
-				return ReadFields();
+				return _dataSource;
 			}
 			set
 			{
@@ -48,14 +49,29 @@ namespace Frontend.View.Forms
 
 		private void OkClick(object sender, EventArgs eventArgs)
 		{
-			this.DialogResult = DialogResult.OK;
-			this.Close();
+			object newDataSource = ReadFields();
+			if(newDataSource != null)
+			{
+				_cancelClose = false;
+				_dataSource = newDataSource;
+				this.DialogResult = DialogResult.OK;
+			}
+			else
+			{
+				_cancelClose = true;
+				MessageBox.Show("Wprowadź informacje do zaznaczonych pól");
+			}
 		}
 
 		private void CancelCLick(object sender, EventArgs eventArgs)
 		{
+			_cancelClose = false;
 			this.DialogResult = DialogResult.Cancel;
-			this.Close();
+		}
+
+		private void OnFormClosing(object sender, FormClosingEventArgs eventArgs)
+		{
+			eventArgs.Cancel = _cancelClose;
 		}
 
 		public void SetForeignKeyId(int index, int entityId)
@@ -100,7 +116,7 @@ namespace Frontend.View.Forms
 						descriptionControl = new Label { Text = nameAttribute.DisplayName };
 						if (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?))
 						{
-							valueControl = new DateTimePicker { ShowCheckBox = true, Text = propertyValue };
+							valueControl = new DateTimePicker { ShowCheckBox = property.GetCustomAttribute<RequiredAttribute>() == null, Text = propertyValue };
 						}
 						else
 						{
@@ -126,37 +142,144 @@ namespace Frontend.View.Forms
 			Type dataSourceType = _dataSource.GetType();
 			object returnEntity = Activator.CreateInstance(dataSourceType);
 			var properties = dataSourceType.GetProperties();
+			bool cancelRead = false;
 			int i = 0;
 			foreach (Control control in _valueControls)
 			{
+				bool required = properties[i].GetCustomAttribute<RequiredAttribute>() != null;
+				bool requiredFieldFilled = true;
 				if (properties[i].PropertyType == typeof(int) || properties[i].PropertyType == typeof(int?))
 				{
-					try
-					{
-						properties[i].SetValue(returnEntity, int.Parse(control.Text));
-					}
-					catch (Exception){
-						properties[i].SetValue(returnEntity, null);
-					}
+					requiredFieldFilled = ReadIntField(returnEntity, control, properties[i], required);
 				}
 				else if(properties[i].PropertyType == typeof(float) || properties[i].PropertyType == typeof(float?))
 				{
-					try
-					{
-						properties[i].SetValue(returnEntity, float.Parse(control.Text));
-					}
-					catch (Exception)
-					{
-						properties[i].SetValue(returnEntity, null);
-					}
+					requiredFieldFilled = ReadFloatField(returnEntity, control, properties[i], required);
+				}
+				else if (properties[i].PropertyType == typeof(DateTime) || properties[i].PropertyType == typeof(DateTime?))
+				{
+					requiredFieldFilled = ReadDateTimeField(returnEntity, control, properties[i], required);
 				}
 				else
 				{
-					properties[i].SetValue(returnEntity, control.Text);
+					if(control.Text == "" && required)
+					{
+						requiredFieldFilled = false;
+					}
+					else
+					{
+						properties[i].SetValue(returnEntity, control.Text);
+					}
 				}
+
+				if(!requiredFieldFilled)
+				{
+					control.BackColor = Color.Red;
+					cancelRead = true;
+				}
+				else
+				{
+					control.BackColor = Color.White;
+				}
+
 				i++;
 			}
-			return returnEntity;
+			if (cancelRead)
+			{
+				return null;
+			}
+			else
+			{
+				return returnEntity;
+			}
+		}
+
+		private bool ReadIntField(object returnEntity, Control control, PropertyInfo fieldProperty, bool required)
+		{
+			try
+			{
+				fieldProperty.SetValue(returnEntity, int.Parse(control.Text));
+			}
+			catch (Exception)
+			{
+				if (required)
+				{
+					return false;
+				}
+				else
+				{
+					if (fieldProperty.PropertyType == typeof(int))
+					{
+						fieldProperty.SetValue(returnEntity, default(int));
+					}
+					else
+					{
+						fieldProperty.SetValue(returnEntity, null);
+					}
+				}
+			}
+			return true;
+		}
+
+		private bool ReadFloatField(object returnEntity, Control control, PropertyInfo fieldProperty, bool required)
+		{
+			try
+			{
+				fieldProperty.SetValue(returnEntity, float.Parse(control.Text));
+			}
+			catch (Exception)
+			{
+				if (required)
+				{
+					return false;
+				}
+				else
+				{
+					if (fieldProperty.PropertyType == typeof(float))
+					{
+						fieldProperty.SetValue(returnEntity, default(float));
+					}
+					else
+					{
+						fieldProperty.SetValue(returnEntity, null);
+					}
+				}
+			}
+			return true;
+		}
+
+		private bool ReadDateTimeField(object returnEntity, Control control, PropertyInfo fieldProperty, bool required)
+		{
+			try
+			{
+				if ((control as DateTimePicker).Checked)
+				{
+					fieldProperty.SetValue(returnEntity, DateTime.Parse(control.Text));
+				}
+				else if(required)
+				{
+					throw new Exception();
+				}
+			}
+			catch (Exception)
+			{
+				if (required)
+				{
+					return false;
+				}
+				else
+				{
+					if (fieldProperty.PropertyType == typeof(DateTime))
+					{
+						fieldProperty.SetValue(returnEntity, default(DateTime));
+					}
+					else
+					{
+						fieldProperty.SetValue(returnEntity, null);
+					}
+				}
+			}
+			return true;
 		}
 
 	}

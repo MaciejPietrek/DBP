@@ -37,70 +37,72 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="BDProject.Context.tt">
+    <Content Include="DBProject.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BDProject.edmx</DependentUpon>
-      <LastGenOutput>BDProject.Context.cs</LastGenOutput>
+      <DependentUpon>DBProject.edmx</DependentUpon>
+      <LastGenOutput>DBProject.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="BDProject.tt">
+    <Content Include="DBProject.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BDProject.edmx</DependentUpon>
-      <LastGenOutput>BDProject.cs</LastGenOutput>
+      <DependentUpon>DBProject.edmx</DependentUpon>
+      <LastGenOutput>DBProject.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\FaultsDataView.sql" />
     <Content Include="Scripts\RentalDataView.sql" />
     <None Include="App.config" />
-    <EntityDeploy Include="BDProject.edmx">
+    <EntityDeploy Include="DBProject.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BDProject.Designer.cs</LastGenOutput>
+      <LastGenOutput>DBProject.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="BDProject.edmx.diagram">
-      <DependentUpon>BDProject.edmx</DependentUpon>
+    <None Include="DBProject.edmx.diagram">
+      <DependentUpon>DBProject.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BDProject.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BDProject.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BDProject.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BDProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BDProject.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BDProject.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Budynki.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Common\Enums\AvailableRoles.cs" />
+    <Compile Include="DBProject.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBProject.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBProject.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBProject.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBProject.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Dozorcy.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Dozorowania.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="FakturyNapraw.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="FakturyWynajem.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Firmy.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="Mapper\ModelMapper.cs" />
     <Compile Include="Mieszkania.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Attributes\ForeignKeyAttribute.cs" />
     <Compile Include="Model\Attributes\PrimaryKeyAttribute.cs" />
+    <Compile Include="Model\Attributes\ReadonlyAttribute.cs" />
+    <Compile Include="Model\Attributes\RequiredAttribute.cs" />
     <Compile Include="Model\Implementation\BuildingModel.cs" />
     <Compile Include="Model\Implementation\CompanyModel.cs" />
     <Compile Include="Model\Implementation\CurrentRepairModel.cs" />
@@ -135,13 +137,13 @@
     <Compile Include="Model\Interfaces\ITenantModel.cs" />
     <Compile Include="Model\LatePaymentChecker.cs" />
     <Compile Include="Najemcy.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Naprawy.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Platnosci.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\Implementation\BuildingService.cs" />
     <Compile Include="Services\Implementation\CompanyService.cs" />
@@ -175,19 +177,19 @@
     <Compile Include="Services\Interfaces\ISupervisorService.cs" />
     <Compile Include="Services\Interfaces\ITenantService.cs" />
     <Compile Include="StanyNapraw.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="StanyUsterek.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Usterki.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Wynajmy.cs">
-      <DependentUpon>BDProject.tt</DependentUpon>
+      <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

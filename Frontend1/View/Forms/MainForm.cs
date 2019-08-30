@@ -1,7 +1,5 @@
-﻿using Frontend.Model.DAO;
-using Frontend.View.Controls;
+﻿using Frontend.View.Controls;
 using Frontend.View.Forms;
-using Frontend.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -92,6 +90,19 @@ namespace Frontend
 		{
 			TabContents tabContents = GetCurrentlySelectedTab().Controls[0] as TabContents;
 			tabContents.DataGrid.Refresh();
+		}
+
+		public void RefreshPages(object dataSource, string tabTitle)
+		{
+			foreach(TabPage tab in tabControl.TabPages)
+			{
+				if(tab.Text == tabTitle)
+				{
+					TabContents tabContents = tab.Controls[0] as TabContents;
+					tabContents.DataGrid.DataSource = null;
+					tabContents.DataGrid.DataSource = dataSource;
+				}
+			}
 		}
 
 		#endregion
