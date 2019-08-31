@@ -180,6 +180,7 @@ namespace Frontend.View.Forms
 				else
 				{
 					control.BackColor = Color.White;
+					cancelRead = false;
 				}
 
 				i++;

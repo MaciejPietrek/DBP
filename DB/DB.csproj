@@ -157,9 +157,9 @@
     <Compile Include="Services\Implementation\RentalService.cs" />
     <Compile Include="Services\Implementation\RepairBillService.cs" />
     <Compile Include="Services\Implementation\RepairService.cs" />
-    <Compile Include="Services\Implementation\SupervisingModel.cs" />
-    <Compile Include="Services\Implementation\SupervisorModel.cs" />
-    <Compile Include="Services\Implementation\TenantModel.cs" />
+    <Compile Include="Services\Implementation\SupervisingService.cs" />
+    <Compile Include="Services\Implementation\SupervisorService.cs" />
+    <Compile Include="Services\Implementation\TenantService.cs" />
     <Compile Include="Services\Interfaces\IBuildingService.cs" />
     <Compile Include="Services\Interfaces\ICompanyService.cs" />
     <Compile Include="Services\Interfaces\ICurrentRepairService.cs" />

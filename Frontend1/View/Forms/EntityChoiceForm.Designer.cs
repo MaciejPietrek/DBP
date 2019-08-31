@@ -34,6 +34,7 @@
 			// tabContents
 			// 
 			this.tabContents.AutoSize = true;
+			this.tabContents.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.tabContents.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabContents.Location = new System.Drawing.Point(0, 0);
 			this.tabContents.Name = "tabContents";
@@ -47,8 +48,9 @@
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.tabContents);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "EntityChoiceForm";
-			this.Text = "EntityChoiceForm";
+			this.Text = "Formularz wyboru";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

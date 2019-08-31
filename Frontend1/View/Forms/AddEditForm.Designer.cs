@@ -108,7 +108,7 @@
 			this.ClientSize = new System.Drawing.Size(897, 387);
 			this.Controls.Add(this.tableLayoutPanelExternal);
 			this.Name = "AddEditForm";
-			this.Text = "AddEditForm";
+			this.Text = "Dodawanie/Edycja";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
 			this.tableLayoutPanelExternal.ResumeLayout(false);
 			this.flowLayoutPanel.ResumeLayout(false);

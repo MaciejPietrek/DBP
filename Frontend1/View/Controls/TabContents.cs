@@ -17,6 +17,7 @@ namespace Frontend.View.Controls
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
+			gridView.AutoSize = true;
 		}
 
 		public GridView DataGrid { get { return gridView; } }

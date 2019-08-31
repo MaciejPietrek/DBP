@@ -98,7 +98,7 @@
 			this.Controls.Add(this.flowLayoutPanel1);
 			this.Controls.Add(this.tabControl);
 			this.Name = "MainForm";
-			this.Text = "Form1";
+			this.Text = "Okno główne";
 			this.tabControl.ResumeLayout(false);
 			this.tabPageConstant.ResumeLayout(false);
 			this.flowLayoutPanel1.ResumeLayout(false);

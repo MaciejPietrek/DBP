@@ -15,7 +15,7 @@ namespace DB.Model.Implementation
         public int Id { get; set; }
 
 		[Required()]
-		[ForeignKey(typeof(RepairModel))]
+		[ForeignKey(typeof(FaultModel))]
 		[System.ComponentModel.DisplayName("Identyfikator usterki")]
         public int? id_usterki { get; set; }
 
