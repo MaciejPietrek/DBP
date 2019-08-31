@@ -8,9 +8,10 @@ namespace DB.Model.Interfaces
 {
     public interface IIncomeModel : IDBModel
     {
-        string Address { get; set; }
-        double Income { get; set; }
-        double Expense { get; set; }
-        double Profit { get; set; }
+        int id_budynku { get; set; }
+        string adres { get; set; }
+        double przychod { get; set; }
+        double wydatek { get; set; }
+        double profit { get; set; }
     }
 }

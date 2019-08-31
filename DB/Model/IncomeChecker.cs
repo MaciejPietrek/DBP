@@ -10,6 +10,7 @@ namespace DB.Model
 {
     public static class IncomeChecker
     {
+        public static int idx { get; set; } = 1;
         public static IncomeModel checkIncome(Budynki budynek, DateTime? startDate, DateTime? endDate)
         {
             List<FakturyNapraw> expenseBills;
@@ -52,10 +53,11 @@ namespace DB.Model
                     }
                 }
             }
-
-            buildingCosts.Income = totalIncome;
-            buildingCosts.Expense = totalExpense;
-            buildingCosts.Profit = totalIncome - totalExpense;
+            buildingCosts.Id = idx;
+            buildingCosts.przychod = totalIncome;
+            buildingCosts.wydatek = totalExpense;
+            buildingCosts.profit = totalIncome - totalExpense;
+            idx++;
 
             return buildingCosts;
         }

@@ -8,6 +8,7 @@ namespace DB.Model.Interfaces
 {
     public interface ILatePaymentModel : IDBModel
     {
+        int id_najemcy { get; set; }
         string imie { get; set; }
         string nr_telefonu { get; set; }
         string adres { get; set; }

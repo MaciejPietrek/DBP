@@ -67,8 +67,8 @@ namespace DB.Services.Implementation
                 foreach (var building in ctx.Budynki.ToList())
                 {
                     var buildingIncome = IncomeChecker.checkIncome(building, null, null);
-                    buildingIncome.Id = building.id;
-                    buildingIncome.Address = building.adres_budynku;
+                    buildingIncome.id_budynku = building.id;
+                    buildingIncome.adres = building.adres_budynku;
                     incomeList.Add(buildingIncome);
                 }
             }

@@ -14,6 +14,9 @@ namespace DB.Model.Implementation
         [System.ComponentModel.DisplayName("ID")]
         public int Id { get; set; }
 
+        [System.ComponentModel.DisplayName("ID Najemcy")]
+        public int id_najemcy { get; set; }
+
         [System.ComponentModel.DisplayName("Imię i nazwisko")]
         public string imie { get; set; }
         
