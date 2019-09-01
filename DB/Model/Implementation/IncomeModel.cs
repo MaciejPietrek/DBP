@@ -14,16 +14,19 @@ namespace DB.Model.Implementation
         [System.ComponentModel.DisplayName("ID")]
         public int Id { get; set; }
 
+        [System.ComponentModel.DisplayName("ID Budynku")]
+        public int id_budynku { get; set; }
+
         [System.ComponentModel.DisplayName("Adres")]
-        public string Address { get; set; }
+        public string adres { get; set; }
         
         [System.ComponentModel.DisplayName("Przychód")]
-        public double Income { get; set; }
+        public double przychod { get; set; }
 
         [System.ComponentModel.DisplayName("Wydatki")]
-        public double Expense { get; set; }
+        public double wydatek { get; set; }
 
         [System.ComponentModel.DisplayName("Profit")]
-        public double Profit { get; set; }
+        public double profit { get; set; }
     }
 }

@@ -62,8 +62,8 @@ namespace DB.Services.Implementation
 
         private List<LatePaymentModel> GetLatePayments()
         {
-            List<LatePaymentModel> latePayments = new List<LatePaymentModel>();
-            
+            var latePayments = new List<LatePaymentModel>();
+
             foreach (var rental in GetActiveRentals())
             {
                 var lp = LatePaymentChecker.CheckForDebts(rental);

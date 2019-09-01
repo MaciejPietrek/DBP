@@ -19,7 +19,10 @@ namespace DB.Model.Implementation
         [System.ComponentModel.DisplayName("Identyfikator usterki")]
         public int? id_usterki { get; set; }
 
-		[ForeignKey(typeof(CompanyModel))]
+        [System.ComponentModel.DisplayName("Lokalizacja")]
+        public string lokalizacja { get; set; }
+
+        [ForeignKey(typeof(CompanyModel))]
         [System.ComponentModel.DisplayName("Identyfikator firmy")]
         public int? id_firmy { get; set; }
 
@@ -31,8 +34,5 @@ namespace DB.Model.Implementation
 
         [System.ComponentModel.DisplayName("Data rozpoczęcia")]
         public DateTime? data_rozpoczecia { get; set; }
-
-		[System.ComponentModel.DisplayName("Stan")]
-        public string stan { get; set; }
     }
 }

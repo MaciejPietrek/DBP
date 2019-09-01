@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DB.Model;
+using DB.Model.Implementation;
 using DB.Model.Interfaces;
 using DB.Services.Interfaces;
 
@@ -12,33 +14,7 @@ namespace DB.Services.Implementation
     {
         public void AddOrUpdate(ICurrentRepairModel model)
         {
-            try
-            {
-                using (var ctx = new DBProjectEntities())
-                {
-                    var newObject = ctx.Naprawy.Find(model.Id);
-
-                    if (newObject == null)
-                    {
-                        newObject = Mapper.ModelMapper.Mapper.Map<Naprawy>(model);
-                        ctx.Naprawy.Add(newObject);
-                    }
-                    else
-                    {
-                        newObject.data_rozpoczecia = model.data_rozpoczecia;
-                        newObject.data_zlecenia = model.data_zlecenia;
-                        newObject.id_firmy = model.id_firmy;
-                        newObject.stan = model.stan;
-                        newObject.id_usterki = model.id_usterki;
-                        newObject.nr_telefonu = model.nr_telefonu;
-                    }
-                    ctx.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(ex.Message);
-            }
+            throw new NotImplementedException();
         }
 
         public List<ICurrentRepairModel> GetAll()
@@ -48,8 +24,7 @@ namespace DB.Services.Implementation
             {
                 using (var ctx = new DBProjectEntities())
                 {
-                    var naprawy = ctx.Naprawy.Where(x => x.stan == "W trakcie").ToList();
-                    foreach (var obiekt in naprawy)
+                    foreach (var obiekt in GetRepairs())
                     {
                         result.Add(Mapper.ModelMapper.Mapper.Map<ICurrentRepairModel>(obiekt));
                     }
@@ -82,32 +57,25 @@ namespace DB.Services.Implementation
 
         public bool Remove(int id)
         {
-            try
-            {
-                using (var ctx = new DBProjectEntities())
-                {
-                    var queryResult = ctx.Naprawy.Where(x => x.id == id).FirstOrDefault();
-                    if (queryResult is null)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        ctx.Naprawy.Remove(queryResult);
-                        ctx.SaveChanges();
-                        return true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(ex.Message);
-                return false;
-            }
+            throw new NotImplementedException();
         }
         public bool Remove(ICurrentRepairModel model)
         {
-            return Remove(model.Id);
+            throw new NotImplementedException();
+        }
+
+        private List<CurrentRepairModel> GetRepairs()
+        {
+            var currentRepairs = new List<CurrentRepairModel>();
+            using (var ctx = new DBProjectEntities())
+            {
+                foreach (var repair in ctx.Naprawy.Where(x=>x.stan=="W trakcie").ToList())
+                {
+                    var repairModel = CurrentRepairChecker.checkRepair(repair);
+                    currentRepairs.Add(repairModel);
+                }
+            }
+            return currentRepairs;
         }
     }
 }

@@ -61,14 +61,12 @@ namespace DB.Services.Implementation
 
         private List<IncomeModel> GetIncome()
         {
-            List<IncomeModel> incomeList = new List<IncomeModel>();
+            var incomeList = new List<IncomeModel>();
             using (var ctx = new DBProjectEntities())
             {
                 foreach (var building in ctx.Budynki.ToList())
                 {
                     var buildingIncome = IncomeChecker.checkIncome(building, null, null);
-                    buildingIncome.Id = building.id;
-                    buildingIncome.Address = building.adres_budynku;
                     incomeList.Add(buildingIncome);
                 }
             }
