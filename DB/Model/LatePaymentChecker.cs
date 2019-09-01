@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DB.Model.Implementation;
 
 namespace DB.Model
 {
     public static class LatePaymentChecker
     {
-        public static int idx { get; set; } = 1;
+        private static int idx { get; set; } = 1;
+
         public static LatePaymentModel CheckForDebts(Wynajmy rental)
         {
             var expectedAmount = 0.0;

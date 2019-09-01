@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DB.Model.Implementation;
 
 namespace DB.Model
 {
     public static class IncomeChecker
     {
-        public static int idx { get; set; } = 1;
+        private static int idx { get; set; } = 1;
+
         public static IncomeModel checkIncome(Budynki budynek, DateTime? startDate, DateTime? endDate)
         {
             List<FakturyNapraw> expenseBills;
@@ -18,10 +17,7 @@ namespace DB.Model
 
             double totalIncome = 0;
             double totalExpense = 0;
-
-            var buildingCosts = new IncomeModel();
-
-
+            
             using (var ctx = new DBProjectEntities())
             {
                 var residences = ctx.Mieszkania.Where(x => x.id_budynku == budynek.id)
@@ -53,10 +49,16 @@ namespace DB.Model
                     }
                 }
             }
-            buildingCosts.Id = idx;
-            buildingCosts.przychod = totalIncome;
-            buildingCosts.wydatek = totalExpense;
-            buildingCosts.profit = totalIncome - totalExpense;
+
+            var buildingCosts = new IncomeModel
+            {
+                Id = idx,
+                przychod = totalIncome,
+                wydatek = totalExpense,
+                profit = totalIncome - totalExpense,
+                id_budynku = budynek.id,
+                adres = budynek.adres_budynku
+            };
             idx++;
 
             return buildingCosts;
