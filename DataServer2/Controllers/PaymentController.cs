@@ -10,7 +10,8 @@ using DB.Services.Implementation;
 
 namespace DataServer.Controllers
 {
-    public class PaymentController : ApiController
+	[Authorize()]
+	public class PaymentController : ApiController
     {
 
         // GET: api/Payment

@@ -11,7 +11,8 @@ using System.Web.Http;
 
 namespace DataServer.Controllers
 {
-    public class TenantController : ApiController
+	[Authorize()]
+	public class TenantController : ApiController
 	{
         // GET: api/Tenant
         public IEnumerable<TenantModel> Get()

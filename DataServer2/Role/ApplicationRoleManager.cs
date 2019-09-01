@@ -24,14 +24,14 @@ namespace DataServer.Role
 			return roleManager;
 		}
 
+		public static List<string> DefinedRoles { get; } = new List<string> { "admin", "overseer", "janitor", "treasurer" };
+
 		private void Setup()
 		{
 			int roleCount = this.Roles.Count();
-			if (roleCount != 4)
+			if (roleCount != DefinedRoles.Count)
 			{
-				string[] roleNames = { "Admin", "Overseer", "Janitor", "Treasurer" };
-
-				foreach(string roleName in roleNames)
+				foreach(string roleName in DefinedRoles)
 				{
 					IdentityRole role;
 					role = this.FindByName(roleName);

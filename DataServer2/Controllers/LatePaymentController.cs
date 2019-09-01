@@ -10,7 +10,8 @@ using DB.Services.Implementation;
 
 namespace DataServer.Controllers
 {
-    public class LatePaymentController : ApiController
+	[Authorize()]
+	public class LatePaymentController : ApiController
     {
         // GET: api/LatePayment
         public IEnumerable<LatePaymentModel> Get()

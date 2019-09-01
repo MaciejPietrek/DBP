@@ -11,7 +11,8 @@ using System.Web.Http;
 
 namespace DataServer.Controllers
 {
-    public class SupervisingController : ApiController
+	[Authorize()]
+	public class SupervisingController : ApiController
 	{
         // GET: api/Supervising
         public IEnumerable<SupervisingModel> Get()

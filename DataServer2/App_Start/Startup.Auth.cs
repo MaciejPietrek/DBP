@@ -23,8 +23,11 @@ namespace DataServer
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            // Configure the db context and user manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+			// Configure the db context and user manager to use a single instance per request
+			app.CreatePerOwinContext(ApplicationDbContext.Create);
+			//Role manager
+			app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
+			
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
@@ -32,8 +35,7 @@ namespace DataServer
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-			//Role manager
-			app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
+			
 
             // Configure the application for OAuth based flow
             PublicClientId = "self";
@@ -50,24 +52,6 @@ namespace DataServer
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
-
-            //app.UseTwitterAuthentication(
-            //    consumerKey: "",
-            //    consumerSecret: "");
-
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
-
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
         }
     }
 }

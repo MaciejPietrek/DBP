@@ -17,6 +17,7 @@ using DataServer.Models;
 using DataServer.Providers;
 using DataServer.Results;
 using DataServer.Role;
+using Frontend.Model;
 
 namespace DataServer.Controllers
 {
@@ -80,17 +81,79 @@ namespace DataServer.Controllers
 
 		#region Public methods
 
-		// POST api/Account/Register
-		[AllowAnonymous]
-		[Route("Register")]
-		public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+		[Authorize(Roles = "admin")]
+		[Route("GetAll")]
+		public List<FrontendUserModel> GetAll()
+		{
+			List<FrontendUserModel> userList = new List<FrontendUserModel>();
+			foreach(ApplicationUser appuser in UserManager.Users)
+			{
+				if(appuser.UserName != "admin")
+				{
+					List<string> roleNames = new List<string>();
+					foreach(IdentityUserRole role in appuser.Roles)
+					{
+						roleNames.Add(RoleManager.FindById(role.RoleId).Name);
+					}
+					userList.Add(new FrontendUserModel { Login = appuser.UserName, Roles = roleNames });
+				}
+			}
+			return userList;
+		}
+
+		[Route("GetRoles")]
+		public List<string> GetRoles()
+		{
+			return ApplicationRoleManager.DefinedRoles;
+		}
+
+		[Route("GetCurrentRoles")]
+		public List<string> GetCurrentRoles()
+		{
+			ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+			List<string> roleNames = new List<string>();
+			foreach (IdentityUserRole role in currentUser.Roles)
+			{
+				roleNames.Add(RoleManager.FindById(role.RoleId).Name);
+			}
+			return roleNames;
+		}
+
+		[Authorize(Roles = "admin")]
+		[Route("Update")]
+		public IHttpActionResult Update(FrontendUserModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				ApplicationUser user = UserManager.FindByName(model.Login);
+				if(user != null)
+				{
+					UserManager.RemoveFromRoles(user.Id, ApplicationRoleManager.DefinedRoles.ToArray());
+					if(model.Roles != null)
+					{
+						foreach (string roleName in model.Roles)
+						{
+							UserManager.AddToRoles(user.Id, model.Roles.ToArray());
+						}
+						return Ok();
+					}
+
+				}
+			}
+			return BadRequest(ModelState);
+		}
+
+		// POST api/Account/Add
+		[Authorize(Roles ="admin")]
+		[Route("Add")]
+		public async Task<IHttpActionResult> Add(AddUserBindingModel model)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			var user = new ApplicationUser() { UserName = model.Username, Email = model.Email };
+			var user = new ApplicationUser() { UserName = model.Username };
 
 			IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -103,50 +166,67 @@ namespace DataServer.Controllers
 		}
 
 
-        // POST api/Account/ChangePassword
+       /* // POST api/Account/ChangePassword
         [Route("ChangePassword")]
-        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
+        public IHttpActionResult ChangePassword(ChangePasswordBindingModel model)
         {
-            /*if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-			IdentityResult result;
-			if (model.Username != null)
+			if (ModelState.IsValid && model.Username != null)
 			{
-				if(User.IsInRole("admin"))
+				ApplicationUser foundUser = UserManager.FindByName(model.Username);
+				if (foundUser != null)
 				{
-					ApplicationUser foundUser = UserManager.FindByName(model.Username);
-					if (foundUser != null)
+					if (UserManager.ChangePassword(foundUser.Id,  model.NewPassword).Succeeded)
 					{
-						result = UserManager.ChangePassword(foundUser.Id, model.OldPassword, model.NewPassword);
+						return Ok();
 					}
-						
-					
-				}else
-				{
-					return Unauthorized();
 				}
 			}
+            return BadRequest();
+        }*/
 
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
-                model.NewPassword);
-            
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }*/
-
-            return Ok();
-        }
-
+		// POST api/Account/ChangeMyPassword
+		[Route("ChangeMyPassword")]
+		public IHttpActionResult ChangeMyPassword(MyPasswordChangeBindingModel password)
+		{
+			if (ModelState.IsValid)
+			{
+				ApplicationUser foundUser = UserManager.FindById(User.Identity.GetUserId());
+				if (foundUser != null)
+				{
+					IdentityResult result = Task.Run(async () => { return await UserManager.PasswordValidator.ValidateAsync(password.Password); }).Result;
+					if (result.Succeeded)
+					{
+						string newPasswordHash = UserManager.PasswordHasher.HashPassword(password.Password);
+						if(foundUser.PasswordHash != newPasswordHash)
+						{
+							foundUser.PasswordHash = newPasswordHash;
+							if (UserManager.Update(foundUser).Succeeded)
+							{
+								return Ok();
+							}
+						}
+					}
+				}
+			}
+			return BadRequest();
+		}
 
 		[Authorize(Roles = "admin")]
 		[Route("RemoveUser")]
-		public IHttpActionResult RemoveUser()
+		public IHttpActionResult RemoveUser(RemoveUserBindingModel model)
 		{
-			return Ok();
+			if (ModelState.IsValid && model.Username != null)
+			{
+				ApplicationUser foundUser = UserManager.FindByName(model.Username);
+				if (foundUser != null)
+				{
+					if (UserManager.Delete(foundUser).Succeeded)
+					{
+						return Ok();
+					}
+				}
+			}
+			return BadRequest();
 		}
 
 		#endregion

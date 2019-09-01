@@ -11,7 +11,8 @@ using System.Web.Http;
 
 namespace DataServer.Controllers
 {
-    public class FaultController : ApiController
+	[Authorize()]
+	public class FaultController : ApiController
 	{
         // GET: api/Fault
         public IEnumerable<FaultModel> Get()

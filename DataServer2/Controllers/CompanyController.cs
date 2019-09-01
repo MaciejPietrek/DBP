@@ -11,7 +11,8 @@ using System.Web.Http;
 
 namespace DataServer.Controllers
 {
-    public class CompanyController : ApiController
+	[Authorize()]
+	public class CompanyController : ApiController
 	{
         // GET: api/Company
         public IEnumerable<CompanyModel> Get()

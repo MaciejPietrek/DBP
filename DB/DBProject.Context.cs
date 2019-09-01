@@ -37,7 +37,6 @@ namespace DB
         public virtual DbSet<Platnosci> Platnosci { get; set; }
         public virtual DbSet<StanyNapraw> StanyNapraw { get; set; }
         public virtual DbSet<StanyUsterek> StanyUsterek { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usterki> Usterki { get; set; }
         public virtual DbSet<Wynajmy> Wynajmy { get; set; }
     }

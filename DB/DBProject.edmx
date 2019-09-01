@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="data_rozpoczecia" Type="datetime" />
           <Property Name="data_zakonczenia" Type="datetime" />
           <Property Name="id_dozorcy" Type="int" />
@@ -75,7 +75,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nr_telefonu" Type="varchar" MaxLength="12" />
           <Property Name="imie" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="nazwisko" Type="varchar" MaxLength="20" Nullable="false" />
@@ -116,16 +116,6 @@
           </Key>
           <Property Name="stan" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Usterki">
           <Key>
             <PropertyRef Name="id" />
@@ -146,7 +136,7 @@
           <Property Name="id_najemcy" Type="int" />
           <Property Name="cena_miesieczna" Type="real" />
         </EntityType>
-        <Association Name="FK__Dozorowan__id_bu__3F466844">
+        <Association Name="FK__Dozorowan__id_bu__2D27B809">
           <End Role="Budynki" Type="Self.Budynki" Multiplicity="0..1" />
           <End Role="Dozorowania" Type="Self.Dozorowania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,7 +148,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Dozorowan__id_do__3E52440B">
+        <Association Name="FK__Dozorowan__id_do__2C3393D0">
           <End Role="Dozorcy" Type="Self.Dozorcy" Multiplicity="0..1" />
           <End Role="Dozorowania" Type="Self.Dozorowania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -182,7 +172,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FakturyWy__id_wy__35BCFE0A">
+        <Association Name="FK__FakturyWy__id_wy__36B12243">
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="0..1" />
           <End Role="FakturyWynajem" Type="Self.FakturyWynajem" Multiplicity="*" />
           <ReferentialConstraint>
@@ -242,7 +232,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Platnosci__id_wy__398D8EEE">
+        <Association Name="FK__Platnosci__id_wy__3A81B327">
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="0..1" />
           <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
           <ReferentialConstraint>
@@ -278,7 +268,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wynajmy__id_mies__31EC6D26">
+        <Association Name="FK__Wynajmy__id_mies__32E0915F">
           <End Role="Mieszkania" Type="Self.Mieszkania" Multiplicity="0..1" />
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -290,7 +280,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wynajmy__id_naje__32E0915F">
+        <Association Name="FK__Wynajmy__id_naje__33D4B598">
           <End Role="Najemcy" Type="Self.Najemcy" Multiplicity="0..1" />
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -315,14 +305,13 @@
           <EntitySet Name="Platnosci" EntityType="Self.Platnosci" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StanyNapraw" EntityType="Self.StanyNapraw" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StanyUsterek" EntityType="Self.StanyUsterek" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usterki" EntityType="Self.Usterki" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wynajmy" EntityType="Self.Wynajmy" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Dozorowan__id_bu__3F466844" Association="Self.FK__Dozorowan__id_bu__3F466844">
+          <AssociationSet Name="FK__Dozorowan__id_bu__2D27B809" Association="Self.FK__Dozorowan__id_bu__2D27B809">
             <End Role="Budynki" EntitySet="Budynki" />
             <End Role="Dozorowania" EntitySet="Dozorowania" />
           </AssociationSet>
-          <AssociationSet Name="FK__Dozorowan__id_do__3E52440B" Association="Self.FK__Dozorowan__id_do__3E52440B">
+          <AssociationSet Name="FK__Dozorowan__id_do__2C3393D0" Association="Self.FK__Dozorowan__id_do__2C3393D0">
             <End Role="Dozorcy" EntitySet="Dozorcy" />
             <End Role="Dozorowania" EntitySet="Dozorowania" />
           </AssociationSet>
@@ -330,7 +319,7 @@
             <End Role="Naprawy" EntitySet="Naprawy" />
             <End Role="FakturyNapraw" EntitySet="FakturyNapraw" />
           </AssociationSet>
-          <AssociationSet Name="FK__FakturyWy__id_wy__35BCFE0A" Association="Self.FK__FakturyWy__id_wy__35BCFE0A">
+          <AssociationSet Name="FK__FakturyWy__id_wy__36B12243" Association="Self.FK__FakturyWy__id_wy__36B12243">
             <End Role="Wynajmy" EntitySet="Wynajmy" />
             <End Role="FakturyWynajem" EntitySet="FakturyWynajem" />
           </AssociationSet>
@@ -350,7 +339,7 @@
             <End Role="StanyNapraw" EntitySet="StanyNapraw" />
             <End Role="Naprawy" EntitySet="Naprawy" />
           </AssociationSet>
-          <AssociationSet Name="FK__Platnosci__id_wy__398D8EEE" Association="Self.FK__Platnosci__id_wy__398D8EEE">
+          <AssociationSet Name="FK__Platnosci__id_wy__3A81B327" Association="Self.FK__Platnosci__id_wy__3A81B327">
             <End Role="Wynajmy" EntitySet="Wynajmy" />
             <End Role="Platnosci" EntitySet="Platnosci" />
           </AssociationSet>
@@ -362,11 +351,11 @@
             <End Role="StanyUsterek" EntitySet="StanyUsterek" />
             <End Role="Usterki" EntitySet="Usterki" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wynajmy__id_mies__31EC6D26" Association="Self.FK__Wynajmy__id_mies__31EC6D26">
+          <AssociationSet Name="FK__Wynajmy__id_mies__32E0915F" Association="Self.FK__Wynajmy__id_mies__32E0915F">
             <End Role="Mieszkania" EntitySet="Mieszkania" />
             <End Role="Wynajmy" EntitySet="Wynajmy" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wynajmy__id_naje__32E0915F" Association="Self.FK__Wynajmy__id_naje__32E0915F">
+          <AssociationSet Name="FK__Wynajmy__id_naje__33D4B598" Association="Self.FK__Wynajmy__id_naje__33D4B598">
             <End Role="Najemcy" EntitySet="Najemcy" />
             <End Role="Wynajmy" EntitySet="Wynajmy" />
           </AssociationSet>
@@ -382,7 +371,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="adres_budynku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Dozorowania" Relationship="Self.FK__Dozorowan__id_bu__3F466844" FromRole="Budynki" ToRole="Dozorowania" />
+          <NavigationProperty Name="Dozorowania" Relationship="Self.FK__Dozorowan__id_bu__2D27B809" FromRole="Budynki" ToRole="Dozorowania" />
           <NavigationProperty Name="Mieszkania" Relationship="Self.FK__Mieszkani__id_bu__164452B1" FromRole="Budynki" ToRole="Mieszkania" />
         </EntityType>
         <EntityType Name="Dozorcy">
@@ -394,19 +383,19 @@
           <Property Name="Imie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Nazwisko" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Dozorowania" Relationship="Self.FK__Dozorowan__id_do__3E52440B" FromRole="Dozorcy" ToRole="Dozorowania" />
+          <NavigationProperty Name="Dozorowania" Relationship="Self.FK__Dozorowan__id_do__2C3393D0" FromRole="Dozorcy" ToRole="Dozorowania" />
         </EntityType>
         <EntityType Name="Dozorowania">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="data_rozpoczecia" Type="DateTime" Precision="3" />
           <Property Name="data_zakonczenia" Type="DateTime" Precision="3" />
           <Property Name="id_dozorcy" Type="Int32" />
           <Property Name="id_budynku" Type="Int32" />
-          <NavigationProperty Name="Budynki" Relationship="Self.FK__Dozorowan__id_bu__3F466844" FromRole="Dozorowania" ToRole="Budynki" />
-          <NavigationProperty Name="Dozorcy" Relationship="Self.FK__Dozorowan__id_do__3E52440B" FromRole="Dozorowania" ToRole="Dozorcy" />
+          <NavigationProperty Name="Budynki" Relationship="Self.FK__Dozorowan__id_bu__2D27B809" FromRole="Dozorowania" ToRole="Budynki" />
+          <NavigationProperty Name="Dozorcy" Relationship="Self.FK__Dozorowan__id_do__2C3393D0" FromRole="Dozorowania" ToRole="Dozorcy" />
         </EntityType>
         <EntityType Name="FakturyNapraw">
           <Key>
@@ -428,7 +417,7 @@
           <Property Name="cena" Type="Single" Nullable="false" />
           <Property Name="numer_faktury" Type="Int32" Nullable="false" />
           <Property Name="data_platnosci" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Wynajmy" Relationship="Self.FK__FakturyWy__id_wy__35BCFE0A" FromRole="FakturyWynajem" ToRole="Wynajmy" />
+          <NavigationProperty Name="Wynajmy" Relationship="Self.FK__FakturyWy__id_wy__36B12243" FromRole="FakturyWynajem" ToRole="Wynajmy" />
         </EntityType>
         <EntityType Name="Firmy">
           <Key>
@@ -451,18 +440,18 @@
           <Property Name="opis" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Budynki" Relationship="Self.FK__Mieszkani__id_bu__164452B1" FromRole="Mieszkania" ToRole="Budynki" />
           <NavigationProperty Name="Usterki" Relationship="Self.FK__Usterki__id_mies__1920BF5C" FromRole="Mieszkania" ToRole="Usterki" />
-          <NavigationProperty Name="Wynajmy" Relationship="Self.FK__Wynajmy__id_mies__31EC6D26" FromRole="Mieszkania" ToRole="Wynajmy" />
+          <NavigationProperty Name="Wynajmy" Relationship="Self.FK__Wynajmy__id_mies__32E0915F" FromRole="Mieszkania" ToRole="Wynajmy" />
         </EntityType>
         <EntityType Name="Najemcy">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nr_telefonu" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="imie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nazwisko" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Wynajmy" Relationship="Self.FK__Wynajmy__id_naje__32E0915F" FromRole="Najemcy" ToRole="Wynajmy" />
+          <NavigationProperty Name="Wynajmy" Relationship="Self.FK__Wynajmy__id_naje__33D4B598" FromRole="Najemcy" ToRole="Wynajmy" />
         </EntityType>
         <EntityType Name="Naprawy">
           <Key>
@@ -490,7 +479,7 @@
           <Property Name="data_platnosci" Type="DateTime" Precision="3" />
           <Property Name="cena" Type="Single" Nullable="false" />
           <Property Name="tytul" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Wynajmy" Relationship="Self.FK__Platnosci__id_wy__398D8EEE" FromRole="Platnosci" ToRole="Wynajmy" />
+          <NavigationProperty Name="Wynajmy" Relationship="Self.FK__Platnosci__id_wy__3A81B327" FromRole="Platnosci" ToRole="Wynajmy" />
         </EntityType>
         <EntityType Name="StanyNapraw">
           <Key>
@@ -505,16 +494,6 @@
           </Key>
           <Property Name="stan" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Usterki" Relationship="Self.FK__Usterki__stan__1A14E395" FromRole="StanyUsterek" ToRole="Usterki" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Usterki">
           <Key>
@@ -538,12 +517,12 @@
           <Property Name="data_zakonczenia" Type="DateTime" Precision="3" />
           <Property Name="id_najemcy" Type="Int32" />
           <Property Name="cena_miesieczna" Type="Single" />
-          <NavigationProperty Name="FakturyWynajem" Relationship="Self.FK__FakturyWy__id_wy__35BCFE0A" FromRole="Wynajmy" ToRole="FakturyWynajem" />
-          <NavigationProperty Name="Mieszkania" Relationship="Self.FK__Wynajmy__id_mies__31EC6D26" FromRole="Wynajmy" ToRole="Mieszkania" />
-          <NavigationProperty Name="Najemcy" Relationship="Self.FK__Wynajmy__id_naje__32E0915F" FromRole="Wynajmy" ToRole="Najemcy" />
-          <NavigationProperty Name="Platnosci" Relationship="Self.FK__Platnosci__id_wy__398D8EEE" FromRole="Wynajmy" ToRole="Platnosci" />
+          <NavigationProperty Name="FakturyWynajem" Relationship="Self.FK__FakturyWy__id_wy__36B12243" FromRole="Wynajmy" ToRole="FakturyWynajem" />
+          <NavigationProperty Name="Mieszkania" Relationship="Self.FK__Wynajmy__id_mies__32E0915F" FromRole="Wynajmy" ToRole="Mieszkania" />
+          <NavigationProperty Name="Najemcy" Relationship="Self.FK__Wynajmy__id_naje__33D4B598" FromRole="Wynajmy" ToRole="Najemcy" />
+          <NavigationProperty Name="Platnosci" Relationship="Self.FK__Platnosci__id_wy__3A81B327" FromRole="Wynajmy" ToRole="Platnosci" />
         </EntityType>
-        <Association Name="FK__Dozorowan__id_bu__3F466844">
+        <Association Name="FK__Dozorowan__id_bu__2D27B809">
           <End Role="Budynki" Type="Self.Budynki" Multiplicity="0..1" />
           <End Role="Dozorowania" Type="Self.Dozorowania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -567,7 +546,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Dozorowan__id_do__3E52440B">
+        <Association Name="FK__Dozorowan__id_do__2C3393D0">
           <End Role="Dozorcy" Type="Self.Dozorcy" Multiplicity="0..1" />
           <End Role="Dozorowania" Type="Self.Dozorowania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -591,7 +570,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FakturyWy__id_wy__35BCFE0A">
+        <Association Name="FK__FakturyWy__id_wy__36B12243">
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="0..1" />
           <End Role="FakturyWynajem" Type="Self.FakturyWynajem" Multiplicity="*" />
           <ReferentialConstraint>
@@ -627,7 +606,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wynajmy__id_mies__31EC6D26">
+        <Association Name="FK__Wynajmy__id_mies__32E0915F">
           <End Role="Mieszkania" Type="Self.Mieszkania" Multiplicity="0..1" />
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -639,7 +618,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wynajmy__id_naje__32E0915F">
+        <Association Name="FK__Wynajmy__id_naje__33D4B598">
           <End Role="Najemcy" Type="Self.Najemcy" Multiplicity="0..1" />
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -675,7 +654,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Platnosci__id_wy__398D8EEE">
+        <Association Name="FK__Platnosci__id_wy__3A81B327">
           <End Role="Wynajmy" Type="Self.Wynajmy" Multiplicity="0..1" />
           <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
           <ReferentialConstraint>
@@ -712,10 +691,9 @@
           <EntitySet Name="Platnosci" EntityType="Self.Platnosci" />
           <EntitySet Name="StanyNapraw" EntityType="Self.StanyNapraw" />
           <EntitySet Name="StanyUsterek" EntityType="Self.StanyUsterek" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Usterki" EntityType="Self.Usterki" />
           <EntitySet Name="Wynajmy" EntityType="Self.Wynajmy" />
-          <AssociationSet Name="FK__Dozorowan__id_bu__3F466844" Association="Self.FK__Dozorowan__id_bu__3F466844">
+          <AssociationSet Name="FK__Dozorowan__id_bu__2D27B809" Association="Self.FK__Dozorowan__id_bu__2D27B809">
             <End Role="Budynki" EntitySet="Budynki" />
             <End Role="Dozorowania" EntitySet="Dozorowania" />
           </AssociationSet>
@@ -723,7 +701,7 @@
             <End Role="Budynki" EntitySet="Budynki" />
             <End Role="Mieszkania" EntitySet="Mieszkania" />
           </AssociationSet>
-          <AssociationSet Name="FK__Dozorowan__id_do__3E52440B" Association="Self.FK__Dozorowan__id_do__3E52440B">
+          <AssociationSet Name="FK__Dozorowan__id_do__2C3393D0" Association="Self.FK__Dozorowan__id_do__2C3393D0">
             <End Role="Dozorcy" EntitySet="Dozorcy" />
             <End Role="Dozorowania" EntitySet="Dozorowania" />
           </AssociationSet>
@@ -731,7 +709,7 @@
             <End Role="Naprawy" EntitySet="Naprawy" />
             <End Role="FakturyNapraw" EntitySet="FakturyNapraw" />
           </AssociationSet>
-          <AssociationSet Name="FK__FakturyWy__id_wy__35BCFE0A" Association="Self.FK__FakturyWy__id_wy__35BCFE0A">
+          <AssociationSet Name="FK__FakturyWy__id_wy__36B12243" Association="Self.FK__FakturyWy__id_wy__36B12243">
             <End Role="Wynajmy" EntitySet="Wynajmy" />
             <End Role="FakturyWynajem" EntitySet="FakturyWynajem" />
           </AssociationSet>
@@ -743,11 +721,11 @@
             <End Role="Mieszkania" EntitySet="Mieszkania" />
             <End Role="Usterki" EntitySet="Usterki" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wynajmy__id_mies__31EC6D26" Association="Self.FK__Wynajmy__id_mies__31EC6D26">
+          <AssociationSet Name="FK__Wynajmy__id_mies__32E0915F" Association="Self.FK__Wynajmy__id_mies__32E0915F">
             <End Role="Mieszkania" EntitySet="Mieszkania" />
             <End Role="Wynajmy" EntitySet="Wynajmy" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wynajmy__id_naje__32E0915F" Association="Self.FK__Wynajmy__id_naje__32E0915F">
+          <AssociationSet Name="FK__Wynajmy__id_naje__33D4B598" Association="Self.FK__Wynajmy__id_naje__33D4B598">
             <End Role="Najemcy" EntitySet="Najemcy" />
             <End Role="Wynajmy" EntitySet="Wynajmy" />
           </AssociationSet>
@@ -759,7 +737,7 @@
             <End Role="StanyNapraw" EntitySet="StanyNapraw" />
             <End Role="Naprawy" EntitySet="Naprawy" />
           </AssociationSet>
-          <AssociationSet Name="FK__Platnosci__id_wy__398D8EEE" Association="Self.FK__Platnosci__id_wy__398D8EEE">
+          <AssociationSet Name="FK__Platnosci__id_wy__3A81B327" Association="Self.FK__Platnosci__id_wy__3A81B327">
             <End Role="Wynajmy" EntitySet="Wynajmy" />
             <End Role="Platnosci" EntitySet="Platnosci" />
           </AssociationSet>
@@ -894,17 +872,6 @@
             <EntityTypeMapping TypeName="DBProjectModel.StanyUsterek">
               <MappingFragment StoreEntitySet="StanyUsterek">
                 <ScalarProperty Name="stan" ColumnName="stan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DBProjectModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

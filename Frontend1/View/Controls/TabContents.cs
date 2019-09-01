@@ -24,6 +24,7 @@ namespace Frontend.View.Controls
 
 		public void FillActionArea(Dictionary<string, EventHandler> data)
 		{
+			actionFlowLayoutPanel.Controls.Clear();
 			foreach(var element in data)
 			{
 				Button actionButton = new Button { Text = element.Key, AutoSize = true};
@@ -32,5 +33,10 @@ namespace Frontend.View.Controls
 			}
 		}
 
+		public void FillActionArea(List<Button> buttons)
+		{
+			actionFlowLayoutPanel.Controls.Clear();
+			actionFlowLayoutPanel.Controls.AddRange(buttons.ToArray());
+		}
 	}
 }

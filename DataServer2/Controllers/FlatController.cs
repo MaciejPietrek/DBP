@@ -11,7 +11,8 @@ using System.Web.Http;
 
 namespace DataServer.Controllers
 {
-    public class FlatController : ApiController
+	[Authorize()]
+	public class FlatController : ApiController
 	{
         // GET: api/Flat
         public IEnumerable<FlatModel> Get()

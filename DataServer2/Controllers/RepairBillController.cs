@@ -11,7 +11,8 @@ using System.Web.Http;
 
 namespace DataServer.Controllers
 {
-    public class RepairBillController : ApiController
+	[Authorize()]
+	public class RepairBillController : ApiController
 	{
         // GET: api/RepairBill
         public IEnumerable<RepairBillModel> Get()

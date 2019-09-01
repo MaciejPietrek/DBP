@@ -1,4 +1,5 @@
 ﻿using Frontend.Misc;
+using Frontend.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,11 @@ namespace Frontend.DataRecievers
 			{
 				BaseAddress = new Uri(System.Configuration.ConfigurationSettings.AppSettings.Get("remoteAddress"))
 			};
+		}
+
+		public void SetCredentials(Dictionary<string, string> tokenData)
+		{
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenData["access_token"]);
 		}
 
 		public static HttpConnector GetInstance()
@@ -167,9 +173,127 @@ namespace Frontend.DataRecievers
 			return null;
 		}
 
-		/*public void setAuthorizeToken(string token)
+		public List<FrontendUserModel> GetUsers()
 		{
-			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue()
-		}*/
+			try
+			{
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.GetAsync("api/Account/GetAll"); }).Result)
+				{
+					if (responseMessage.StatusCode == HttpStatusCode.OK)
+					{
+						using (HttpContent content = responseMessage.Content)
+						{
+							return JsonConvert.DeserializeObject<List<FrontendUserModel>>(Task.Run(async () => { return await content.ReadAsStringAsync(); }).Result);
+						}
+					}
+					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						_lastErrorMessage = "Odmowa dostępu";
+					}
+					else
+					{
+						_lastErrorMessage = "Błąd połączenia z serwerem";
+					}
+				}
+			}
+			catch (Exception exc)
+			{
+				_lastErrorMessage = "Błąd połączenia z serwerem";
+			}
+
+			return null;
+		}
+
+		public List<string> GetRoles()
+		{
+			try
+			{
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.GetAsync("api/Account/GetRoles"); }).Result)
+				{
+					if (responseMessage.StatusCode == HttpStatusCode.OK)
+					{
+						using (HttpContent content = responseMessage.Content)
+						{
+							return JsonConvert.DeserializeObject<List<string>>(Task.Run(async () => { return await content.ReadAsStringAsync(); }).Result);
+						}
+					}
+					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						_lastErrorMessage = "Odmowa dostępu";
+					}
+					else
+					{
+						_lastErrorMessage = "Błąd połączenia z serwerem";
+					}
+				}
+			}
+			catch (Exception exc)
+			{
+				_lastErrorMessage = "Błąd połączenia z serwerem";
+			}
+
+			return null;
+		}
+
+		public List<string> GetCurrentRoles()
+		{
+			try
+			{
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.GetAsync("api/Account/GetCurrentRoles"); }).Result)
+				{
+					if (responseMessage.StatusCode == HttpStatusCode.OK)
+					{
+						using (HttpContent content = responseMessage.Content)
+						{
+							return JsonConvert.DeserializeObject<List<string>>(Task.Run(async () => { return await content.ReadAsStringAsync(); }).Result);
+						}
+					}
+					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						_lastErrorMessage = "Odmowa dostępu";
+					}
+					else
+					{
+						_lastErrorMessage = "Błąd połączenia z serwerem";
+					}
+				}
+			}
+			catch (Exception exc)
+			{
+				_lastErrorMessage = "Błąd połączenia z serwerem";
+			}
+
+			return null;
+		}
+
+		public void ChangePassword(string password)
+		{
+			try
+			{
+				HttpContent content = new FormUrlEncodedContent(new Dictionary<string, string>()
+				{
+					{ "Password", password }
+				});
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PostAsync("api/Account/ChangeMyPassword", content); }).Result)
+				{
+					if (responseMessage.StatusCode == HttpStatusCode.NoContent || responseMessage.StatusCode == HttpStatusCode.OK)
+					{
+					}
+					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						_lastErrorMessage = "Odmowa dostępu";
+					}
+					else
+					{
+						_lastErrorMessage = "Błąd połączenia z serwerem";
+					}
+
+				}
+			}
+			catch (Exception exc)
+			{
+				_lastErrorMessage = "Błąd połączenia z serwerem";
+			}
+		}
 	}
 }

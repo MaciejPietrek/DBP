@@ -182,9 +182,6 @@
     <Compile Include="StanyUsterek.cs">
       <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>DBProject.tt</DependentUpon>
-    </Compile>
     <Compile Include="Usterki.cs">
       <DependentUpon>DBProject.tt</DependentUpon>
     </Compile>

@@ -8,7 +8,8 @@ using System.Web.Http;
 
 namespace DataServer.Controllers
 {
-    public class CurrentRepairController : ApiController
+	[Authorize()]
+	public class CurrentRepairController : ApiController
     {
         // GET: api/CurrentRepair
         public IEnumerable<CurrentRepairModel> Get()

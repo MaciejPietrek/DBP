@@ -11,7 +11,7 @@ namespace Frontend.Managers
 	{
 		static AuthManager _instance = new AuthManager();
 		Dictionary<string, string> _tokenData;
-
+		List<string> _userRoles = new List<string>();
 
 		private AuthManager() { }
 
@@ -20,11 +20,20 @@ namespace Frontend.Managers
 			return _instance;
 		}
 
+		public List<string> UserRoles { get { return _userRoles; } }
+
 		public string SignIn(string login, string password)
 		{
 			HttpConnector httpConnector = HttpConnector.GetInstance();
 			_tokenData = httpConnector.GetToken(login, password);
-			return httpConnector.LastErrorMessage;
+			string errorMessage = httpConnector.LastErrorMessage;
+			if(errorMessage == null)
+			{
+				httpConnector.SetCredentials(_tokenData);
+				_userRoles = httpConnector.GetCurrentRoles();
+				errorMessage = httpConnector.LastErrorMessage;
+			}
+			return errorMessage;
 		}
 	}
 }

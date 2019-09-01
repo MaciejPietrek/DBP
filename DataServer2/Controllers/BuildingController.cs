@@ -12,6 +12,7 @@ using System.Web.Http;
 
 namespace DataServer.Controllers
 {
+	[Authorize()]
     public class BuildingController : ApiController
     {
         // GET: api/Building

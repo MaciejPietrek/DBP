@@ -28,6 +28,7 @@ namespace Frontend.Controllers
 		{
 			_mainForm.FormClosing += CloseFormHandler;
 			_mainForm.LogoutEvent += LogoutHandler;
+			_mainForm.AccountButton.Click += AccountEditHandler;
 			PrepareTabSet();
 		}
 
@@ -35,17 +36,28 @@ namespace Frontend.Controllers
 
 		#region Properties
 
+		/// <summary>
+		/// Określa, czy po zamknięciu formularza należy zamknąć program czy tylko wylogować użytkownika
+		/// </summary>
 		public bool ExitRequested { get; private set; }
 
 		#endregion Properties
 
 		#region Methods
 
+		/// <summary>
+		/// Otwiera formularz
+		/// </summary>
 		public void Start()
 		{
 			_mainForm.ShowDialog();
 		}
 
+		/// <summary>
+		/// Pobiera akcje dla podanego typu
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
 		private Dictionary<string, EventHandler> GetActionsFor<T>() where T : class, IDBModel, new()
 		{
 			foreach (var data in _actionsForType)
@@ -61,6 +73,9 @@ namespace Frontend.Controllers
 			return newActions;
 		}
 
+		/// <summary>
+		/// Przgotowanie przycisków do otwierania zakładek
+		/// </summary>
 		private void PrepareTabSet()
 		{
 			var buttonData = new Dictionary<string, EventHandler>();
@@ -82,6 +97,11 @@ namespace Frontend.Controllers
             _mainForm.CreateTabOpeningButtonSet(buttonData);
 		}
 
+		/// <summary>
+		/// Dla podanego typu tworzy  dostępne akcje.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <returns>Słownik, w którym klucz jest nazwą akcji, a wartość to event hander do obsługi akcji</returns>
 		private Dictionary<string, EventHandler> GenerateActionsFor<T>() where T : class, IDBModel, new()
 		{
 			Dictionary<string, EventHandler> newActionSet = new Dictionary<string, EventHandler>();
@@ -105,6 +125,10 @@ namespace Frontend.Controllers
 			return newActionSet;
 		}
 
+		/// <summary>
+		/// ODświeża zawartość data gridów we wszystkich zakładkach po aktualizacji zawartości bazy danych.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
 		private void RefreshDataGrids<T>() where T : class, IDBModel, new()
 		{
 			TabPage tab = _mainForm.GetCurrentlySelectedTab() as TabPage;
@@ -115,6 +139,11 @@ namespace Frontend.Controllers
 
 		#region Event handlers
 
+		/// <summary>
+		/// Kliknięcie w krzyżyk zamykający okno
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
 		private void CloseFormHandler(object sender, CancelEventArgs eventArgs)
 		{
 			if(MessageBox.Show("Czy na pewno chcesz zamknąć program?", "Wyjście", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -127,12 +156,29 @@ namespace Frontend.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Klikniećie w przycisk wyloguj
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
 		private void LogoutHandler(object sender, EventArgs eventArgs)
 		{
 			_mainForm.FormClosing -= CloseFormHandler;
 			_mainForm.Close();
 		}
 
+		private void AccountEditHandler(object sender, EventArgs eventArgs)
+		{
+			AccountManagementController accountManagement = new AccountManagementController();
+			accountManagement.Start();
+		}
+
+		/// <summary>
+		/// Kliknięcię w przycisk otwierania nowej karty.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
 		private void OpenTabHandler<T>(object sender, EventArgs eventArgs) where T : class, IDBModel, new()
 		{
 			TabPage newTab = _mainForm.GetRecentlyOpenedTab();
@@ -150,11 +196,22 @@ namespace Frontend.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Klinięcie w przycisk zamknięcia karty
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
 		private void CloseTabHandler(object sender, EventArgs eventArgs)
 		{
 			_mainForm.CloseTab(_mainForm.GetCurrentlySelectedTab());
 		}
 
+		/// <summary>
+		/// Handler dodawania obiektu. Otwiera formularz do wypełnienia danych.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
 		private void AddEntity<T>(object sender, EventArgs eventArgs) where T : class, IDBModel, new()
 		{
 			AddEditFormController addEditFormController = new AddEditFormController();
@@ -170,6 +227,12 @@ namespace Frontend.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Handler edycji obiektu. Otwiera formularz i wypełnia go aktualnymi danymi.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
 		private void UpdateEntity<T>(object sender, EventArgs eventArgs) where T : class, IDBModel, new()
 		{
 			AddEditFormController addEditFormController = new AddEditFormController();
@@ -186,6 +249,12 @@ namespace Frontend.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Usunięcie zaznaczonej pozycji z listy
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
 		private void DeleteEntity<T>(object sender, EventArgs eventArgs) where T : class, IDBModel, new()
 		{
 			AddEditFormController addEditFormController = new AddEditFormController();

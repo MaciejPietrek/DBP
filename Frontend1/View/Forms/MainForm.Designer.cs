@@ -33,6 +33,7 @@
 			this.flowLayoutPanelConstant = new System.Windows.Forms.FlowLayoutPanel();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.logoutButton = new System.Windows.Forms.Button();
+			this.accountButton = new System.Windows.Forms.Button();
 			this.tabControl.SuspendLayout();
 			this.tabPageConstant.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
@@ -75,6 +76,7 @@
 			this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flowLayoutPanel1.Controls.Add(this.logoutButton);
+			this.flowLayoutPanel1.Controls.Add(this.accountButton);
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 417);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(802, 33);
@@ -89,6 +91,15 @@
 			this.logoutButton.Text = "Wyloguj";
 			this.logoutButton.UseVisualStyleBackColor = true;
 			this.logoutButton.Click += new System.EventHandler(this.LogoutButtonClicked);
+			// 
+			// accountButton
+			// 
+			this.accountButton.Location = new System.Drawing.Point(84, 3);
+			this.accountButton.Name = "accountButton";
+			this.accountButton.Size = new System.Drawing.Size(75, 23);
+			this.accountButton.TabIndex = 1;
+			this.accountButton.Text = "Konta";
+			this.accountButton.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
@@ -113,6 +124,7 @@
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.Button logoutButton;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelConstant;
+		private System.Windows.Forms.Button accountButton;
 	}
 }
 

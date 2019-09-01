@@ -30,6 +30,8 @@ namespace Frontend
 			}
 		}
 
+		public Button AccountButton { get { return accountButton; } }
+
 		#region Event handlers
 
 		private void LogoutButtonClicked(object sender, EventArgs e)

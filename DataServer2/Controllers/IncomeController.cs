@@ -10,7 +10,8 @@ using DB.Services.Implementation;
 
 namespace DataServer.Controllers
 {
-    public class IncomeController : ApiController
+	[Authorize()]
+	public class IncomeController : ApiController
     {
         // GET: api/Income
         public IEnumerable<IncomeModel> Get()

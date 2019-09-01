@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using DataServer.Models;
+using System;
 
 namespace DataServer
 {
@@ -23,7 +24,7 @@ namespace DataServer
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = true,
-                RequireUniqueEmail = true
+                RequireUniqueEmail = false
             };
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
@@ -39,7 +40,23 @@ namespace DataServer
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+			manager.Setup();
             return manager;
         }
-    }
+
+		private void Setup()
+		{
+			string adminName = "admin";
+			if(this.FindByName(adminName) == null)
+			{
+				ApplicationUser admin = new ApplicationUser
+				{
+					Id = Guid.NewGuid().ToString(),
+					UserName = "admin",
+				};
+				this.Create(admin, "P@ssw0rd");
+				this.AddToRole(admin.Id, "admin");
+			}
+		}
+	}
 }
