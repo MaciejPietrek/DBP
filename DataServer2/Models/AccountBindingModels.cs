@@ -63,7 +63,7 @@ namespace DataServer.Models
         public string ConfirmPassword { get; set; }
     }
 
-	public class MyPasswordChangeBindingModel
+	public class PasswordChangeBindingModel
 	{
 		[Required]
 		[DataType(DataType.Password)]

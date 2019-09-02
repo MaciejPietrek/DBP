@@ -274,7 +274,7 @@ namespace Frontend.DataRecievers
 				{
 					{ "Password", password }
 				});
-				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PostAsync("api/Account/ChangeMyPassword", content); }).Result)
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PostAsync("api/Account/ChangePassword", content); }).Result)
 				{
 					if (responseMessage.StatusCode == HttpStatusCode.NoContent || responseMessage.StatusCode == HttpStatusCode.OK)
 					{
@@ -295,5 +295,32 @@ namespace Frontend.DataRecievers
 				_lastErrorMessage = "Błąd połączenia z serwerem";
 			}
 		}
+
+		public void AddUser(FrontendUserModel model)
+		{
+			try
+			{
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PostAsJsonAsync("api/Account/AddUser", model); }).Result)
+				{
+					if (responseMessage.StatusCode == HttpStatusCode.NoContent)
+					{
+					}
+					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						_lastErrorMessage = "Odmowa dostępu";
+					}
+					else
+					{
+						_lastErrorMessage = "Błąd połączenia z serwerem";
+					}
+
+				}
+			}
+			catch (Exception exc)
+			{
+				_lastErrorMessage = "Błąd połączenia z serwerem";
+			}
+		}
+
 	}
 }

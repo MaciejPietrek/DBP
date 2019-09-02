@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Frontend.Model;
 
 namespace Frontend.View.Forms
 {
@@ -56,6 +57,11 @@ namespace Frontend.View.Forms
 			addUserButton.Click += addUser;
 			updateUserButton.Click += updateUser;
 			deleteUserButton.Click += deleteUser;
+		}
+
+		public object GetSelectedUser()
+		{
+			return tabContents.DataGrid.CurrentRow.DataBoundItem;
 		}
 	}
 }
