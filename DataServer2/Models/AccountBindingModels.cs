@@ -42,13 +42,6 @@ namespace DataServer.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class RemoveUserBindingModel
-    {
-        [Required]
-        [Display(Name = "Username")]
-        public string Username { get; set; }
-    }
-
     public class SetPasswordBindingModel
     {
         [Required]

@@ -27,14 +27,16 @@ namespace DataServer.Controllers
             return ModelMapper.Mapper.Map<BuildingModel>(new BuildingService().GetSingle(id));
         }
 
-        // PUT: api/Building/5
-        public void Put([FromBody]BuildingModel value)
+		// PUT: api/Building/5
+		[Authorize(Roles = "admin,overseer")]
+		public void Put([FromBody]BuildingModel value)
         {
             new BuildingService().AddOrUpdate(value);
         }
 
-        // DELETE: api/Building/5
-        public IHttpActionResult Delete(int id)
+		// DELETE: api/Building/5
+		[Authorize(Roles = "admin,overseer")]
+		public IHttpActionResult Delete(int id)
         {
 			bool result = new BuildingService().Remove(id);
 			if (result)
@@ -43,8 +45,9 @@ namespace DataServer.Controllers
 				return Conflict();
         }
 
-        // DELETE: api/Building/5
-        public void Delete([FromBody]BuildingModel value)
+		// DELETE: api/Building/5
+		[Authorize(Roles = "admin,overseer")]
+		public void Delete([FromBody]BuildingModel value)
         {
             new BuildingService().Remove(value);
         }

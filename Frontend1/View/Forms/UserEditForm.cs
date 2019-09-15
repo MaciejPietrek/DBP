@@ -17,7 +17,11 @@ namespace Frontend.View.Forms
 		FrontendUserModel _user;
 		List<CheckBox> _roleCheckBoxes = new List<CheckBox>();
 		bool _checkUserData = false;
+		bool _openedForEdit;
 
+		/// <summary>
+		/// Dodaje checkboxy dla obsługi wyboru ról
+		/// </summary>
 		public UserEditForm()
 		{
 			InitializeComponent();
@@ -29,26 +33,63 @@ namespace Frontend.View.Forms
 			}
 		}
 
+		/// <summary>
+		/// Otwiera czysty formularz do dodawania użytkownika. 
+		/// </summary>
+		/// <param name="user"></param>
 		public void OpenForAddition(FrontendUserModel user)
 		{
+			_openedForEdit = false;
 			_user = user;
-			usernameTextBox.Text = "";
+			usernameTextBox.Text = user.Username ?? "";
 			passwordEdit.Clear();
 			foreach(CheckBox roleCheckBox in _roleCheckBoxes)
 			{
-				roleCheckBox.Checked = user.Roles.Exists((string roleName) => { return roleName == roleCheckBox.Name; });
+				roleCheckBox.Checked = user.Roles != null && user.Roles.Exists((string roleName) => { return roleName == roleCheckBox.Name; });
 			}
 		}
 
+		/// <summary>
+		/// Otwiera fomularz i wypełnia aktualnymi danymi użytkownika
+		/// </summary>
+		/// <param name="user"></param>
+		public void OpenForEdit(FrontendUserModel user)
+		{
+			_openedForEdit = true;
+			_user = user;
+			usernameTextBox.Text = user.Username ?? "";
+			passwordEdit.Clear();
+			foreach (CheckBox roleCheckBox in _roleCheckBoxes)
+			{
+				roleCheckBox.Checked = user.Roles != null && user.Roles.Exists((string roleName) => { return roleName == roleCheckBox.Name; });
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
 		void OnFormClosing(object sender, FormClosingEventArgs eventArgs)
 		{
 			if (_checkUserData)
 			{
 				_checkUserData = false;
-				if (passwordEdit.Validate())
+				if (passwordEdit.Validate() || (passwordEdit.Password == "" && _openedForEdit))
 				{
 					if(usernameTextBox.Text != "")
 					{
+						_user.Username = usernameTextBox.Text;
+						_user.Password = passwordEdit.Password;
+						_user.Roles = new List<string>();
+						foreach(CheckBox roleCheckBox in _roleCheckBoxes)
+						{
+							if (roleCheckBox.Checked)
+							{
+								_user.Roles.Add(roleCheckBox.Name);
+							}
+						}
+						DialogResult = DialogResult.OK;
 						return;
 					}
 					else
@@ -58,7 +99,7 @@ namespace Frontend.View.Forms
 				}
 				else
 				{
-					MessageBox.Show("Oba pola hasła muszą być wypełnione");
+					MessageBox.Show("Oba pola hasła muszą być wypełnione i hasła muszą być takie same");
 				}
 				eventArgs.Cancel = true;
 			}
@@ -67,8 +108,14 @@ namespace Frontend.View.Forms
 		void OnOkCLick(object sender, EventArgs eventArgs)
 		{
 			_checkUserData = true;
+			this.Close();
 		}
 
+		void OnCancelCLick(object sender, EventArgs eventArgs)
+		{
+			_checkUserData = false;
+			DialogResult = DialogResult.Cancel;
+		}
 
 		private string GetRoleName(string roleName)
 		{
@@ -80,7 +127,7 @@ namespace Frontend.View.Forms
 			{
 				return "Nadzorca";
 			}
-			else if (roleName == "supervisor")
+			else if (roleName == "janitor")
 			{
 				return "Dozorca";
 			}

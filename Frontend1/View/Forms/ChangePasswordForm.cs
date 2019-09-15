@@ -43,7 +43,7 @@ namespace Frontend.View.Forms
 			Reset();
 		}
 
-		private void Reset()
+		public void Reset()
 		{
 			passwordEdit.Clear();
 			_closeWithoutSaving = true;

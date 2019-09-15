@@ -34,6 +34,7 @@
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.logoutButton = new System.Windows.Forms.Button();
 			this.accountButton = new System.Windows.Forms.Button();
+			this.changePasswordButton = new System.Windows.Forms.Button();
 			this.tabControl.SuspendLayout();
 			this.tabPageConstant.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
@@ -77,6 +78,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flowLayoutPanel1.Controls.Add(this.logoutButton);
 			this.flowLayoutPanel1.Controls.Add(this.accountButton);
+			this.flowLayoutPanel1.Controls.Add(this.changePasswordButton);
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 417);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(802, 33);
@@ -101,6 +103,16 @@
 			this.accountButton.Text = "Konta";
 			this.accountButton.UseVisualStyleBackColor = true;
 			// 
+			// changePasswordButton
+			// 
+			this.changePasswordButton.AutoSize = true;
+			this.changePasswordButton.Location = new System.Drawing.Point(165, 3);
+			this.changePasswordButton.Name = "changePasswordButton";
+			this.changePasswordButton.Size = new System.Drawing.Size(76, 23);
+			this.changePasswordButton.TabIndex = 2;
+			this.changePasswordButton.Text = "Zmień hasło";
+			this.changePasswordButton.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,6 +125,7 @@
 			this.tabControl.ResumeLayout(false);
 			this.tabPageConstant.ResumeLayout(false);
 			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -125,6 +138,7 @@
 		private System.Windows.Forms.Button logoutButton;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelConstant;
 		private System.Windows.Forms.Button accountButton;
+		private System.Windows.Forms.Button changePasswordButton;
 	}
 }
 

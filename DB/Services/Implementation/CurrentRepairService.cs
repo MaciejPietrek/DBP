@@ -69,11 +69,11 @@ namespace DB.Services.Implementation
             var currentRepairs = new List<CurrentRepairModel>();
             using (var ctx = new DBProjectEntities())
             {
-                foreach (var repair in ctx.Naprawy.Where(x=>x.stan=="W trakcie").ToList())
+                /*foreach (var repair in ctx.Naprawy.Where(x=>x.stan=="W trakcie").ToList())
                 {
                     var repairModel = CurrentRepairChecker.checkRepair(repair);
                     currentRepairs.Add(repairModel);
-                }
+                }*/
             }
             return currentRepairs;
         }

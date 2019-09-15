@@ -1,8 +1,10 @@
 ﻿using DB.Model.Attributes;
 using DB.Model.Implementation;
 using DB.Model.Interfaces;
+using Frontend.DataRecievers;
 using Frontend.Managers;
 using Frontend.View.Controls;
+using Frontend.View.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +22,8 @@ namespace Frontend.Controllers
 		MainForm _mainForm = new MainForm();
 		DataSourceManager _dataSourceManager = DataSourceManager.GetInstance();
 		Dictionary<Type, Dictionary<string, EventHandler>> _actionsForType = new Dictionary<Type, Dictionary<string, EventHandler>>();
+		ChangePasswordForm _passwordForm = new ChangePasswordForm();
+
 		#endregion Private members
 
 		#region Ctors
@@ -29,6 +33,9 @@ namespace Frontend.Controllers
 			_mainForm.FormClosing += CloseFormHandler;
 			_mainForm.LogoutEvent += LogoutHandler;
 			_mainForm.AccountButton.Click += AccountEditHandler;
+			_mainForm.ChangePasswordButton.Click += ChangePassword;
+			_passwordForm.FormClosing += SavePassword;
+
 			PrepareTabSet();
 		}
 
@@ -268,6 +275,39 @@ namespace Frontend.Controllers
 				}
 				RefreshDataGrids<T>();
 			}
+		}
+
+		/// <summary>
+		/// Kliknięcie przycisku zmiany hasła
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="eventArgs"></param>
+		private void ChangePassword(object sender, EventArgs eventArgs)
+		{
+			_passwordForm.ShowDialog();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void SavePassword(object sender, FormClosingEventArgs e)
+		{
+			if (!_passwordForm.CloseWithoutSaving && !e.Cancel)
+			{
+				HttpConnector httpConnector = HttpConnector.GetInstance();
+				string password = _passwordForm.GetPassword();
+				httpConnector.ChangePassword(password);
+				string errorMessage = httpConnector.LastErrorMessage;
+				if (errorMessage != null)
+				{
+					MessageBox.Show("Zmiana hasła się nie powiodła. Hasło musi mieć co najmniej 6 liter, zawierać jedną cyfrę, jeden znak specjalny i jedną wielką literę.", "Niepowodzenie zmiany hasła");
+					e.Cancel = true;
+					return;
+				}
+			}
+			_passwordForm.Reset();
 		}
 
 		#endregion Event handlers

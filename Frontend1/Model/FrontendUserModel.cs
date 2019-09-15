@@ -10,6 +10,18 @@ namespace Frontend.Model
 	{
 		public string Username { get; set; }
 		public string Password { get; set; }
-		public List<string> Roles { get; set; } 
+		public List<string> Roles { get; set; }
+
+		public FrontendUserModel Clone()
+		{
+			var clone = new FrontendUserModel { Username = Username, Password = Password };
+			var roleList = new List<string>();
+			foreach(string roleName in Roles)
+			{
+				roleList.Add(roleName);
+			}
+			clone.Roles = roleList;
+			return clone;
+		}
 	}
 }

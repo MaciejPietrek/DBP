@@ -95,6 +95,7 @@
 			this.cancelButton.TabIndex = 5;
 			this.cancelButton.Text = "Anuluj";
 			this.cancelButton.UseVisualStyleBackColor = true;
+			this.cancelButton.Click += new System.EventHandler(this.OnCancelCLick);
 			// 
 			// UserEditForm
 			// 
@@ -113,6 +114,7 @@
 			this.MaximumSize = new System.Drawing.Size(350, 768);
 			this.Name = "UserEditForm";
 			this.Text = "UserEditForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
 			this.flowLayoutPanel.ResumeLayout(false);
 			this.flowLayoutPanel.PerformLayout();
 			this.ResumeLayout(false);

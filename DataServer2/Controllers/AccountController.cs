@@ -81,6 +81,10 @@ namespace DataServer.Controllers
 
 		#region Public methods
 
+		/// <summary>
+		/// Zwraca wszystkich użytkowników
+		/// </summary>
+		/// <returns>Lista obiektów reprezentujących użytkowników w aplikacji desktopowej</returns>
 		[Authorize(Roles = "admin")]
 		[Route("GetAll")]
 		public List<FrontendUserModel> GetAll()
@@ -101,12 +105,20 @@ namespace DataServer.Controllers
 			return userList;
 		}
 
+		/// <summary>
+		/// Zwraca zdefiniowane role
+		/// </summary>
+		/// <returns>Lista z nazwami ról</returns>
 		[Route("GetRoles")]
 		public List<string> GetRoles()
 		{
 			return ApplicationRoleManager.DefinedRoles;
 		}
 
+		/// <summary>
+		/// Zwraca role dla zalogowanego użytkownia
+		/// </summary>
+		/// <returns>Lista z nazwami ról</returns>
 		[Route("GetCurrentRoles")]
 		public List<string> GetCurrentRoles()
 		{
@@ -119,7 +131,11 @@ namespace DataServer.Controllers
 			return roleNames;
 		}
 
-		// POST api/Account/AddUser
+		/// <summary>
+		/// Dodawanie użytkownika
+		/// </summary>
+		/// <param name="model">Model reprecentujący użytkownika w aplikacji desktopowej</param>
+		/// <returns>OK jeżeli dodano, BadRequest w przeciwnym wypadku</returns>
 		[Authorize(Roles ="admin")]
 		[Route("AddUser")]
 		public IHttpActionResult AddUser(FrontendUserModel model)
@@ -134,7 +150,7 @@ namespace DataServer.Controllers
 					{
 						string newPasswordHash = UserManager.PasswordHasher.HashPassword(model.Password);
 						user = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = model.Username, PasswordHash = newPasswordHash };
-						if (UserManager.Update(user).Succeeded)
+						if (UserManager.Create(user).Succeeded)
 						{
 							foreach(string roleName in model.Roles)
 							{
@@ -149,7 +165,13 @@ namespace DataServer.Controllers
 			return BadRequest();
 		}
 
+		/// <summary>
+		/// Aktualizacja danych użytkownika
+		/// </summary>
+		/// <param name="model">Model reprezentujący użytkownika w aplikacji klienckiej</param>
+		/// <returns>Ok jeżeli dodano, BadRequest w przeciwnym wypadku</returns>
 		[Authorize(Roles = "admin")]
+		[HttpPut]
 		[Route("UpdateUser")]
 		public IHttpActionResult UpdateUser(FrontendUserModel model)
 		{
@@ -188,9 +210,15 @@ namespace DataServer.Controllers
 			return BadRequest();
 		}
 
+		/// <summary>
+		/// Żądanie usunięcia wskazanego użytkownika
+		/// </summary>
+		/// <param name="model">Model reprezentujący użytkownika w aplikacji klienckiej</param>
+		/// <returns>OK jeżeli usunięto, BadRequest w przecinym wypadku</returns>
 		[Authorize(Roles = "admin")]
+		[HttpPost]
 		[Route("DeleteUser")]
-		public IHttpActionResult DeleteUser(RemoveUserBindingModel model)
+		public IHttpActionResult DeleteUser(FrontendUserModel model)
 		{
 			if (ModelState.IsValid && model.Username != null)
 			{
@@ -206,7 +234,11 @@ namespace DataServer.Controllers
 			return BadRequest();
 		}
 
-		// POST api/Account/ChangePassword
+		/// <summary>
+		/// Żądanie zmiany hasła
+		/// </summary>
+		/// <param name="password"></param>
+		/// <returns></returns>
 		[Route("ChangePassword")]
 		public IHttpActionResult ChangePassword(PasswordChangeBindingModel password)
 		{
@@ -232,8 +264,6 @@ namespace DataServer.Controllers
 			}
 			return BadRequest();
 		}
-
-
 
 		#endregion
 

@@ -101,6 +101,12 @@ namespace Frontend.DataRecievers
 			return null;
         }
 
+		/// <summary>
+		/// Aktualizacja modelu
+		/// </summary>
+		/// <param name="url">Scieżka do odpowiedniego kontrolera na serwerze</param>
+		/// <param name="postContent">Model</param>
+		/// <returns>String w formacie JSON zaweirający odpowiedź z serwera</returns>
         public string Update(string url, object postContent)
         {
 			try
@@ -132,6 +138,12 @@ namespace Frontend.DataRecievers
 			return null;
         }
 
+		/// <summary>
+		/// Pobranie danych tokena autoryzującego, używane przy logowaniu
+		/// </summary>
+		/// <param name="login">Login</param>
+		/// <param name="password">Hasło</param>
+		/// <returns>Dictionary zawierający dane tokena</returns>
 		public Dictionary<string, string> GetToken(string login, string password)
 		{
 			HttpContent content = new FormUrlEncodedContent(new Dictionary<string, string>()
@@ -173,6 +185,10 @@ namespace Frontend.DataRecievers
 			return null;
 		}
 
+		/// <summary>
+		/// Pobranie wszystkich użytkowników
+		/// </summary>
+		/// <returns></returns>
 		public List<FrontendUserModel> GetUsers()
 		{
 			try
@@ -204,6 +220,10 @@ namespace Frontend.DataRecievers
 			return null;
 		}
 
+		/// <summary>
+		/// Pobranie ról zdefiniowanych w systemie
+		/// </summary>
+		/// <returns></returns>
 		public List<string> GetRoles()
 		{
 			try
@@ -235,6 +255,10 @@ namespace Frontend.DataRecievers
 			return null;
 		}
 
+		/// <summary>
+		/// Pobranie ról aktualnie zalogowanego użytkownika
+		/// </summary>
+		/// <returns>Lista nazw ról</returns>
 		public List<string> GetCurrentRoles()
 		{
 			try
@@ -266,6 +290,10 @@ namespace Frontend.DataRecievers
 			return null;
 		}
 
+		/// <summary>
+		/// Zmiana hasła altualnego użytkownika
+		/// </summary>
+		/// <param name="password">Nowe hasło</param>
 		public void ChangePassword(string password)
 		{
 			try
@@ -296,13 +324,77 @@ namespace Frontend.DataRecievers
 			}
 		}
 
+		/// <summary>
+		/// Dodawanie użytkownika
+		/// </summary>
+		/// <param name="model"></param>
 		public void AddUser(FrontendUserModel model)
 		{
 			try
 			{
 				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PostAsJsonAsync("api/Account/AddUser", model); }).Result)
 				{
-					if (responseMessage.StatusCode == HttpStatusCode.NoContent)
+					if (responseMessage.StatusCode == HttpStatusCode.OK)
+					{
+					}
+					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						_lastErrorMessage = "Odmowa dostępu";
+					}
+					else
+					{
+						_lastErrorMessage = "Błąd połączenia z serwerem";
+					}
+
+				}
+			}
+			catch (Exception exc)
+			{
+				_lastErrorMessage = "Błąd połączenia z serwerem";
+			}
+		}
+
+		/// <summary>
+		/// Edycja użytkownika
+		/// </summary>
+		/// <param name="model"></param>
+		public void UpdateUser(FrontendUserModel model)
+		{
+			try
+			{
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PutAsJsonAsync("api/Account/UpdateUser", model); }).Result)
+				{
+					if (responseMessage.StatusCode == HttpStatusCode.OK)
+					{
+					}
+					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						_lastErrorMessage = "Odmowa dostępu";
+					}
+					else
+					{
+						_lastErrorMessage = "Błąd połączenia z serwerem";
+					}
+
+				}
+			}
+			catch (Exception exc)
+			{
+				_lastErrorMessage = "Błąd połączenia z serwerem";
+			}
+		}
+
+		/// <summary>
+		/// Usuwanie użytkownika
+		/// </summary>
+		/// <param name="model"></param>
+		public void DeleteUser(FrontendUserModel model)
+		{
+			try
+			{
+				using (HttpResponseMessage responseMessage = Task.Run(async () => { return await _httpClient.PostAsJsonAsync("api/Account/DeleteUser", model); }).Result)
+				{
+					if (responseMessage.StatusCode == HttpStatusCode.OK)
 					{
 					}
 					else if (responseMessage.StatusCode == HttpStatusCode.Unauthorized)
